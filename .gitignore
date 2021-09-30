@@ -1,4 +1,5 @@
 node_modules
+.gitignore
 .env
 .vscode
 config.json
