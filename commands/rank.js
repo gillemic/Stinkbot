@@ -24,16 +24,11 @@ module.exports = {
 				.setDescription('An adjective to rank everyone by. Leave blank to choose a random one from Stinkbot\'s past')
 				.setRequired(false)),
 	async execute(interaction) {
-		// let bot = interaction.client;
-		// const membersList = await interaction.guild.members.fetch();
-		// const memberNames = membersList.map(user => user.nickname ?? user.user.username);
-
 		const adj1 = ['MOST', 'LEAST'];
 		const rand1 = random(0, 2);
 		let adj2 = interaction.options.getString('adjective');
 
 		if (adj2 !== null) {
-			// console.log(interaction.options._hoistedOptions[0].value);
 			adj2 = adj2.toLocaleUpperCase();
 
 			sql = `SELECT * FROM rank_adjectives WHERE descriptors="${adj2}"`;
@@ -55,7 +50,7 @@ module.exports = {
 		else {
 			console.log('MADE IT HERE');
 
-			// choose from DB
+			// choose from database
 			sql = 'SELECT * FROM rank_adjectives ORDER BY RAND() LIMIT 1';
 
 			con.query(sql, (error, result) => {

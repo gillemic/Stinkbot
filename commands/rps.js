@@ -115,10 +115,11 @@ module.exports = {
 			});
 		}
 		else if (choice === 'ban') {
-			// TODO
 			console.log('Connected. Banning ' + interaction.user.username);
+
 			const id = interaction.user.id;
 			const sql = `UPDATE rps SET isBanned=True WHERE UserID=${id}`;
+
 			con.query(sql, function(err) {
 				if (err) throw err;
 				console.log('Banned af');
@@ -162,8 +163,6 @@ module.exports = {
 							const winner = await interaction.guild.members.fetch(winnerID);
 							const loser = await interaction.guild.members.fetch(loserID);
 
-							// console.log(winnerID, loserID, winner, loser);
-
 							interaction.reply(`${winner.displayName} wins! ${loser.displayName} stinks!`);
 
 							sql = `UPDATE rps SET Wins=Wins+1 WHERE UserID=${game.winnerID}`;
@@ -203,8 +202,6 @@ module.exports = {
 						const loserID = game.loserID;
 						const winner = await interaction.guild.members.fetch(winnerID);
 						const loser = await interaction.guild.members.fetch(loserID);
-
-						// console.log(winnerID, loserID, winner, loser);
 
 						interaction.reply(`${winner.displayName} wins! ${loser.displayName} stinks!`);
 

@@ -1,9 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { random } = require('../util/random');
-// const fs = require('fs');
 const mysql = require('mysql');
 require('dotenv').config();
-// const words = require('../words.json');
 
 const con = mysql.createConnection({
 	host: process.env.DB_HOST,

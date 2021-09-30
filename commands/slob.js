@@ -21,7 +21,6 @@ module.exports = {
 
 		// Check if a food is specified
 		if (food) {
-			// TODO
 			console.log(food);
 			if (food === 'pizza') {
 				await interaction.deferReply();
