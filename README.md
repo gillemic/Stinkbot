@@ -1,4 +1,5 @@
 **Stinkbot**
+<br><br>
 Stinkbot is a bot first created in June 2017 for me and my friends' discord server. He has no useful functionality whatsoever and most
 of his commands are specific to me and my friend group. I uploaded him to Github mainly so I could work on him across different devices.
 When Stinkbot was first made, he had one long if/else if/else statement in the message event that ran **every**, **single**, **time**. I may
