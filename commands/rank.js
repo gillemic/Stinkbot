@@ -1,6 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { hashShuffle } = require('../util/shuffle');
-const { random } = require('../util/random');
 const mysql = require('mysql');
 require('dotenv').config();
 // const fs = require('fs');
@@ -24,8 +23,6 @@ module.exports = {
 				.setDescription('An adjective to rank everyone by. Leave blank to choose a random one from Stinkbot\'s past')
 				.setRequired(false)),
 	async execute(interaction) {
-		const adj1 = ['MOST', 'LEAST'];
-		const rand1 = random(0, 2);
 		let adj2 = interaction.options.getString('adjective');
 
 		if (adj2 !== null) {
@@ -66,11 +63,7 @@ module.exports = {
 
 		console.log(shuffledNames);
 
-		if (adj1[rand1] == 'LEAST') {
-			shuffledNames.reverse();
-		}
-
-		let str = `${adj1[rand1]} ${adj2} USERS IN THIS SERVER: RANKED\n\n`;
+		let str = `MOST **${adj2}** USERS IN THIS SERVER: RANKED\n\n`;
 
 		const l = shuffledNames.length;
 
