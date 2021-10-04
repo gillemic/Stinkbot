@@ -1,21 +1,27 @@
 {
   "name": "stinkbot2.0",
-  "version": "1.0.0",
-  "description": "",
+  "version": "2.0.0",
+  "description": "A reworked Stinkbot for the modern era",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node .",
+    "lint": "eslint ."
   },
   "keywords": [],
-  "author": "",
+  "author": "Michael Gillett",
   "license": "ISC",
   "dependencies": {
     "@discordjs/builders": "^0.6.0",
     "@discordjs/rest": "^0.1.0-canary.0",
+    "bufferutil": "^4.0.4",
     "discord-api-types": "^0.23.1",
     "discord.js": "^13.1.0",
     "dotenv": "^10.0.0",
-    "mysql": "^2.18.1"
+    "erlpack": "github:discord/erlpack",
+    "mysql": "^2.18.1",
+    "utf-8-validate": "^5.0.6",
+    "zlib-sync": "^0.1.7"
   },
   "devDependencies": {
     "eslint": "^7.32.0"

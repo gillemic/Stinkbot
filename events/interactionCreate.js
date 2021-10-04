@@ -22,6 +22,6 @@ module.exports = {
 			console.error(error);
 			interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 		}
-		// console.log(`${interaction.user.tag} in #${interaction.channel.name} triggered an interaction.`);
+		console.log(`${interaction.user.tag} in #${interaction.channel.name} triggered an interaction.`);
 	},
 };
