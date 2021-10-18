@@ -1,9 +1,19 @@
 const { random } = require('../util/random');
+const { doesContain } = require('../util/doesContain');
 
 module.exports = {
 	name: 'messageCreate',
 	execute(message) {
 		console.log(`${message.author.username} sent a message`);
+
+		if (message.channel.id === '358699161551634442') {
+			// stink chat
+			return;
+		}
+
+		if (doesContain(message.content, 'thank') && doesContain(message.content, 'stinkbot')) {
+			message.reply('You\'re welcome :relieved:');
+		}
 
 		// map all emojis in server the message was sent
 		const all_emojis = message.guild.emojis.cache.map(e => e.toString());
