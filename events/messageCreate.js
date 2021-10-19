@@ -4,7 +4,7 @@ const { doesContain } = require('../util/doesContain');
 module.exports = {
 	name: 'messageCreate',
 	execute(message) {
-		console.log(`${message.author.username} sent a message`);
+		// console.log(`${message.author.username} sent a message`);
 
 		if (message.channel.id === '358699161551634442') {
 			// stink chat
