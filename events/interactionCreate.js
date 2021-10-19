@@ -1,3 +1,5 @@
+const bannedUsers = ['105884992055349248'];
+
 module.exports = {
 	name: 'interactionCreate',
 	execute(interaction) {
@@ -9,6 +11,10 @@ module.exports = {
 			// stink chat
 			interaction.reply({ content: 'Not today sucka', ephemeral: true });
 			return;
+		}
+
+		if (bannedUsers.includes(interaction.user.id)) {
+			interaction.reply({ content: 'You\'re banned from all Stinkbot commands because you stink', ephemeral: true });
 		}
 
 		const command = client.commands.get(interaction.commandName);

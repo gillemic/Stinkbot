@@ -1,6 +1,8 @@
 const { random } = require('../util/random');
 const { doesContain } = require('../util/doesContain');
 
+const bannedUsers = ['105884992055349248'];
+
 module.exports = {
 	name: 'messageCreate',
 	execute(message) {
@@ -8,6 +10,10 @@ module.exports = {
 
 		if (message.channel.id === '358699161551634442') {
 			// stink chat
+			return;
+		}
+
+		if (bannedUsers.includes(message.author.id)) {
 			return;
 		}
 

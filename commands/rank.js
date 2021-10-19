@@ -45,8 +45,6 @@ module.exports = {
 			});
 		}
 		else {
-			console.log('MADE IT HERE');
-
 			// choose from database
 			sql = 'SELECT * FROM rank_adjectives ORDER BY RAND() LIMIT 1';
 
@@ -60,8 +58,6 @@ module.exports = {
 		const memberNames = membersList.map(user => user.nickname ?? user.user.username);
 
 		const shuffledNames = hashShuffle(memberNames, adj2);
-
-		console.log(shuffledNames);
 
 		let str = `MOST **${adj2}** USERS IN THIS SERVER: RANKED\n\n`;
 
