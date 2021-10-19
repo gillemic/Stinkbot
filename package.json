@@ -13,21 +13,11 @@
   "license": "ISC",
   "dependencies": {
     "@discordjs/builders": "^0.6.0",
-    "@discordjs/opus": "^0.5.3",
     "@discordjs/rest": "^0.1.0-canary.0",
-    "@discordjs/voice": "^0.6.0",
-    "bufferutil": "^4.0.4",
     "discord-api-types": "^0.23.1",
     "discord.js": "^13.1.0",
     "dotenv": "^10.0.0",
-    "erlpack": "github:discord/erlpack",
-    "ffmpeg": "^0.0.4",
-    "ffmpeg-static": "^4.4.0",
-    "libsodium-wrappers": "^0.7.9",
-    "mysql": "^2.18.1",
-    "opusscript": "^0.0.8",
-    "utf-8-validate": "^5.0.6",
-    "zlib-sync": "^0.1.7"
+    "mysql": "^2.18.1"
   },
   "devDependencies": {
     "eslint": "^7.32.0"
