@@ -16,6 +16,16 @@ for (const file of commandFiles) {
 	client.commands.set(command.data.name, command);
 }
 
+client.legacy_commands = new Collection();
+const legacyCommandFiles = fs.readdirSync('./legacy_commands').filter(file => file.endsWith('.js'));
+
+for (const file of legacyCommandFiles) {
+	const command = require(`./legacy_commands/${file}`);
+	// Set a new item in the Collection
+	// With the key as the command name and the value as the exported module
+	client.legacy_commands.set(command.name, command);
+}
+
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 
 for (const file of eventFiles) {
