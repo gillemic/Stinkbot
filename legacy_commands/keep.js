@@ -26,14 +26,14 @@ module.exports = {
 				// already been decided on
 				const verdict = result[0].decision ? 'Yes' : 'No';
 				message.reply(`Verdict already reached for ${thing}. Decision was ${verdict}`);
-				console.log(verdict);
+				// console.log(verdict);
 			}
 			else {
 				let decision = random(0, 2);
 				const sql2 = `INSERT INTO keep_stuff VALUES ("${thing}", ${decision})`;
-				con.query(sql2, (error2, result2) => {
+				con.query(sql2, (error2) => {
 					if (error2) throw error2;
-					console.log(result2);
+					// console.log(result2);
 				});
 
 				decision = decision ? 'Yes' : 'No';

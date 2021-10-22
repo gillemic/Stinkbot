@@ -95,7 +95,7 @@ module.exports = {
 			const sql = 'SELECT * FROM discord_bot.rps_leaderboard';
 			con.query(sql, userArray, async (err, result) => {
 				if (err) throw err;
-				console.log(result);
+				// console.log(result);
 				let leaderboard = 'ROCK, PAPER, SCISSORS LEADERBOARD';
 				for (const i in result) {
 					if (!userArray.includes(result[i].UserID)) {
@@ -109,37 +109,37 @@ module.exports = {
 			});
 		}
 		else if (choice === 'ban') {
-			console.log('Connected. Banning ' + message.author.username);
+			console.log('Banning ' + message.author.username);
 
 			const id = message.author.id;
 			const sql = `UPDATE rps SET isBanned=True WHERE UserID=${id}`;
 
 			con.query(sql, function(err) {
 				if (err) throw err;
-				console.log('Banned af');
+				// console.log('Banned af');
 			});
 			message.reply('Nice job, you\'re banned');
 		}
 		else if (choice === 'unban' && message.author.username === 'mjelly96') {
-			console.log('Connected. Unbanning all members');
+			console.log('Unbanning all members');
 			const sql = 'UPDATE rps SET isBanned=False';
 			con.query(sql, function(err) {
 				if (err) throw err;
-				console.log('Unbanned');
+				// console.log('Unbanned');
 			});
 		}
 		else if (choice === 'unban') {
 			message.reply({ content: 'Only my creator can unban. Live with your foolish decision', ephemeral: true });
 		}
-		else {
+		else if (['r', 'p', 's'].includes(choice)) {
 			let sql = `SELECT isBanned FROM rps WHERE UserID="${userID}"`;
 
 			con.query(sql, async (err, result) => {
 				if (err) throw err;
 				if (result.length) {
-					console.log('User in database');
+					// console.log('User in database');
 					if (result[0].isBanned) {
-						console.log('User is banned');
+						// console.log('User is banned');
 						message.reply('Dude you\'re banned af');
 					}
 					else {
@@ -160,16 +160,16 @@ module.exports = {
 
 							sql = `UPDATE rps SET Wins=Wins+1 WHERE UserID=${game.winnerID}`;
 
-							con.query(sql, function(err, result2) {
+							con.query(sql, function(err) {
 								if (err) throw err;
-								console.log(result2);
+								// console.log(result2);
 							});
 
 							sql = `UPDATE rps SET Losses=Losses+1 WHERE UserID=${game.loserID}`;
 
-							con.query(sql, function(err, result3) {
+							con.query(sql, function(err) {
 								if (err) throw err;
-								console.log(result3);
+								// console.log(result3);
 							});
 						}
 					}
@@ -178,9 +178,9 @@ module.exports = {
 					// new player
 					sql = `INSERT INTO rps VALUES ("${userID}", 0, 0, "${message.author.username}", false)`;
 
-					con.query(sql, function(err, result4) {
+					con.query(sql, function(err) {
 						if (err) throw err;
-						console.log(result4);
+						// console.log(result4);
 					});
 
 					const game = new RPS(choice);
@@ -200,21 +200,33 @@ module.exports = {
 
 						sql = `UPDATE rps SET Wins=Wins+1 WHERE UserID=${game.winnerID}`;
 
-						con.query(sql, function(err, result2) {
+						con.query(sql, function(err) {
 							if (err) throw err;
-							console.log(result2);
+							// console.log(result2);
 						});
 
 						sql = `UPDATE rps SET Losses=Losses+1 WHERE UserID=${game.loserID}`;
 
-						con.query(sql, function(err, result3) {
+						con.query(sql, function(err) {
 							if (err) throw err;
-							console.log(result3);
+							// console.log(result3);
 						});
 					}
 				}
-				console.log(result);
+				// console.log(result);
 			});
+		}
+		else {
+			console.log('Banning ' + message.author.username);
+
+			const id = message.author.id;
+			const sql = `UPDATE rps SET isBanned=True WHERE UserID=${id}`;
+
+			con.query(sql, function(err) {
+				if (err) throw err;
+				// console.log('Banned af');
+			});
+			message.reply('Nice job, you\'re banned');
 		}
 	},
 };
