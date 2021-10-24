@@ -9,6 +9,6 @@ module.exports = {
 
 		bot.setUsername('Stinkbot');
 		bot.setAvatar('img/stinkbot.jpg');
-		bot.setActivity({ name: 'Conor Sucks' });
+		bot.setActivity({ name: 'Metroid™ Dread' });
 	},
 };

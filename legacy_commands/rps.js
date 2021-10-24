@@ -89,8 +89,6 @@ module.exports = {
 				return user.user.id;
 			});
 
-			console.log(userArray);
-
 			console.log('Connected. Displaying RPS leaderboard');
 			const sql = 'SELECT * FROM discord_bot.rps_leaderboard';
 			con.query(sql, userArray, async (err, result) => {
@@ -132,7 +130,7 @@ module.exports = {
 			message.reply({ content: 'Only my creator can unban. Live with your foolish decision', ephemeral: true });
 		}
 		else if (['r', 'p', 's'].includes(choice)) {
-			let sql = `SELECT isBanned FROM rps WHERE UserID="${userID}"`;
+			let sql = `SELECT isBanned, Wins FROM rps WHERE UserID="${userID}"`;
 
 			con.query(sql, async (err, result) => {
 				if (err) throw err;
@@ -156,7 +154,14 @@ module.exports = {
 							const winner = await message.guild.members.fetch(winnerID);
 							const loser = await message.guild.members.fetch(loserID);
 
-							message.reply(`${winner.displayName} wins! ${loser.displayName} stinks!`);
+							const playerWins = result[0].Wins;
+
+							if (winner.user.username === 'Stinkbot') {
+								message.reply(`${winner.displayName} wins! ${loser.displayName} stinks!`);
+							}
+							else {
+								message.reply(`${winner.displayName} wins! ${loser.displayName} stinks! ${playerWins + 1} total wins`);
+							}
 
 							sql = `UPDATE rps SET Wins=Wins+1 WHERE UserID=${game.winnerID}`;
 
@@ -196,7 +201,14 @@ module.exports = {
 						const winner = await message.guild.members.fetch(winnerID);
 						const loser = await message.guild.members.fetch(loserID);
 
-						message.reply(`${winner.displayName} wins! ${loser.displayName} stinks!`);
+						const playerWins = result[0].Wins;
+
+						if (winner.user.username === 'Stinkbot') {
+							message.reply(`${winner.displayName} wins! ${loser.displayName} stinks!`);
+						}
+						else {
+							message.reply(`${winner.displayName} wins! ${loser.displayName} stinks! ${playerWins + 1} total wins`);
+						}
 
 						sql = `UPDATE rps SET Wins=Wins+1 WHERE UserID=${game.winnerID}`;
 

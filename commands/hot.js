@@ -118,7 +118,7 @@ module.exports = {
 			interaction.reply({ content: 'Only my creator can unban. Live with your foolish decision', ephemeral: true });
 		}
 		else {
-			let sql = `SELECT isBanned FROM hot WHERE UserID="${userID}"`;
+			let sql = `SELECT isBanned, Wins FROM hot WHERE UserID="${userID}"`;
 
 			con.query(sql, async (err, result) => {
 				if (err) throw err;
@@ -142,7 +142,14 @@ module.exports = {
 							const winner = await interaction.guild.members.fetch(winnerID);
 							const loser = await interaction.guild.members.fetch(loserID);
 
-							interaction.reply(`${winner.displayName} wins! ${loser.displayName} stinks!`);
+							const playerWins = result[0].Wins;
+
+							if (winner.user.username === 'Stinkbot') {
+								interaction.reply(`${winner.displayName} wins! ${loser.displayName} stinks!`);
+							}
+							else {
+								interaction.reply(`${winner.displayName} wins! ${loser.displayName} stinks! ${playerWins + 1} total wins`);
+							}
 
 							sql = `UPDATE hot SET Wins=Wins+1 WHERE UserID=${game.winnerID}`;
 
@@ -182,7 +189,14 @@ module.exports = {
 						const winner = await interaction.guild.members.fetch(winnerID);
 						const loser = await interaction.guild.members.fetch(loserID);
 
-						interaction.reply(`${winner.displayName} wins! ${loser.displayName} stinks!`);
+						const playerWins = result[0].Wins;
+
+						if (winner.user.username === 'Stinkbot') {
+							interaction.reply(`${winner.displayName} wins! ${loser.displayName} stinks!`);
+						}
+						else {
+							interaction.reply(`${winner.displayName} wins! ${loser.displayName} stinks! ${playerWins + 1} total wins`);
+						}
 
 						sql = `UPDATE hot SET Wins=Wins+1 WHERE UserID=${game.winnerID}`;
 
