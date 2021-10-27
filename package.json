@@ -8,15 +8,21 @@
     "start": "node .",
     "lint": "eslint ."
   },
-  "keywords": ["stinkbot", "discord", "bot"],
+  "keywords": [
+    "stinkbot",
+    "discord",
+    "bot"
+  ],
   "author": "Michael Gillett",
   "license": "ISC",
   "dependencies": {
     "@discordjs/builders": "^0.7.0",
     "@discordjs/rest": "^0.1.0-canary.0",
+    "@discordjs/voice": "^0.6.0",
     "discord-api-types": "^0.24.0",
     "discord.js": "^13.2.0",
     "dotenv": "^10.0.0",
+    "libsodium-wrappers": "^0.7.9",
     "mysql": "^2.18.1"
   },
   "devDependencies": {
