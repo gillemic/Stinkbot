@@ -26,9 +26,33 @@ const statuses = [
 	'The Crystal Key',
 	'NiBiRu: Age of Secrets',
 	'Freddi Fish 4: The Case of the Hogfish Rustlers of Briny Gulch',
+	'ROTS 2 TOS',
+	'Halo Infinite',
+	'Aegis Wing',
+	'Naruto: Uzumaki Chronicles',
+	'1 vs 100',
+	'Jimmie Johnson\'s Anything With an Engine',
+	'Nudder Shuffle',
+	'Little Nicky (2000, GBC)',
+	'Antz Extreme Racing',
+	'G-Force (2009, PS2)',
+	'The Grinch (2000, PS1)',
+	'High School Musical: Makin\' the Cut!',
+	'PaRappa 2: The Rappening',
+	'LEGO Indiana Jones 2: The Adventure Continues',
+	'Vampire Rain',
+	'Fast and Furious: Showdown',
+	'Tony Hawk: Ride',
+	'Duke Nukem Forever',
+	'The Quiet Man',
+	'Doritos Crash Course',
+	'Dash of Destruction',
+	'CastleMiner Z',
+	'AVATOUR',
+	'ATV Offroad Fury',
+	'Inuyasha: The Secret of the Cursed Mask',
 ];
 
-const { random } = require('../util/random');
 const { randomShuffle } = require('../util/shuffle');
 
 module.exports = {
@@ -37,7 +61,7 @@ module.exports = {
 	execute(client) {
 		console.log(`Ready! Logged in as ${client.user.tag}`);
 
-		let counter = random(0, statuses.length);
+		let counter = 0;
 
 		let shuffledStatuses = randomShuffle(statuses);
 

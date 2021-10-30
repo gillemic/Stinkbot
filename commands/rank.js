@@ -25,7 +25,7 @@ module.exports = {
 	async execute(interaction) {
 		let adj2 = interaction.options.getString('adjective');
 
-		if (adj2 !== null) {
+		if (adj2) {
 			adj2 = adj2.toLocaleUpperCase();
 
 			sql = `SELECT * FROM rank_adjectives WHERE descriptors="${adj2}"`;
@@ -50,7 +50,7 @@ module.exports = {
 
 			con.query(sql, (error, result) => {
 				if (error) throw error;
-				adj2 = result[0].descriptors;
+				adj2 = result[0].descriptors || 'STINKY';
 			});
 		}
 

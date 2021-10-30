@@ -14,12 +14,24 @@ module.exports = {
 			console.log(`${member.displayName} left the voice channel ${oldChannel.name}`);
 		}
 
+		// member joined
 		if (!oldChannel) {
 			console.log(`${member.displayName} joined the voice channel ${newChannel.name}`);
 		}
 
+		// member muted self
 		if (newState.mute) {
 			console.log(`${member.displayName} is muted`);
+		}
+
+		// member started streaming
+		if (newState.streaming && !oldState.streaming) {
+			console.log(`${member.displayName} started streaming ${member.presence?.activities[0]?.name}`);
+		}
+
+		// member stopped streaming
+		if (!newState.streaming && oldState.streaming) {
+			console.log(`${member.displayName} stopped streaming ${member.presence?.activities[0]?.name}`);
 		}
 	},
 };
