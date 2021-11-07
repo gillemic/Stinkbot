@@ -11,27 +11,27 @@ module.exports = {
 		// console.log(`${member.displayName} joined the voice channel ${channel}`);
 		// member left
 		if (!newChannel) {
-			console.log(`${member.displayName} left the voice channel ${oldChannel.name}`);
+			console.log(`${new Date().toLocaleTimeString()} - ${member.displayName} left the voice channel ${oldChannel.name}`);
 		}
 
 		// member joined
 		if (!oldChannel) {
-			console.log(`${member.displayName} joined the voice channel ${newChannel.name}`);
+			console.log(`${new Date().toLocaleTimeString()} - ${member.displayName} joined the voice channel ${newChannel.name}`);
 		}
 
 		// member muted self
 		if (newState.mute) {
-			console.log(`${member.displayName} is muted`);
+			console.log(`${new Date().toLocaleTimeString()} - ${member.displayName} is muted`);
 		}
 
 		// member started streaming
 		if (newState.streaming && !oldState.streaming) {
-			console.log(`${member.displayName} started streaming ${member.presence?.activities[0]?.name}`);
+			console.log(`${new Date().toLocaleTimeString()} - ${member.displayName} started streaming`);
 		}
 
 		// member stopped streaming
 		if (!newState.streaming && oldState.streaming) {
-			console.log(`${member.displayName} stopped streaming ${member.presence?.activities[0]?.name}`);
+			console.log(`${new Date().toLocaleTimeString()} - ${member.displayName} stopped streaming`);
 		}
 	},
 };
