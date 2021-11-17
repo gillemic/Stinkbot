@@ -50,7 +50,7 @@ module.exports = {
 
 			con.query(sql, (error, result) => {
 				if (error) throw error;
-				adj2 = result[0].descriptors || 'STINKY';
+				adj2 = result[0].descriptors ?? 'STINKY';
 			});
 		}
 
