@@ -15,6 +15,10 @@ module.exports = {
 			message.react(all_emojis[rand]);
 		}
 
+		if (doesContain(message.content, '-baseball')) {
+			message.reply({ files: ['./img/OTAB.mp4'] });
+		}
+
 		if (message.channel.id === '358699161551634442') {
 			// stink chat
 			return;
