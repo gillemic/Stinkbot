@@ -51,6 +51,9 @@ const statuses = [
 	'AVATOUR',
 	'ATV Offroad Fury',
 	'Inuyasha: The Secret of the Cursed Mask',
+	'Ninja Blade',
+	'Urban Dead',
+	'King\'s Field IV',
 ];
 
 const { randomShuffle } = require('../util/shuffle');

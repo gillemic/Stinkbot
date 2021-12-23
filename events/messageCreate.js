@@ -16,7 +16,7 @@ module.exports = {
 		}
 
 		if (doesContain(message.content, '-baseball')) {
-			message.reply({ files: ['./img/OTAB.mp4'] });
+			message.channel.send({ files: ['./img/OTAB.mp4'] });
 		}
 
 		if (message.channel.id === '358699161551634442') {
