@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { hashShuffle } = require('../util/shuffle');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 require('dotenv').config();
 // const fs = require('fs');
 // const descriptors = require('../descriptors.json');

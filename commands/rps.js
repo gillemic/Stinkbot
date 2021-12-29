@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 // const { random } = require('../util/random');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 require('dotenv').config();
 
 class RPS {
