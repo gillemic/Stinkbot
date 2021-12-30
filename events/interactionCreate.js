@@ -11,10 +11,6 @@ module.exports = {
 			return;
 		}
 
-		if (bannedUsers.includes(interaction.user.id)) {
-			interaction.reply({ content: 'You\'re banned from all Stinkbot commands because you stink', ephemeral: true });
-		}
-
 		const command = client.commands.get(interaction.commandName);
 
 		if (!command) return;

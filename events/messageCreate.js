@@ -22,10 +22,6 @@ module.exports = {
 			return;
 		}
 
-		if (bannedUsers.includes(message.author.id)) {
-			return;
-		}
-
 		if (doesContain(message.content, 'thank') && doesContain(message.content, 'stinkbot')) {
 			message.reply('You\'re welcome :relieved:');
 		}
