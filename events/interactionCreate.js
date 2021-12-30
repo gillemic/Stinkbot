@@ -1,5 +1,3 @@
-const bannedUsers = ['105884992055349248'];
-
 module.exports = {
 	name: 'interactionCreate',
 	execute(interaction) {

@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const mysql = require('mysql2');
+const mysql = require('mysql');
 require('dotenv').config();
 
 class HOT {

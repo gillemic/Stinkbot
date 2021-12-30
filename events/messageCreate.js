@@ -1,8 +1,6 @@
 const { random } = require('../util/random');
 const { doesContain } = require('../util/doesContain');
 
-const bannedUsers = ['105884992055349248'];
-
 module.exports = {
 	name: 'messageCreate',
 	execute(message) {
