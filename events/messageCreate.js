@@ -17,6 +17,10 @@ module.exports = {
 			message.channel.send({ files: ['./img/OTAB.mp4'] });
 		}
 
+		if (message.author.bot) {
+			return;
+		}
+
 		const message_id = message.id;
 
 		const last_digit = parseInt(message_id[message_id.length - 1]) % 10;
