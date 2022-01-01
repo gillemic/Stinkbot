@@ -6,3 +6,4 @@ config.json
 img/hopps
 commands/feet.js
 start.bat
+*.log

@@ -30,7 +30,7 @@ module.exports = {
 			}
 
 			if (count === 1) {
-				message.reply('Better luck next time, idiot');
+				message.reply(`MessageID: ${message_id} Better luck next time, idiot`);
 			}
 			else {
 				switch (count) {
