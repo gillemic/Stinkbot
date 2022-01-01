@@ -46,6 +46,8 @@ module.exports = {
 				case 5:
 					message.reply(`MessageID: ${message_id} Holy shit! You got quints`);
 					break;
+				default:
+					break;
 				}
 			}
 		}
