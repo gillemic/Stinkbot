@@ -17,38 +17,33 @@ module.exports = {
 			message.channel.send({ files: ['./img/OTAB.mp4'] });
 		}
 
-		if (doesContain(message.content, '-checkem')) {
-			const message_id = message.id;
+		const message_id = message.id;
 
-			const last_digit = parseInt(message_id[message_id.length - 1]) % 10;
+		const last_digit = parseInt(message_id[message_id.length - 1]) % 10;
 
-			let count = 1;
+		let count = 1;
 
-			while (last_digit === parseInt(message_id[message_id.length - (count + 1)])) {
-				count++;
-			}
+		while (last_digit === parseInt(message_id[message_id.length - (count + 1)])) {
+			count++;
+		}
 
-			if (count === 1) {
-				message.reply(`MessageID: ${message_id} Better luck next time, idiot`);
-			}
-			else {
-				switch (count) {
-				case 2:
-					message.reply(`MessageID: ${message_id} Holy shit! You got dubs`);
-					break;
-				case 3:
-					message.reply(`MessageID: ${message_id} Holy shit! You got trips`);
-					break;
-				case 4:
-					message.reply(`MessageID: ${message_id} Holy shit! You got quads`);
-					break;
-				case 5:
-					message.reply(`MessageID: ${message_id} Holy shit! You got quints`);
-					break;
-				default:
-					message.reply(`MessageID: ${message_id} WOOOOOAAAAAHHHHH!!!!`);
-					break;
-				}
+		if (count > 1) {
+			switch (count) {
+			case 2:
+				message.reply(`MessageID: ${message_id} Holy shit! You got dubs`);
+				break;
+			case 3:
+				message.reply(`MessageID: ${message_id} Holy shit! You got trips`);
+				break;
+			case 4:
+				message.reply(`MessageID: ${message_id} Holy shit! You got quads`);
+				break;
+			case 5:
+				message.reply(`MessageID: ${message_id} Holy shit! You got quints`);
+				break;
+			default:
+				message.reply(`MessageID: ${message_id} WOOOOOAAAAAHHHHH!!!!`);
+				break;
 			}
 		}
 
