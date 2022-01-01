@@ -26,7 +26,7 @@ module.exports = {
 			let count = 1;
 
 			while (last_digit === parseInt(message_id[message_id.length - count])) {
-				count += 1;
+				count++;
 			}
 
 			if (count === 1) {
