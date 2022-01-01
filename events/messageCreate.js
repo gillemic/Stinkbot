@@ -19,13 +19,12 @@ module.exports = {
 
 		if (doesContain(message.content, '-checkem')) {
 			const message_id = message.id;
-			const id_as_num = parseInt(message.id);
 
-			const last_digit = id_as_num % 10;
+			const last_digit = parseInt(message_id[message_id.length - 1]) % 10;
 
 			let count = 1;
 
-			while (last_digit === parseInt(message_id[message_id.length - count])) {
+			while (last_digit === parseInt(message_id[message_id.length - (count + 1)])) {
 				count++;
 			}
 
@@ -47,6 +46,7 @@ module.exports = {
 					message.reply(`MessageID: ${message_id} Holy shit! You got quints`);
 					break;
 				default:
+					message.reply(`MessageID: ${message_id} WOOOOOAAAAAHHHHH!!!!`);
 					break;
 				}
 			}
