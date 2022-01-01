@@ -1,5 +1,6 @@
 const { random } = require('../util/random');
 const { doesContain } = require('../util/doesContain');
+const { checkDubs } = require('../util/checkDubs');
 
 module.exports = {
 	name: 'messageCreate',
@@ -21,35 +22,7 @@ module.exports = {
 			return;
 		}
 
-		const message_id = message.id;
-
-		const last_digit = parseInt(message_id[message_id.length - 1]) % 10;
-
-		let count = 1;
-
-		while (last_digit === parseInt(message_id[message_id.length - (count + 1)])) {
-			count++;
-		}
-
-		if (count > 1) {
-			switch (count) {
-			case 2:
-				message.reply(`MessageID: ${message_id} Holy shit! You got dubs`);
-				break;
-			case 3:
-				message.reply(`MessageID: ${message_id} Woah!! You got trips`);
-				break;
-			case 4:
-				message.reply(`MessageID: ${message_id} Oh fug!!! You got quads`);
-				break;
-			case 5:
-				message.reply(`MessageID: ${message_id} THAT'S QUINTS BABY!!`);
-				break;
-			default:
-				message.reply(`MessageID: ${message_id} WOOOOOAAAAAHHHHH!!!!`);
-				break;
-			}
-		}
+		checkDubs(message);
 
 		if (message.channel.id === '358699161551634442') {
 			// stink chat
