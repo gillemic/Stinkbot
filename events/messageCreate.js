@@ -37,13 +37,13 @@ module.exports = {
 				message.reply(`MessageID: ${message_id} Holy shit! You got dubs`);
 				break;
 			case 3:
-				message.reply(`MessageID: ${message_id} Holy shit! You got trips`);
+				message.reply(`MessageID: ${message_id} Woah!! You got trips`);
 				break;
 			case 4:
-				message.reply(`MessageID: ${message_id} Holy shit! You got quads`);
+				message.reply(`MessageID: ${message_id} Oh fug!!! You got quads`);
 				break;
 			case 5:
-				message.reply(`MessageID: ${message_id} Holy shit! You got quints`);
+				message.reply(`MessageID: ${message_id} THAT'S QUINTS BABY!!`);
 				break;
 			default:
 				message.reply(`MessageID: ${message_id} WOOOOOAAAAAHHHHH!!!!`);
