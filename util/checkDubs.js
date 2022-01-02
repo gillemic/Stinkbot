@@ -27,22 +27,22 @@ module.exports = {
 			switch (count) {
 			case 2:
 				column = 'dubs';
-				message.reply(`MessageID: ${message_id} Holy shit! You got dubs`);
+				message.reply({ content: `MessageID: ${message_id} Holy shit! You got dubs`, files: ['./img/dubs.jpg'] });
 				break;
 			case 3:
 				column = 'trips';
-				message.reply(`MessageID: ${message_id} Woah!! You got trips`);
+				message.reply({ content: `MessageID: ${message_id} Woah!! You got trips`, files: ['./img/trips.jpg'] });
 				break;
 			case 4:
 				column = 'quads';
-				message.reply(`MessageID: ${message_id} Oh fug!!! You got quads`);
+				message.reply({ content: `MessageID: ${message_id} Oh fug!!! You got quads`, files: ['./img/quads.png'] });
 				break;
 			case 5:
 				column = 'quints';
-				message.reply(`MessageID: ${message_id} THAT'S QUINTS BABY!!`);
+				message.reply({ content: `MessageID: ${message_id} THAT'S QUINTS BABY!!`, files: ['./img/quints.png'] });
 				break;
 			default:
-				message.reply(`MessageID: ${message_id} WOOOOOAAAAAHHHHH!!!!`);
+				message.reply({ content: `MessageID: ${message_id} WOOOOOAAAAAHHHHH!!!!`, files: ['./img/holy.jpg'] });
 				break;
 			}
 
