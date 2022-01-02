@@ -55,7 +55,7 @@ module.exports = {
 				if (result.length) {
 					// user exists
 					if (result[0].highest < count) {
-						sql = `UPDATE dubs SET highest=${count}`;
+						sql = `UPDATE dubs SET highest=${count} WHERE UserID=${userID}`;
 						con.query(sql, function(err, result2) {
 							if (err) throw err;
 							console.log(result2);
