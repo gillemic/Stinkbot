@@ -50,7 +50,7 @@ module.exports = {
 
 			let sql = `SELECT * FROM dubs WHERE UserID="${userID}"`;
 
-			con.query(sql, async (err, result) => {
+			con.query(sql, (err, result) => {
 				if (err) throw err;
 				if (result.length) {
 					// user exists
@@ -86,5 +86,32 @@ module.exports = {
 				console.log(result);
 			});
 		}
+	},
+	async dubsLeaderboard(message) {
+		let userArray = await message.guild.members.fetch();
+
+		userArray = userArray.map(user => {
+			return user.user.id;
+		});
+
+		console.log(userArray);
+
+		console.log('Connected. Displaying dubs leaderboard');
+		const sql = 'SELECT * FROM dubs';
+
+		con.query(sql, userArray, async (err, result) => {
+			if (err) throw err;
+			console.log(result);
+			let leaderboard = 'DUBS (CHECK EM) LEADERBOARD';
+			for (const i in result) {
+				if (!userArray.includes(result[i].UserID)) {
+					continue;
+				}
+				const name = await message.guild.members.fetch(result[i].UserID);
+				leaderboard += '\n- - - - - - - - - - - - - - - - - - - -\n';
+				leaderboard += `**${name.displayName}**  |  Dubs: ${result[i].dubs}  |  Trips: ${result[i].trips}  |  Quads: ${result[i].quads}\nQuints: ${result[i].quints}  |  Highest: ${result[i].highest}\n`;
+			}
+			return message.reply(leaderboard.substring(0, leaderboard.length - 1));
+		});
 	},
 };

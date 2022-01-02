@@ -1,6 +1,6 @@
 const { random } = require('../util/random');
 const { doesContain } = require('../util/doesContain');
-const { checkDubs } = require('../util/checkDubs');
+const { checkDubs, dubsLeaderboard } = require('../util/checkDubs');
 
 module.exports = {
 	name: 'messageCreate',
@@ -23,6 +23,11 @@ module.exports = {
 		}
 
 		checkDubs(message);
+
+		if (doesContain(message.content, '-dubsleaderboard')) {
+			// p
+			dubsLeaderboard(message);
+		}
 
 		if (message.channel.id === '358699161551634442') {
 			// stink chat
