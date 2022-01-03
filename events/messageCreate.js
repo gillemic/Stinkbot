@@ -22,15 +22,13 @@ module.exports = {
 			return;
 		}
 
-		checkDubs(message);
-
 		if (doesContain(message.content, '-dubsleaderboard')) {
-			// p
 			dubsLeaderboard(message);
 		}
 
 		if (message.channel.id === '358699161551634442') {
 			// stink chat
+			checkDubs(message);
 			return;
 		}
 
