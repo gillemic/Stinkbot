@@ -97,7 +97,7 @@ module.exports = {
 		console.log(userArray);
 
 		console.log('Connected. Displaying dubs leaderboard');
-		const sql = 'SELECT * FROM dubs';
+		const sql = 'SELECT * FROM dubs ORDER BY dubs DESC';
 
 		con.query(sql, userArray, async (err, result) => {
 			if (err) throw err;
