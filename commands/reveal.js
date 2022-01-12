@@ -9,7 +9,7 @@ module.exports = {
 
 		bot.setUsername('Stinkbot');
 		bot.setAvatar('img/stinkbot.jpg');
-		bot.setActivity({ name: 'Metroid™ Dread ', type: 'STREAMING', url: 'twitch.tv/twistingnutsack' });
+		bot.setActivity({ name: 'Fiwst Cwass Twouble', type: 'STREAMING', url: 'twitch.tv/twistingnutsack' });
 
 		interaction.reply({ content: 'Sike it was me the whole time', ephemeral: true });
 	},
