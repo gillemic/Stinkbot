@@ -24,6 +24,7 @@ module.exports = {
 
 		if (doesContain(message.content, '-dubsleaderboard')) {
 			dubsLeaderboard(message);
+			return;
 		}
 
 		if (message.channel.id === '358699161551634442') {
@@ -35,15 +36,5 @@ module.exports = {
 		if (doesContain(message.content, 'thank') && doesContain(message.content, 'stinkbot')) {
 			message.reply('You\'re welcome :relieved:');
 		}
-
-		// map all emojis in server the message was sent
-		// const all_emojis = message.guild.emojis.cache.map(e => e.toString());
-		// const rand = random(0, all_emojis.length - 1);
-
-		// // 1 in 10 chance to react
-		// const rand2 = random(0, 10);
-		// if (rand2 === 2) {
-		// 	message.react(all_emojis[rand]);
-		// }
 	},
 };
