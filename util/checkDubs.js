@@ -39,7 +39,7 @@ module.exports = {
 				break;
 			case 5:
 				column = 'quints';
-				message.reply({ content: `MessageID: ${message_id} THAT'S QUINTS BABY!!`, files: ['./img/quints.png'] });
+				message.reply({ content: `MessageID: ${message_id} THATS QUINTS BABY!!`, files: ['./img/quints.png'] });
 				break;
 			default:
 				message.reply({ content: `MessageID: ${message_id} WOOOOOAAAAAHHHHH!!!!`, files: ['./img/holy.jpg'] });
@@ -97,7 +97,7 @@ module.exports = {
 		console.log(userArray);
 
 		console.log('Connected. Displaying dubs leaderboard');
-		const sql = 'SELECT * FROM dubs ORDER BY dubs DESC';
+		const sql = 'SELECT * FROM dubs ORDER BY quints DESC, quads DESC, trips DESC, dubs DESC';
 
 		con.query(sql, userArray, async (err, result) => {
 			if (err) throw err;
@@ -109,7 +109,7 @@ module.exports = {
 				}
 				const name = await message.guild.members.fetch(result[i].UserID);
 				leaderboard += '\n- - - - - - - - - - - - - - - - - - - -\n';
-				leaderboard += `**${name.displayName}**  |  Dubs: ${result[i].dubs}  |  Trips: ${result[i].trips}  |  Quads: ${result[i].quads}  |  Quints: ${result[i].quints}\n`;
+				leaderboard += `**${name.displayName}**  |  Dubs: ${result[i].dubs}  |  Trips: ${result[i].trips}  |  Quads: ${result[i].quads}  |  Quints: ${result[i].quints}`;
 			}
 			return message.reply(leaderboard.substring(0, leaderboard.length - 1));
 		});
