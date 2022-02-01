@@ -111,7 +111,7 @@ module.exports = {
 				leaderboard += '\n- - - - - - - - - - - - - - - - - - - -\n';
 				leaderboard += `**${name.displayName}**  |  Dubs: ${result[i].dubs}  |  Trips: ${result[i].trips}  |  Quads: ${result[i].quads}  |  Quints: ${result[i].quints}`;
 			}
-			return message.reply(leaderboard.substring(0, leaderboard.length - 1));
+			return message.reply(leaderboard);
 		});
 	},
 };
