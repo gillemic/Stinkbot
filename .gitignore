@@ -1,5 +1,4 @@
 node_modules
-.gitignore
 .env
 .vscode
 config.json
@@ -7,3 +6,4 @@ img/hopps
 commands/feet.js
 start.bat
 *.log
+output/*
