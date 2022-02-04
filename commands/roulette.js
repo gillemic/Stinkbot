@@ -29,11 +29,11 @@ module.exports = {
 		if (victim.moderatable) {
 			if (result != 2) {
 				interaction.member.timeout(1000 * 60 * 15, 'Owned idiot');
-				interaction.reply({ content: 'You lost! You\'ve been put in timeout for 15 minutes', ephemeral: true });
+				interaction.reply({ content: 'You lost! You\'ve been put in timeout for 15 minutes' });
 			}
 			else {
 				victim.timeout(1000 * 60 * 15, `You have been put in timeout by ${interaction.member.displayName}`);
-				interaction.reply({ content: `You won! ${victim.displayName} has been put in timeout for 15 minutes`, ephemeral: true });
+				interaction.reply({ content: `You won! ${victim.displayName} has been put in timeout for 15 minutes` });
 			}
 		}
 		else {
