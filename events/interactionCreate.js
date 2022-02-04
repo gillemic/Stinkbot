@@ -5,13 +5,13 @@ module.exports = {
 
 		if (!interaction.isCommand()) return;
 
-		if (interaction.channel.id === '358699161551634442') {
+		const command = client.commands.get(interaction.commandName);
+
+		if (interaction.channel.id === '358699161551634442' && interaction.commandName != 'roulette') {
 			// stink chat
 			interaction.reply({ content: 'Not today sucka', ephemeral: true });
 			return;
 		}
-
-		const command = client.commands.get(interaction.commandName);
 
 		if (!command) return;
 
