@@ -91,7 +91,7 @@ module.exports = {
 			if (victim.moderatable) {
 				if (verdict != 2) {
 					interaction.member.timeout(1000 * 60 * (5 * (CL + 1)), 'Owned idiot');
-					interaction.reply({ content: `You lost! You've been put in timeout for ${5 * (CL + 1)} minutes.\nConsecutive Losses: ${CL + 1}`, files: ['./img/roulette_loss.jpg'] });
+					interaction.reply({ content: `You lost! You've been put in timeout for ${5 * (CL + 1)} minutes.\nConsecutive Losses: ${CL + 1}`, files: ['./img/roulette_loss.gif'] });
 
 					sql = `UPDATE roulette SET Consecutive_Losses=Consecutive_Losses+1, Attempts=Attempts+1 WHERE UserID=${userID}`;
 				}
