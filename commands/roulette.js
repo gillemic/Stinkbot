@@ -22,6 +22,7 @@ module.exports = {
 		.addStringOption(option =>
 			option.setName('leaderboard')
 				.setDescription('show the leaderboard')
+				.addChoice('t', true)
 				.setRequired(false),
 		),
 	async execute(interaction) {
@@ -49,6 +50,7 @@ module.exports = {
 				}
 				return interaction.reply(leaderboard);
 			});
+			return;
 		}
 
 		const verdict = random(0, 5);
