@@ -19,10 +19,9 @@ module.exports = {
 				.setDescription('the member to try and timeout')
 				.setRequired(false),
 		)
-		.addStringOption(option =>
+		.addBooleanOption(option =>
 			option.setName('leaderboard')
 				.setDescription('show the leaderboard')
-				.addChoice('t', true)
 				.setRequired(false),
 		),
 	async execute(interaction) {
