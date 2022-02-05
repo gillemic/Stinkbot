@@ -109,9 +109,9 @@ module.exports = {
 					}
 					const name = await interaction.guild.members.fetch(result[i].UserID);
 					leaderboard += '\n- - - - - - - - - - - - - - - - - - - -\n';
-					leaderboard += `**${name.displayName}**  |  Wins: ${result[i].Wins}  |  W/L: ${result[i].WL}\n`;
+					leaderboard += `**${name.displayName}**  |  Wins: ${result[i].Wins}  |  W/L: ${result[i].WL}`;
 				}
-				return interaction.reply(leaderboard.substring(0, leaderboard.length - 1));
+				return interaction.reply(leaderboard);
 			});
 		}
 		else if (choice === 'ban') {

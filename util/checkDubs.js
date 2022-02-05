@@ -11,9 +11,8 @@ module.exports = {
 	name: 'checkDubs',
 	checkDubs(message) {
 		const message_id = message.id;
-		console.log(message.author.id);
 
-		const last_digit = parseInt(message_id[message_id.length - 1]) % 10;
+		const last_digit = parseInt(message_id[message_id.length - 1]);
 
 		let count = 1;
 
