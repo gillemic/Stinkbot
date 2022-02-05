@@ -69,7 +69,7 @@ module.exports = {
 		const userID = interaction.user.id;
 
 		let sql = `SELECT * FROM roulette WHERE UserID="${userID}"`;
-		let CL = 0;
+		let CL;
 
 		con.query(sql, (err, result) => {
 			if (err) throw err;
@@ -80,6 +80,8 @@ module.exports = {
 			else {
 				// new user
 				sql = `INSERT INTO roulette VALUES ("${userID}", 0, 0, 0)`;
+
+				CL = 0;
 
 				con.query(sql, (err, result2) => {
 					if (err) throw err;
