@@ -95,7 +95,7 @@ module.exports = {
 				interaction.member.timeout(1000 * 60 * (5 * (CL + 1)), 'Owned idiot');
 				interaction.reply({ content: `You lost! You've been put in timeout for ${5 * (CL + 1)} minutes.\nConsecutive Losses: ${CL + 1}` });
 
-				sql = `UPDATE roulette SET Consecutive_Losses=${CL + 1}, Attempts=Attempts+1 WHERE UserID=${userID}`;
+				sql = `UPDATE roulette SET Consecutive_Losses=Consecutive_Losses+1, Attempts=Attempts+1 WHERE UserID=${userID}`;
 			}
 			else {
 				victim.timeout(1000 * 60 * 5, `You have been put in timeout by ${interaction.member.displayName}`);
