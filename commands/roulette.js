@@ -76,7 +76,7 @@ module.exports = {
 			console.log(result[0]);
 			if (result[0].Consecutive_Losses) {
 				// user exists
-				CL = result[0].Consecutive_Losses;
+				CL = parseInt(result[0].Consecutive_Losses);
 			}
 			else {
 				// new user
