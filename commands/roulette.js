@@ -25,7 +25,7 @@ module.exports = {
 				.setRequired(false),
 		),
 	async execute(interaction) {
-		if (interaction.options.getString('leaderboard')) {
+		if (interaction.options.getBoolean('leaderboard')) {
 			let userArray = await interaction.guild.members.fetch();
 
 			userArray = userArray.map(user => {
@@ -33,7 +33,7 @@ module.exports = {
 			});
 
 			console.log('Connected. Displaying roulette leaderboard');
-			const sql = 'SELECT * FROM discord_bot.roulette_leaderboard';
+			const sql = 'SELECT * FROM roulette_leaderboard';
 
 			con.query(sql, userArray, async (err, result) => {
 				if (err) throw err;
