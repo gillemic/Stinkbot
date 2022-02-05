@@ -69,20 +69,18 @@ module.exports = {
 		const userID = interaction.user.id;
 
 		let sql = `SELECT * FROM roulette WHERE UserID="${userID}"`;
-		let CL;
+		let CL = 0;
 
-		con.query(sql, (err, result) => {
+		con.query(sql, async (err, result) => {
 			if (err) throw err;
 			console.log(result[0]);
-			if (result[0].Consecutive_Losses) {
+			if (result.length) {
 				// user exists
 				CL = parseInt(result[0].Consecutive_Losses);
 			}
 			else {
 				// new user
 				sql = `INSERT INTO roulette VALUES ("${userID}", 0, 0, 0)`;
-
-				CL = 0;
 
 				con.query(sql, (err, result2) => {
 					if (err) throw err;
