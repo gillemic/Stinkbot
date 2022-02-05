@@ -74,7 +74,7 @@ module.exports = {
 		con.query(sql, (err, result) => {
 			if (err) throw err;
 			console.log(result[0]);
-			if (result.length) {
+			if (result[0].Consecutive_Losses) {
 				// user exists
 				CL = result[0].Consecutive_Losses;
 			}
