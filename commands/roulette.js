@@ -98,8 +98,8 @@ module.exports = {
 				sql = `UPDATE roulette SET Consecutive_Losses=${CL + 1}, Attempts=Attempts+1 WHERE UserID=${userID}`;
 			}
 			else {
-				victim.timeout(1000 * 60 * 15, `You have been put in timeout by ${interaction.member.displayName}`);
-				interaction.reply({ content: `You won! ${victim.displayName} has been put in timeout for 15 minutes` });
+				victim.timeout(1000 * 60 * 5, `You have been put in timeout by ${interaction.member.displayName}`);
+				interaction.reply({ content: `You won! ${victim.displayName} has been put in timeout for 5 minutes` });
 
 				sql = `UPDATE roulette SET Consecutive_Losses=0, Wins=Wins+1, Attempts=Attempts+1 WHERE UserID=${userID}`;
 			}
