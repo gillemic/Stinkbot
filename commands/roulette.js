@@ -66,7 +66,7 @@ module.exports = {
 			return;
 		}
 
-		const userID = interaction.author.id;
+		const userID = interaction.user.id;
 
 		let sql = `SELECT * FROM roulette WHERE UserID="${userID}"`;
 		let CL = 0;
