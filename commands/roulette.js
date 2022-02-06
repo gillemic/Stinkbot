@@ -68,7 +68,7 @@ module.exports = {
 		}
 
 		if (victim.isCommunicationDisabled()) {
-			interaction.reply({ content: 'This member is already in timeout!' });
+			interaction.reply({ content: `${victim.displayName} is already in timeout!` });
 			return;
 		}
 
