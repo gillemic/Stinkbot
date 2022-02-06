@@ -52,7 +52,7 @@ module.exports = {
 			return;
 		}
 
-		const verdict = random(0, 5);
+		const verdict = random(0, 6);
 
 		const victim = interaction.options.getMember('target');
 		const userID = interaction.member.id;
@@ -68,7 +68,8 @@ module.exports = {
 		}
 
 		if (victim.isCommunicationDisabled()) {
-			interaction.reply({ content: `${victim.displayName} is already in timeout!` });
+			const time = victim.communicationDisabledUntil;
+			interaction.reply({ content: `${victim.displayName} is already in timeout until ${time.toLocaleTimeString()}!` });
 			return;
 		}
 
