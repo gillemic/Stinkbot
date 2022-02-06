@@ -69,7 +69,7 @@ module.exports = {
 
 		if (victim.isCommunicationDisabled()) {
 			const time = victim.communicationDisabledUntil;
-			interaction.reply({ content: `${victim.displayName} is already in timeout until ${time.toLocaleTimeString()}!` });
+			interaction.reply({ content: `${victim.displayName} is already in timeout! (Until ${time.toLocaleTimeString()} PST)` });
 			return;
 		}
 
