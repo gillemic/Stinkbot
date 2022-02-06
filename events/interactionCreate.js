@@ -7,7 +7,7 @@ module.exports = {
 
 		const command = client.commands.get(interaction.commandName);
 
-		if (interaction.channel.id === '358699161551634442' && interaction.commandName != 'roulette') {
+		if (interaction.channel.id === '358699161551634442') {
 			// stink chat
 			interaction.reply({ content: 'Not today sucka', ephemeral: true });
 			return;
