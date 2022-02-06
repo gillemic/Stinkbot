@@ -62,7 +62,7 @@ module.exports = {
 			return;
 		}
 
-		if (victim.id === interaction.client.id) {
+		if (victim.id === interaction.client.user.id) {
 			interaction.reply({ content: 'Fool. You cannot timeout Stinkbot.', ephemeral: true });
 			return;
 		}
