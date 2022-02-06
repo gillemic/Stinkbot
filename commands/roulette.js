@@ -55,6 +55,22 @@ module.exports = {
 		const verdict = random(0, 5);
 
 		const victim = interaction.options.getMember('target');
+		const userID = interaction.member.id;
+
+		if (victim.id === userID) {
+			interaction.reply({ content: 'Why would you try to timeout yourself??', ephemeral: true });
+			return;
+		}
+
+		if (victim.id === interaction.client.id) {
+			interaction.reply({ content: 'Fool. You cannot timeout Stinkbot.', ephemeral: true });
+			return;
+		}
+
+		if (victim.isCommunicationDisabled()) {
+			interaction.reply({ content: 'This member is already in timeout!' });
+			return;
+		}
 
 		if (!interaction.guild.me.permissions.has(Permissions.FLAGS.MODERATE_MEMBERS)) {
 			interaction.reply({ content: 'Stinkbot does not have permissions to timeout members :(', ephemeral: true });
@@ -65,8 +81,6 @@ module.exports = {
 			interaction.reply({ content: 'One or more user(s) is an Administator of this guild and cannot be put in timeout', ephemeral: true });
 			return;
 		}
-
-		const userID = interaction.user.id;
 
 		let sql = `SELECT * FROM roulette WHERE UserID="${userID}"`;
 		let CL = 0;
