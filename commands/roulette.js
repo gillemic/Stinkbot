@@ -25,7 +25,7 @@ module.exports = {
 				.setDescription('show the leaderboard'),
 		),
 	async execute(interaction) {
-		if (interaction.options.getSubcommand('target')) {
+		if (interaction.options.getSubcommand() === 'target') {
 			//
 			const verdict = random(0, 6);
 
@@ -102,7 +102,7 @@ module.exports = {
 			});
 			//
 		}
-		else if (interaction.options.getSubcommand('leaderboard')) {
+		else if (interaction.options.getSubcommand() === 'leaderboard') {
 			let userArray = await interaction.guild.members.fetch();
 
 			userArray = userArray.map(user => {
