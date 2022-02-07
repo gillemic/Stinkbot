@@ -25,33 +25,7 @@ module.exports = {
 				.setDescription('show the leaderboard'),
 		),
 	async execute(interaction) {
-		if (interaction.options.getSubcommand('leaderboard')) {
-			let userArray = await interaction.guild.members.fetch();
-
-			userArray = userArray.map(user => {
-				return user.user.id;
-			});
-
-			console.log('Connected. Displaying roulette leaderboard');
-			const sql = 'SELECT * FROM roulette_leaderboard';
-
-			con.query(sql, userArray, async (err, result) => {
-				if (err) throw err;
-				// console.log(result);
-				let leaderboard = 'ROULETTE LEADERBOARD';
-				for (const i in result) {
-					if (!userArray.includes(result[i].UserID)) {
-						continue;
-					}
-					const name = await interaction.guild.members.fetch(result[i].UserID);
-					leaderboard += '\n- - - - - - - - - - - - - - - - - - - -\n';
-					leaderboard += `**${name.displayName}**  |  Wins: ${result[i].Wins}  |  Attempts: ${result[i].Attempts}  |  W/L: ${result[i].WL}`;
-				}
-				return interaction.reply(leaderboard);
-			});
-			return;
-		}
-		else if (interaction.options.getSubcommand('target')) {
+		if (interaction.options.getSubcommand('target')) {
 			//
 			const verdict = random(0, 6);
 
@@ -127,6 +101,32 @@ module.exports = {
 				}
 			});
 			//
+		}
+		else if (interaction.options.getSubcommand('leaderboard')) {
+			let userArray = await interaction.guild.members.fetch();
+
+			userArray = userArray.map(user => {
+				return user.user.id;
+			});
+
+			console.log('Connected. Displaying roulette leaderboard');
+			const sql = 'SELECT * FROM roulette_leaderboard';
+
+			con.query(sql, userArray, async (err, result) => {
+				if (err) throw err;
+				// console.log(result);
+				let leaderboard = 'ROULETTE LEADERBOARD';
+				for (const i in result) {
+					if (!userArray.includes(result[i].UserID)) {
+						continue;
+					}
+					const name = await interaction.guild.members.fetch(result[i].UserID);
+					leaderboard += '\n- - - - - - - - - - - - - - - - - - - -\n';
+					leaderboard += `**${name.displayName}**  |  Wins: ${result[i].Wins}  |  Attempts: ${result[i].Attempts}  |  W/L: ${result[i].WL}`;
+				}
+				return interaction.reply(leaderboard);
+			});
+			return;
 		}
 		else {
 			interaction.reply({ content: 'You need to specify a subcommand', ephemeral: true });
