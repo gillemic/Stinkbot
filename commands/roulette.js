@@ -29,7 +29,7 @@ module.exports = {
 			//
 			const verdict = random(0, 6);
 
-			const victim = interaction.options.getMember('target');
+			const victim = interaction.options.getMember('user');
 			const userID = interaction.member.id;
 
 			if (victim.id === userID) {
