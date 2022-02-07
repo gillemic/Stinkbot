@@ -17,14 +17,12 @@ module.exports = {
 		.addSubcommand(subcommand =>
 			subcommand.setName('target')
 				.setDescription('The member to try and timeout. Don\'t lose though!')
-				.setRequired(false)
 				.addUserOption(option =>
-					option.setName('user').setDescription('the user to target')),
+					option.setName('user').setDescription('the user to target').setRequired(true)),
 		)
 		.addSubcommand(subcommand =>
 			subcommand.setName('leaderboard')
-				.setDescription('show the leaderboard')
-				.setRequired(false),
+				.setDescription('show the leaderboard'),
 		),
 	async execute(interaction) {
 		if (interaction.options.getSubcommand('leaderboard')) {
