@@ -10,6 +10,20 @@ const con = mysql.createConnection({
 	database: process.env.DB_DATABASE,
 });
 
+function calculateTime(minutes) {
+	const hours = Math.floor(minutes / 60);
+	const mins = minutes % 60;
+	if (hours > 0 && mins === 0) {
+		return `${hours} hour(s)`;
+	}
+	else if (hours > 0) {
+		return `${hours} hour(s) and ${mins} minutes`;
+	}
+	else {
+		return `${mins} minutes`;
+	}
+}
+
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('roulette')
@@ -18,12 +32,10 @@ module.exports = {
 			subcommand.setName('target')
 				.setDescription('The member to try and timeout. Don\'t lose though!')
 				.addUserOption(option =>
-					option.setName('user').setDescription('the user to target').setRequired(true)),
-		)
+					option.setName('user').setDescription('the user to target').setRequired(true)))
 		.addSubcommand(subcommand =>
 			subcommand.setName('leaderboard')
-				.setDescription('show the leaderboard'),
-		),
+				.setDescription('show the leaderboard')),
 	async execute(interaction) {
 		if (interaction.options.getSubcommand() === 'target') {
 			//
@@ -81,7 +93,7 @@ module.exports = {
 				if (victim.moderatable) {
 					if (verdict != 2) {
 						interaction.member.timeout(1000 * 60 * (30 * (CL + 1)), 'Owned idiot');
-						interaction.reply({ content: `You lost! You've been put in timeout for ${30 * (CL + 1)} minutes.\nConsecutive Losses: ${CL + 1}`, files: ['./img/roulette_loss.gif'] });
+						interaction.reply({ content: `You lost! You've been put in timeout for ${calculateTime(30 * (CL + 1))}.\nConsecutive Losses: ${CL + 1}`, files: ['./img/roulette_loss.gif'] });
 
 						sql = `UPDATE roulette SET Consecutive_Losses=Consecutive_Losses+1, Attempts=Attempts+1 WHERE UserID=${userID}`;
 					}
