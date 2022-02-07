@@ -19,13 +19,13 @@ module.exports = {
 				.setDescription('the member to try and timeout')
 				.setRequired(false),
 		)
-		.addBooleanOption(option =>
-			option.setName('leaderboard')
-				.setDescription('show the leaderboard')
-				.setRequired(false),
+		.addSubcommand(subcommand =>
+			subcommand
+				.setName('leaderboard')
+				.setDescription('Display the roulette leaderboard'),
 		),
 	async execute(interaction) {
-		if (interaction.options.getBoolean('leaderboard')) {
+		if (interaction.options.getSubcommand('leaderboard')) {
 			let userArray = await interaction.guild.members.fetch();
 
 			userArray = userArray.map(user => {
