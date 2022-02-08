@@ -44,11 +44,6 @@ module.exports = {
 			const victim = interaction.options.getMember('user');
 			const userID = interaction.member.id;
 
-			if (victim.id === userID) {
-				interaction.reply({ content: 'Why would you try to timeout yourself??', ephemeral: true });
-				return;
-			}
-
 			if (victim.id === interaction.client.user.id) {
 				interaction.reply({ content: 'Fool. You cannot timeout Stinkbot.', ephemeral: true });
 				return;
