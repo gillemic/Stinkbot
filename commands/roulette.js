@@ -93,19 +93,19 @@ module.exports = {
 							return;
 						}
 						else {
-							interaction.reply({ content: `**\*click**\*` });
+							interaction.reply({ content: '**\*click**\*' });
 							return;
 						}
 					}
 					else if (verdict != 2) {
-						interaction.member.timeout(1000 * 60 * (30 * (CL + 1)), 'Owned idiot');
-						interaction.reply({ content: `You lost! You've been put in timeout for ${calculateTime(30 * (CL + 1))}.\nConsecutive Losses: ${CL + 1}`, files: ['./img/roulette_loss.gif'] });
+						interaction.member.timeout(1000 * 60 * (30 + 15 * (CL + 1)), 'Owned idiot');
+						interaction.reply({ content: `You lost! You've been put in timeout for ${calculateTime(30 + 15 * (CL + 1))}.\nConsecutive Losses: ${CL + 1}`, files: ['./img/roulette_loss.gif'] });
 
 						sql = `UPDATE roulette SET Consecutive_Losses=Consecutive_Losses+1, Attempts=Attempts+1 WHERE UserID=${userID}`;
 					}
 					else {
-						victim.timeout(1000 * 60 * (15 + 10 * (CL + 1)), `You have been put in timeout by ${interaction.member.displayName}`);
-						interaction.reply({ content: `You won! ${victim.displayName} has been put in timeout for ${calculateTime(15 + 10 * (CL + 1))}`, files: ['./img/roulette_win.jpg'] });
+						victim.timeout(1000 * 60 * (15 + 5 * (CL + 1)), `You have been put in timeout by ${interaction.member.displayName}`);
+						interaction.reply({ content: `You won! ${victim.displayName} has been put in timeout for ${calculateTime(15 + 5 * (CL + 1))}`, files: ['./img/roulette_win.jpg'] });
 
 						sql = `UPDATE roulette SET Consecutive_Losses=0, Wins=Wins+1, Attempts=Attempts+1 WHERE UserID=${userID}`;
 					}
