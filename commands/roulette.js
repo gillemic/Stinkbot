@@ -100,15 +100,15 @@ module.exports = {
 					}
 					else if (verdict != 2) {
 						interaction.member.timeout(1000 * 60 * (30 + (15 * CL)), 'Owned idiot');
-						interaction.deferReply();
-						interaction.editReply({ content: `You lost! You've been put in timeout for ${calculateTime(30 + 15 * CL)}.\nConsecutive Losses: ${CL + 1}`, files: ['./img/roulette_loss.gif'] });
+						await interaction.deferReply();
+						await interaction.editReply({ content: `You lost! You've been put in timeout for ${calculateTime(30 + 15 * CL)}.\nConsecutive Losses: ${CL + 1}`, files: ['./img/roulette_loss.gif'] });
 
 						sql = `UPDATE roulette SET Consecutive_Losses=Consecutive_Losses+1, Attempts=Attempts+1 WHERE UserID=${userID}`;
 					}
 					else {
 						victim.timeout(1000 * 60 * (15 + 5 * CL), `You have been put in timeout by ${interaction.member.displayName}`);
-						interaction.deferReply();
-						interaction.editReply({ content: `You won! ${victim.displayName} has been put in timeout for ${calculateTime(15 + 5 * CL)}`, files: ['./img/roulette_win.jpg'] });
+						await interaction.deferReply();
+						await interaction.editReply({ content: `You won! ${victim.displayName} has been put in timeout for ${calculateTime(15 + 5 * CL)}`, files: ['./img/roulette_win.jpg'] });
 
 						sql = `UPDATE roulette SET Consecutive_Losses=0, Wins=Wins+1, Attempts=Attempts+1 WHERE UserID=${userID}`;
 					}
@@ -145,8 +145,8 @@ module.exports = {
 					leaderboard += '\n- - - - - - - - - - - - - - - - - - - -\n';
 					leaderboard += `**${name.displayName}**  |  Wins: ${result[i].Wins}  |  Attempts: ${result[i].Attempts}  |  W/L: ${result[i].WL}`;
 				}
-				interaction.deferReply();
-				return interaction.editReply({ content: leaderboard });
+				await interaction.deferReply();
+				await interaction.editReply({ content: leaderboard });
 			});
 		}
 		else {
