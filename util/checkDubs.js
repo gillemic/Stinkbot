@@ -26,7 +26,7 @@ module.exports = {
 			switch (count) {
 			case 2:
 				column = 'dubs';
-				message.reply({ content: `MessageID: ${message_id} Holy shit! You got dubs`, files: ['./img/dubs.jpg'] });
+				// message.reply({ content: `MessageID: ${message_id} Holy shit! You got dubs`, files: ['./img/dubs.jpg'] });
 				break;
 			case 3:
 				column = 'trips';
