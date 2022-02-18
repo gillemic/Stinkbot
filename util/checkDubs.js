@@ -1,5 +1,5 @@
 const mysql = require('mysql');
-const { doesContain } = require('./doesContain');
+const { doesContain, containsAny } = require('./doesContain');
 const { Permissions } = require('discord.js');
 
 const con = mysql.createConnection({
@@ -91,8 +91,9 @@ module.exports = {
 			});
 		}
 		else {
-			console.log('shut up >:(');
-			if (doesContain(message.content, 'dubs') || doesContain(message.content, 'Dubs')) {
+			const words = ['dubs', 'dub5', 'doobs', 'd00bs', 'd00b5', 'doubles', 'doobles'];
+			const m = message.content.toLowerCase();
+			if (containsAny(m, words)) {
 				if (message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) {
 					message.reply({ content: 'You are an Administator of this guild and cannot be put in timeout', ephemeral: true });
 					return;
