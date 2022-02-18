@@ -1,5 +1,6 @@
 const mysql = require('mysql');
 const { doesContain } = require('./doesContain');
+const { Permissions } = require('discord.js');
 
 const con = mysql.createConnection({
 	host: process.env.DB_HOST,
@@ -92,6 +93,10 @@ module.exports = {
 		else {
 			console.log('shut up >:(');
 			if (doesContain(message.content, 'dubs') || doesContain(message.content, 'Dubs')) {
+				if (message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) {
+					message.reply({ content: 'You are an Administator of this guild and cannot be put in timeout', ephemeral: true });
+					return;
+				}
 				message.member.timeout(1000 * 60 * 5, 'Owned idiot');
 				message.reply({ content: 'No dubs. You\'ve been put in timeout for 5 minutes.', files: ['./img/clown.jpg'] });
 			}
