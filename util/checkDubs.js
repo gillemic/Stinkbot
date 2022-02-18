@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+const { doesContain } = require('./doesContain');
 
 const con = mysql.createConnection({
 	host: process.env.DB_HOST,
@@ -26,6 +27,9 @@ module.exports = {
 			switch (count) {
 			case 2:
 				column = 'dubs';
+				if (doesContain(message.content, 'dubs')) {
+					message.reply({ content: `MessageID: ${message_id} Holy shit! You got dubs`, files: ['./img/dubs.jpg'] });
+				}
 				// message.reply({ content: `MessageID: ${message_id} Holy shit! You got dubs`, files: ['./img/dubs.jpg'] });
 				break;
 			case 3:
@@ -84,6 +88,13 @@ module.exports = {
 				}
 				console.log(result);
 			});
+		}
+		else {
+			console.log('shut up >:(');
+			if (doesContain(message.content, 'dubs')) {
+				message.member.timeout(1000 * 60 * 5, 'Owned idiot');
+				message.reply({ content: 'No dubs. You\'ve been put in timeout for 5 minutes.', files: ['./img/clown.jpg'] });
+			}
 		}
 	},
 	async dubsLeaderboard(message) {
