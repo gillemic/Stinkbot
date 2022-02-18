@@ -91,7 +91,7 @@ module.exports = {
 		}
 		else {
 			console.log('shut up >:(');
-			if (doesContain(message.content, 'dubs')) {
+			if (doesContain(message.content, 'dubs') || doesContain(message.content, 'Dubs')) {
 				message.member.timeout(1000 * 60 * 5, 'Owned idiot');
 				message.reply({ content: 'No dubs. You\'ve been put in timeout for 5 minutes.', files: ['./img/clown.jpg'] });
 			}
