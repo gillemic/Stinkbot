@@ -33,9 +33,6 @@ module.exports = {
 				if (containsAny(m, words)) {
 					message.reply({ content: `MessageID: ${message_id} Holy shit! You got dubs`, files: ['./img/dubs.jpg'] });
 				}
-				else {
-					message.reply({ content: `MessageID: ${message_id} Holy shit! You got dubs`, files: ['./img/dubs.jpg'], ephemeral: true });
-				}
 				break;
 			case 3:
 				column = 'trips';
@@ -98,11 +95,11 @@ module.exports = {
 			console.log('shut up >:(');
 			if (containsAny(m, words)) {
 				if (message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) {
-					message.reply({ content: 'You are an Administator of this guild and cannot be put in timeout', ephemeral: true });
+					message.reply({ content: 'You are an Administator of this guild and cannot be put in timeout' });
 					return;
 				}
 				message.member.timeout(1000 * 60 * 5, 'Owned idiot');
-				message.reply({ content: 'No dubs. You\'ve been put in timeout for 5 minutes.', files: ['./img/clown.jpg'], ephemeral: true });
+				message.reply({ content: 'No dubs. You\'ve been put in timeout for 5 minutes.', files: ['./img/clown.jpg'] });
 			}
 		}
 	},
