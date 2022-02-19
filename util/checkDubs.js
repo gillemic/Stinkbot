@@ -1,5 +1,5 @@
 const mysql = require('mysql');
-const { doesContain, containsAny } = require('./doesContain');
+const { containsAny } = require('./doesContain');
 const { Permissions } = require('discord.js');
 
 const con = mysql.createConnection({
@@ -13,6 +13,8 @@ module.exports = {
 	name: 'checkDubs',
 	checkDubs(message) {
 		const message_id = message.id;
+		const m = message.content.toLowerCase();
+		const words = ['dubs', 'dub5', 'doobs', 'd00bs', 'd00b5', 'doubles', 'doobles'];
 
 		const last_digit = parseInt(message_id[message_id.length - 1]);
 
@@ -28,10 +30,12 @@ module.exports = {
 			switch (count) {
 			case 2:
 				column = 'dubs';
-				if (doesContain(message.content, 'dubs')) {
+				if (containsAny(m, words)) {
 					message.reply({ content: `MessageID: ${message_id} Holy shit! You got dubs`, files: ['./img/dubs.jpg'] });
 				}
-				// message.reply({ content: `MessageID: ${message_id} Holy shit! You got dubs`, files: ['./img/dubs.jpg'] });
+				else {
+					message.reply({ content: `MessageID: ${message_id} Holy shit! You got dubs`, files: ['./img/dubs.jpg'], ephemeral: true });
+				}
 				break;
 			case 3:
 				column = 'trips';
@@ -91,15 +95,14 @@ module.exports = {
 			});
 		}
 		else {
-			const words = ['dubs', 'dub5', 'doobs', 'd00bs', 'd00b5', 'doubles', 'doobles'];
-			const m = message.content.toLowerCase();
+			console.log('shut up >:(');
 			if (containsAny(m, words)) {
 				if (message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) {
 					message.reply({ content: 'You are an Administator of this guild and cannot be put in timeout', ephemeral: true });
 					return;
 				}
 				message.member.timeout(1000 * 60 * 5, 'Owned idiot');
-				message.reply({ content: 'No dubs. You\'ve been put in timeout for 5 minutes.', files: ['./img/clown.jpg'] });
+				message.reply({ content: 'No dubs. You\'ve been put in timeout for 5 minutes.', files: ['./img/clown.jpg'], ephemeral: true });
 			}
 		}
 	},
