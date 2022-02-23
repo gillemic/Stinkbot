@@ -107,7 +107,7 @@ module.exports = {
 					return;
 				}
 				message.member.timeout(1000 * 60 * 10, 'Owned idiot');
-				message.reply({ content: 'No trips. You\'ve been put in timeout for 5 minutes.', files: ['./img/clown2.jpg'] });
+				message.reply({ content: 'No trips. You\'ve been put in timeout for 10 minutes.', files: ['./img/clown2.jpg'] });
 			}
 			else if (doesContain(m, 'quads')) {
 				if (message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) {
