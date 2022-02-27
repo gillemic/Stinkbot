@@ -159,7 +159,7 @@ module.exports = {
 			}
 			interaction.member.timeout(1000 * 60 * 60 * 24 * 29.5, 'Owned idiot');
 			await interaction.deferReply();
-			await interaction.editReply({ content: `You have been fucked up and put in timeout for ${calculateTime(1000 * 60 * 60 * 24 * 29.5)}.` });
+			await interaction.editReply({ content: `You have been fucked up and put in timeout for ${calculateTime(60 * 60 * 24 * 29.5)}.` });
 		}
 		else {
 			interaction.reply({ content: 'You need to specify a subcommand', ephemeral: true });
