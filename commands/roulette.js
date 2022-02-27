@@ -157,9 +157,9 @@ module.exports = {
 				interaction.reply({ content: 'You are an Administator of this guild and cannot be put in timeout', ephemeral: true });
 				return;
 			}
-			interaction.member.timeout(1000 * 60 * 60 * 24 * 8, 'Owned idiot');
+			interaction.member.timeout(1000 * 60 * 60 * 24 * 30, 'Owned idiot');
 			await interaction.deferReply();
-			await interaction.editReply({ content: `You have been fucked up and put in timeout for ${calculateTime(1.797693134862315E+308)}.` });
+			await interaction.editReply({ content: `You have been fucked up and put in timeout for ${calculateTime(7)}.` });
 		}
 		else {
 			interaction.reply({ content: 'You need to specify a subcommand', ephemeral: true });
