@@ -35,7 +35,10 @@ module.exports = {
 					option.setName('user').setDescription('the user to target').setRequired(true)))
 		.addSubcommand(subcommand =>
 			subcommand.setName('leaderboard')
-				.setDescription('show the leaderboard')),
+				.setDescription('show the leaderboard'))
+		.addSubcommand(subcommand =>
+			subcommand.setName('fuckmeup')
+				.setDescription('fucks you up fr')),
 	async execute(interaction) {
 		if (interaction.options.getSubcommand() === 'target') {
 			//
@@ -148,6 +151,11 @@ module.exports = {
 				await interaction.deferReply();
 				await interaction.editReply({ content: leaderboard });
 			});
+		}
+		else if (interaction.options.getSubcommand() === 'fuckmeup') {
+			interaction.member.timeout(Infinity, 'Owned idiot');
+			await interaction.deferReply();
+			await interaction.editReply({ content: `You have been fucked up and put in timeout for ${calculateTime(Infinity)}.` });
 		}
 		else {
 			interaction.reply({ content: 'You need to specify a subcommand', ephemeral: true });
