@@ -153,9 +153,13 @@ module.exports = {
 			});
 		}
 		else if (interaction.options.getSubcommand() === 'fuckmeup') {
-			interaction.member.timeout(Infinity, 'Owned idiot');
+			if (interaction.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) {
+				interaction.reply({ content: 'You are an Administator of this guild and cannot be put in timeout', ephemeral: true });
+				return;
+			}
+			interaction.member.timeout(1.797693134862315E+308, 'Owned idiot');
 			await interaction.deferReply();
-			await interaction.editReply({ content: `You have been fucked up and put in timeout for ${calculateTime(Infinity)}.` });
+			await interaction.editReply({ content: `You have been fucked up and put in timeout for ${calculateTime(1.797693134862315E+308)}.` });
 		}
 		else {
 			interaction.reply({ content: 'You need to specify a subcommand', ephemeral: true });
