@@ -1,5 +1,3 @@
-// const { VoiceConnectionStatus, AudioPlayerStatus } = require('@discordjs/voice');
-
 module.exports = {
 	name: 'voiceStateUpdate',
 	execute(oldState, newState) {
@@ -19,14 +17,9 @@ module.exports = {
 			console.log(`${new Date().toLocaleTimeString()} - ${member.displayName} joined the voice channel ${newChannel.name}`);
 		}
 
-		// member muted self
-		if (newState.mute) {
-			console.log(`${new Date().toLocaleTimeString()} - ${member.displayName} is muted`);
-		}
-
 		// member started streaming
 		if (newState.streaming && !oldState.streaming) {
-			console.log(`${new Date().toLocaleTimeString()} - ${member.displayName} started streaming`);
+			console.log(`${new Date().toLocaleTimeString()} - ${member.user.tag} has started streaming in ${newState.channel.name}`);
 		}
 
 		// member stopped streaming
