@@ -4,7 +4,7 @@ module.exports = {
 		// console.log(oldPresence, newPresence);
 		if (!newPresence.activities) return false;
 
-		newPresence.forEach(activity => {
+		newPresence.activities.forEach(activity => {
 			if (activity.type == 'STREAMING') {
 				console.log(`${newPresence.user.tag} is streaming at ${activity.url}`);
 			}

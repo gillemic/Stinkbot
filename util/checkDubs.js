@@ -14,8 +14,8 @@ module.exports = {
 	checkDubs(message) {
 		const message_id = message.id;
 		const m = message.content.toLowerCase();
-		const dubs_words = ['dubs', 'dub5', 'doobs', 'd00bs', 'd00b5', 'doubles', 'doobles'];
-		const all_words = dubs_words.push(['trips', 'quads', 'quints']);
+		const dubs_words = ['dubs', 'dub5', 'doobs', 'd00bs', 'd00b5', 'doubles', 'doobles', 'dubbies', 'dubby'];
+		dubs_words.push(['trips', 'quads', 'quints']);
 
 		const last_digit = parseInt(message_id[message_id.length - 1]);
 
@@ -31,7 +31,7 @@ module.exports = {
 			switch (count) {
 			case 2:
 				column = 'dubs';
-				if (containsAny(m, all_words)) {
+				if (containsAny(m, dubs_words)) {
 					message.reply({ content: `MessageID: ${message_id} Holy shit! You got dubs`, files: ['./img/dubs.jpg'] });
 				}
 				break;
