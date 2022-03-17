@@ -15,7 +15,7 @@ module.exports = {
 		const message_id = message.id;
 		const m = message.content.toLowerCase();
 		const dubs_words = ['dubs', 'dub5', 'doobs', 'd00bs', 'd00b5', 'doubles', 'doobles', 'dubbies', 'dubby'];
-		dubs_words.push(['trips', 'quads', 'quints']);
+		dubs_words.push('trips', 'quads', 'quints');
 
 		const last_digit = parseInt(message_id[message_id.length - 1]);
 
