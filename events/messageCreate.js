@@ -1,6 +1,7 @@
 const { random } = require('../util/random');
 const { doesContain } = require('../util/doesContain');
 const { checkDubs, dubsLeaderboard } = require('../util/checkDubs');
+const banned_users = ['347933045371830292', '211398319958654977'];
 
 module.exports = {
 	name: 'messageCreate',
@@ -12,6 +13,11 @@ module.exports = {
 		const rand2 = random(0, 25);
 		if (rand2 === 2) {
 			message.react(all_emojis[rand]);
+		}
+
+		if (banned_users.includes(message.author.id)) {
+			message.react('😠');
+			return;
 		}
 
 		if (doesContain(message.content, '-baseball')) {

@@ -1,3 +1,5 @@
+const banned_users = ['347933045371830292'];
+
 module.exports = {
 	name: 'interactionCreate',
 	execute(interaction) {
@@ -7,7 +9,7 @@ module.exports = {
 
 		const command = client.commands.get(interaction.commandName);
 
-		if (interaction.channel.id === '358699161551634442') {
+		if (interaction.channel.id === '358699161551634442' || banned_users.includes(interaction.user.id)) {
 			// stink chat
 			interaction.reply({ content: 'Not today sucka', ephemeral: true });
 			return;
