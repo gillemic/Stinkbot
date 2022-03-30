@@ -29,6 +29,12 @@ module.exports = {
 		let column;
 
 		if (count > 1) {
+			if (banned_users.includes(message.author.id)) {
+				message.member.timeout(1000 * 60 * 15, 'Owned idiot');
+				message.react('😠');
+				return;
+			}
+
 			switch (count) {
 			case 2:
 				column = 'dubs';
@@ -94,14 +100,14 @@ module.exports = {
 			});
 		}
 		else {
-			if (banned_users.includes(message.author.id)) {
-				message.member.timeout(1000 * 60 * 15, 'Owned idiot');
-				message.react('😠');
-				return;
-			}
 			if (containsAny(m, dubs_words)) {
 				if (message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) {
 					message.reply({ content: 'You are an Administator of this guild and cannot be put in timeout' });
+					return;
+				}
+				else if (banned_users.includes(message.author.id)) {
+					message.member.timeout(1000 * 60 * 15, 'Owned idiot');
+					message.react('😠');
 					return;
 				}
 				message.member.timeout(1000 * 60 * 5, 'Owned idiot');
