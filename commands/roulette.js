@@ -41,7 +41,7 @@ module.exports = {
 				.setDescription('fucks you up fr')),
 	async execute(interaction) {
 		if (interaction.options.getSubcommand() === 'target') {
-			//
+			// woah!
 			const verdict = random(0, 6);
 
 			const victim = interaction.options.getMember('user');
