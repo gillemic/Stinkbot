@@ -1,4 +1,4 @@
-const banned_users = ['347933045371830292'];
+const banned_users = ['347933045371830292', '211398319958654977'];
 
 module.exports = {
 	name: 'interactionCreate',
