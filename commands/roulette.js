@@ -35,10 +35,7 @@ module.exports = {
 					option.setName('user').setDescription('the user to target').setRequired(true)))
 		.addSubcommand(subcommand =>
 			subcommand.setName('leaderboard')
-				.setDescription('show the leaderboard'))
-		.addSubcommand(subcommand =>
-			subcommand.setName('fuckmeup')
-				.setDescription('fucks you up fr')),
+				.setDescription('show the leaderboard')),
 	async execute(interaction) {
 		if (interaction.options.getSubcommand() === 'target') {
 			// woah!
@@ -151,15 +148,6 @@ module.exports = {
 				await interaction.deferReply();
 				await interaction.editReply({ content: leaderboard });
 			});
-		}
-		else if (interaction.options.getSubcommand() === 'fuckmeup') {
-			if (interaction.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) {
-				interaction.reply({ content: 'You are an Administator of this guild and cannot be put in timeout', ephemeral: true });
-				return;
-			}
-			interaction.member.timeout(1000 * 60 * 60 * 24 * 28, 'Owned idiot');
-			await interaction.deferReply();
-			await interaction.editReply({ content: `You have been fucked up and put in timeout for ${calculateTime(60 * 60 * 24 * 28)}.` });
 		}
 		else {
 			interaction.reply({ content: 'You need to specify a subcommand', ephemeral: true });
