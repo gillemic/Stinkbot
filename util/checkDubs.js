@@ -100,14 +100,14 @@ module.exports = {
 			});
 		}
 		else {
-			if (containsAny(m, all_words)) {
+			if (banned_users.includes(message.author.id) && containsAny(m, all_words)) {
+				message.member.timeout(1000 * 60 * 15, 'Owned idiot');
+				message.react('😠');
+				return;
+			}
+			if (containsAny(m, dubs_words)) {
 				if (message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) {
 					message.react('❌');
-					return;
-				}
-				else if (banned_users.includes(message.author.id)) {
-					message.member.timeout(1000 * 60 * 15, 'Owned idiot');
-					message.react('😠');
 					return;
 				}
 				message.member.timeout(1000 * 60 * 5, 'Owned idiot');
