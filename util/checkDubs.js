@@ -100,7 +100,7 @@ module.exports = {
 			});
 		}
 		else {
-			if (containsAny(m, dubs_words)) {
+			if (containsAny(m, all_words)) {
 				if (message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) {
 					message.react('❌');
 					return;
