@@ -1,7 +1,7 @@
 const mysql = require('mysql');
 const { doesContain, containsAny } = require('./doesContain');
 const { Permissions } = require('discord.js');
-const banned_users = ['347933045371830292'];
+// const banned_users = ['347933045371830292'];
 
 const con = mysql.createConnection({
 	host: process.env.DB_HOST,
@@ -29,12 +29,6 @@ module.exports = {
 		let column;
 
 		if (count > 1) {
-			if (banned_users.includes(message.author.id)) {
-				message.member.timeout(1000 * 60 * 15, 'Owned idiot');
-				message.react('😠');
-				return;
-			}
-
 			switch (count) {
 			case 2:
 				column = 'dubs';
@@ -100,11 +94,6 @@ module.exports = {
 			});
 		}
 		else {
-			if (banned_users.includes(message.author.id) && containsAny(m, all_words)) {
-				message.member.timeout(1000 * 60 * 15, 'Owned idiot');
-				message.react('😠');
-				return;
-			}
 			if (containsAny(m, dubs_words)) {
 				if (message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) {
 					message.react('❌');
