@@ -52,7 +52,7 @@ module.exports = {
 				}
 				const name = await message.guild.members.fetch(result[i].UserID);
 				leaderboard += '\n- - - - - - - - - - - - - - - - - - - -\n';
-				leaderboard += `**${name.displayName}**  |  Timeouts: ${result[i].Timeouts}  |  Total time spent in timeout: ${result[i].TotalTime}`;
+				leaderboard += `**${name.displayName}**  |  Timeouts: ${result[i].Timeouts}  |  Minutes spent in timeout: ${result[i].TotalTime}`;
 			}
 			return message.reply(leaderboard);
 		});
