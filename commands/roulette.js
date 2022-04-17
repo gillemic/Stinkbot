@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { random } = require('../util/random');
 const { Permissions } = require('discord.js');
+const { updateTimeout } = require('../util/updateTimeout');
 const mysql = require('mysql');
 
 const con = mysql.createConnection({
@@ -88,6 +89,7 @@ module.exports = {
 				if (victim.moderatable) {
 					if (victim.id === userID) {
 						if (verdict === 2) {
+							updateTimeout(userID, 120);
 							interaction.member.timeout(1000 * 60 * 60 * 2, 'Owned idiot');
 							await interaction.deferReply();
 							await interaction.editReply({ content: `You lost! You've been put in timeout for ${calculateTime(120)}.`, files: ['./img/roulette_loss.gif'] });
@@ -99,6 +101,7 @@ module.exports = {
 						}
 					}
 					else if (verdict != 2) {
+						updateTimeout(userID, 30 + (15 * CL));
 						interaction.member.timeout(1000 * 60 * (30 + (15 * CL)), 'Owned idiot');
 						await interaction.deferReply();
 						await interaction.editReply({ content: `You lost! You've been put in timeout for ${calculateTime(30 + 15 * CL)}.\nConsecutive Losses: ${CL + 1}`, files: ['./img/roulette_loss.gif'] });
@@ -106,6 +109,7 @@ module.exports = {
 						sql = `UPDATE roulette SET Consecutive_Losses=Consecutive_Losses+1, Attempts=Attempts+1 WHERE UserID=${userID}`;
 					}
 					else {
+						updateTimeout(victim.id, 15 + 5 * CL);
 						victim.timeout(1000 * 60 * (15 + 5 * CL), `You have been put in timeout by ${interaction.member.displayName}`);
 						await interaction.deferReply();
 						await interaction.editReply({ content: `You won! ${victim.displayName} has been put in timeout for ${calculateTime(15 + 5 * CL)}`, files: ['./img/roulette_win.jpg'] });

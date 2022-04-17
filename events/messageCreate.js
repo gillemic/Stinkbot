@@ -1,6 +1,7 @@
 const { random } = require('../util/random');
 const { doesContain } = require('../util/doesContain');
 const { checkDubs, dubsLeaderboard } = require('../util/checkDubs');
+const { timeoutLeaderboard } = require('../util/updateTimeout');
 
 module.exports = {
 	name: 'messageCreate',
@@ -24,6 +25,11 @@ module.exports = {
 
 		if (doesContain(message.content, '-dubsleaderboard')) {
 			dubsLeaderboard(message);
+			return;
+		}
+
+		if (doesContain(message.content, '-timeoutleaderboard')) {
+			timeoutLeaderboard(message);
 			return;
 		}
 

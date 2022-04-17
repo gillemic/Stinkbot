@@ -1,6 +1,7 @@
 const mysql = require('mysql');
 const { doesContain, containsAny } = require('./doesContain');
 const { Permissions } = require('discord.js');
+const { updateTimeout } = require('./updateTimeout');
 // const banned_users = ['347933045371830292'];
 
 const con = mysql.createConnection({
@@ -99,19 +100,25 @@ module.exports = {
 				return;
 			}
 
+			const userID = message.author.id;
+
 			if (containsAny(m, dubs_words)) {
+				updateTimeout(userID, 5);
 				message.member.timeout(1000 * 60 * 5, 'Owned idiot');
 				message.reply({ content: 'No dubs. You\'ve been put in timeout for 5 minutes.', files: ['./img/clown.jpg'] });
 			}
 			else if (doesContain(m, 'trips')) {
+				updateTimeout(userID, 10);
 				message.member.timeout(1000 * 60 * 10, 'Owned idiot');
 				message.reply({ content: 'No trips. You\'ve been put in timeout for 10 minutes.', files: ['./img/clown2.jpg'] });
 			}
 			else if (doesContain(m, 'quads')) {
+				updateTimeout(userID, 15);
 				message.member.timeout(1000 * 60 * 15, 'Owned idiot');
 				message.reply({ content: 'No quads. You\'ve been put in timeout for 15 minutes.', files: ['./img/clown3.jpg'] });
 			}
 			else if (doesContain(m, 'quints')) {
+				updateTimeout(userID, 30);
 				message.member.timeout(1000 * 60 * 30, 'Owned idiot');
 				message.reply({ content: 'No quints. You\'ve been put in timeout for 30 minutes.', files: ['./img/booboo.jpg'] });
 			}
