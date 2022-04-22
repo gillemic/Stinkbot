@@ -36,7 +36,12 @@ module.exports = {
 					option.setName('user').setDescription('the user to target').setRequired(true)))
 		.addSubcommand(subcommand =>
 			subcommand.setName('leaderboard')
-				.setDescription('show the leaderboard')),
+				.setDescription('show the leaderboard'))
+		.addSubcommand(subcommand =>
+			subcommand.setName('rescue')
+				.setDescription('rescue a timed out user')
+				.addUserOption(option =>
+					option.setName('user').setDescription('the user to rescue').setRequired(true))),
 	async execute(interaction) {
 		if (interaction.options.getSubcommand() === 'target') {
 			// woah!
@@ -151,6 +156,82 @@ module.exports = {
 				}
 				await interaction.deferReply();
 				await interaction.editReply({ content: leaderboard });
+			});
+		}
+		else if (interaction.options.getSubcommand() === 'rescue') {
+			const verdict = random(0, 6);
+
+			const victim = interaction.options.getMember('user');
+			const userID = interaction.member.id;
+
+			if (victim.id === interaction.client.user.id) {
+				interaction.reply({ content: 'Fool. You cannot rescue Stinkbot.', ephemeral: true });
+				return;
+			}
+
+			if (!victim.isCommunicationDisabled()) {
+				// const time = victim.communicationDisabledUntil;
+				interaction.reply({ content: `${victim.displayName} is not in timeout!` });
+				return;
+			}
+
+			if (!interaction.guild.me.permissions.has(Permissions.FLAGS.MODERATE_MEMBERS)) {
+				interaction.reply({ content: 'Stinkbot does not have permissions to timeout members :(', ephemeral: true });
+				return;
+			}
+
+			if (interaction.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || victim.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) {
+				interaction.reply({ content: 'One or more user(s) is an Administator of this guild and cannot be put in timeout', ephemeral: true });
+				return;
+			}
+
+			let sql = `SELECT * FROM roulette WHERE UserID="${userID}"`;
+			let CL = 0;
+
+			con.query(sql, async (err, result) => {
+				if (err) throw err;
+				console.log(result[0]);
+				if (result.length) {
+					// user exists
+					CL = parseInt(result[0].Consecutive_Losses);
+				}
+				else {
+					// new user
+					sql = `INSERT INTO roulette VALUES ("${userID}", 0, 0, 0)`;
+
+					con.query(sql, (err, result2) => {
+						if (err) throw err;
+						console.log(result2);
+					});
+				}
+
+				if (victim.moderatable) {
+					if (verdict != 2) {
+						const time = victim.communicationDisabledUntil;
+						const diff = Math.abs(time - Date.now());
+						const minutes = Math.round((diff / 1000) / 60);
+						updateTimeout(userID, minutes);
+						interaction.member.timeout(1000 * 60 * minutes, 'Owned idiot');
+						await interaction.deferReply();
+						await interaction.editReply({ content: `You lost! You've been put in timeout for ${calculateTime(minutes)} alongside ${victim.displayName}.\nConsecutive Losses: ${CL + 1}`, files: ['./img/rescue_fail.gif'] });
+
+						sql = `UPDATE roulette SET Consecutive_Losses=Consecutive_Losses+1, Attempts=Attempts+1 WHERE UserID=${userID}`;
+					}
+					else {
+						victim.timeout(null, `You have been saved from timeout by ${interaction.member.displayName}`);
+						await interaction.deferReply();
+						await interaction.editReply({ content: `You won! ${victim.displayName} has been saved from the depths of timeout!`, files: ['./img/rescue_success.jpg'] });
+
+						sql = `UPDATE roulette SET Consecutive_Losses=0, Wins=Wins+1, Attempts=Attempts+1 WHERE UserID=${userID}`;
+					}
+					con.query(sql, (err, result3) => {
+						if (err) throw err;
+						console.log(result3);
+					});
+				}
+				else {
+					interaction.reply('Stinkbot doesn\'t have permissions to timeout this member :(');
+				}
 			});
 		}
 		else {
