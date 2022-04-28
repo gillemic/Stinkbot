@@ -47,7 +47,7 @@ module.exports = {
 				break;
 			case 5:
 				column = 'quints';
-				message.reply({ content: `MessageID: ${message_id} THATS QUINTS BABY!!`, files: ['./img/thefirstquints.png'] });
+				message.reply({ content: `MessageID: ${message_id} THATS QUINTS BABY!!`, files: ['./img/thefirstquints.png', './img/quints.png'] });
 				break;
 			default:
 				message.reply({ content: `MessageID: ${message_id} WOOOOOAAAAAHHHHH!!!!`, files: ['./img/holy.jpg'] });
