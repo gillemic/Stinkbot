@@ -28,25 +28,43 @@ module.exports = {
 		}
 
 		let column;
+		let correct_call = false;
+		let did_attempt = false;
+
+		if (containsAny(m, all_words)) {
+			did_attempt = true;
+		}
 
 		if (count > 1) {
 			switch (count) {
 			case 2:
 				column = 'dubs';
 				if (containsAny(m, all_words)) {
+					if (containsAny(m, dubs_words)) {
+						correct_call = true;
+					}
 					message.reply({ content: `MessageID: ${message_id} Holy shit! You got dubs`, files: ['./img/dubs.jpg'] });
 				}
 				break;
 			case 3:
 				column = 'trips';
+				if (doesContain(message, 'trips')) {
+					correct_call = true;
+				}
 				message.reply({ content: `MessageID: ${message_id} Woah!! You got trips`, files: ['./img/trips.jpg'] });
 				break;
 			case 4:
 				column = 'quads';
+				if (doesContain(message, 'quads')) {
+					correct_call = true;
+				}
 				message.reply({ content: `MessageID: ${message_id} Oh fug!!! You got quads`, files: ['./img/quads.png'] });
 				break;
 			case 5:
 				column = 'quints';
+				if (doesContain(message, 'quints')) {
+					correct_call = true;
+				}
 				message.reply({ content: `MessageID: ${message_id} THATS QUINTS BABY!!`, files: ['./img/thefirstquints.png', './img/quints.png'] });
 				break;
 			default:
@@ -70,7 +88,18 @@ module.exports = {
 						});
 					}
 
-					sql = `UPDATE dubs SET ${column}=${column}+1 WHERE UserID=${userID}`;
+					if (did_attempt) {
+						if (correct_call) {
+							sql = `UPDATE dubs SET correct_${column}=correct_${column}+1, attempts=attempts+1 WHERE UserID=${userID}`;
+						}
+						else {
+							sql = `UPDATE dubs SET attempts=attempts+1 WHERE UserID=${userID}`;
+						}
+					}
+					else {
+						sql = `UPDATE dubs SET ${column}=${column}+1 WHERE UserID=${userID}`;
+					}
+
 					con.query(sql, function(err, result3) {
 						if (err) throw err;
 						console.log(result3);
@@ -78,20 +107,30 @@ module.exports = {
 				}
 				else {
 					// new entry
-					sql = `INSERT INTO dubs VALUES ("${userID}", 0, 0, 0, 0, ${count})`;
+					sql = `INSERT INTO dubs VALUES ("${userID}", 0, 0, 0, 0, ${count}, 0, 0, 0, 0, 0)`;
 
 					con.query(sql, function(err, result4) {
 						if (err) throw err;
 						console.log(result4);
 					});
 
-					sql = `UPDATE dubs SET ${column}=${column}+1 WHERE UserID=${userID}`;
+					if (did_attempt) {
+						if (correct_call) {
+							sql = `UPDATE dubs SET correct_${column}=correct_${column}+1, attempts=attempts+1 WHERE UserID=${userID}`;
+						}
+						else {
+							sql = `UPDATE dubs SET attempts=attempts+1 WHERE UserID=${userID}`;
+						}
+					}
+					else {
+						sql = `UPDATE dubs SET ${column}=${column}+1 WHERE UserID=${userID}`;
+					}
+
 					con.query(sql, function(err, result5) {
 						if (err) throw err;
 						console.log(result5);
 					});
 				}
-				console.log(result);
 			});
 		}
 		else {
@@ -101,6 +140,38 @@ module.exports = {
 			}
 
 			const userID = message.author.id;
+
+			if (did_attempt) {
+				let sql = `SELECT * FROM dubs WHERE UserID="${userID}"`;
+
+				con.query(sql, (err, result) => {
+					if (err) throw err;
+					if (result.length) {
+						// user exists
+						if (did_attempt) {
+							sql = `UPDATE dubs SET attempts=attempts+1 WHERE UserID=${userID}`;
+
+							con.query(sql, function(err, result5) {
+								if (err) throw err;
+								console.log(result5);
+							});
+						}
+					}
+					else {
+						// new user
+						if (did_attempt) {
+							sql = `INSERT INTO dubs VALUES ("${userID}", 0, 0, 0, 0, 0, 0, 0, 0, 0, 1)`;
+						}
+						else {
+							sql = `INSERT INTO dubs VALUES ("${userID}", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)`;
+						}
+						con.query(sql, function(err, result5) {
+							if (err) throw err;
+							console.log(result5);
+						});
+					}
+				});
+			}
 
 			if (containsAny(m, dubs_words)) {
 				updateTimeout(userID, 5);
