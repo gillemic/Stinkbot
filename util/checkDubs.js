@@ -134,11 +134,6 @@ module.exports = {
 			});
 		}
 		else {
-			if (message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) && containsAny(m, all_words)) {
-				message.react('❌');
-				return;
-			}
-
 			const userID = message.author.id;
 
 			if (did_attempt) {
@@ -171,6 +166,11 @@ module.exports = {
 						});
 					}
 				});
+			}
+
+			if (message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) && containsAny(m, all_words)) {
+				message.react('❌');
+				return;
 			}
 
 			if (containsAny(m, dubs_words)) {
