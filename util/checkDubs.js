@@ -48,21 +48,21 @@ module.exports = {
 				break;
 			case 3:
 				column = 'trips';
-				if (doesContain(message, 'trips')) {
+				if (doesContain(message.content, 'trips')) {
 					correct_call = true;
 				}
 				message.reply({ content: `MessageID: ${message_id} Woah!! You got trips`, files: ['./img/trips.jpg'] });
 				break;
 			case 4:
 				column = 'quads';
-				if (doesContain(message, 'quads')) {
+				if (doesContain(message.content, 'quads')) {
 					correct_call = true;
 				}
 				message.reply({ content: `MessageID: ${message_id} Oh fug!!! You got quads`, files: ['./img/quads.png'] });
 				break;
 			case 5:
 				column = 'quints';
-				if (doesContain(message, 'quints')) {
+				if (doesContain(message.content, 'quints')) {
 					correct_call = true;
 				}
 				message.reply({ content: `MessageID: ${message_id} THATS QUINTS BABY!!`, files: ['./img/thefirstquints.png', './img/quints.png'] });
