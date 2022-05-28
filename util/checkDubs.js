@@ -45,6 +45,9 @@ module.exports = {
 					}
 					message.reply({ content: `MessageID: ${message_id} Holy shit! You got dubs`, files: ['./img/dubs.jpg'] });
 				}
+				else {
+					message.react('2️⃣');
+				}
 				break;
 			case 3:
 				column = 'trips';
