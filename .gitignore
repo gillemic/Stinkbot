@@ -4,6 +4,7 @@ node_modules
 config.json
 img/hopps
 commands/feet.js
+commands/dubsweep.js
 start.bat
 *.log
 output/*

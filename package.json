@@ -26,6 +26,7 @@
     "mysql": "^2.18.1"
   },
   "devDependencies": {
+    "discord-fetch-all": "^3.0.2",
     "eslint": "^8.0.1"
   }
 }

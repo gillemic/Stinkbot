@@ -43,7 +43,32 @@ module.exports = {
 				.addUserOption(option =>
 					option.setName('user').setDescription('the user to rescue').setRequired(true))),
 	async execute(interaction) {
-		if (interaction.options.getSubcommand() === 'target') {
+		if (interaction.options.getSubcommand() === 'leaderboard') {
+			let userArray = await interaction.guild.members.fetch();
+
+			userArray = userArray.map(user => {
+				return user.user.id;
+			});
+
+			console.log('Connected. Displaying roulette leaderboard');
+			const sql = 'SELECT * FROM roulette_leaderboard';
+
+			con.query(sql, userArray, async (err, result) => {
+				if (err) throw err;
+				let leaderboard = 'ROULETTE LEADERBOARD';
+				for (const i in result) {
+					if (!userArray.includes(result[i].UserID)) {
+						continue;
+					}
+					const name = await interaction.guild.members.fetch(result[i].UserID);
+					leaderboard += '\n- - - - - - - - - - - - - - - - - - - -\n';
+					leaderboard += `**${name.displayName}**  |  Wins: ${result[i].Wins}  |  Attempts: ${result[i].Attempts}  |  W/L: ${result[i].WL}`;
+				}
+				await interaction.deferReply();
+				await interaction.editReply({ content: leaderboard });
+			});
+		}
+		else if (interaction.options.getSubcommand() === 'target') {
 			// woah!
 			const verdict = random(0, 6);
 
@@ -132,32 +157,6 @@ module.exports = {
 			});
 			//
 		}
-		else if (interaction.options.getSubcommand() === 'leaderboard') {
-			let userArray = await interaction.guild.members.fetch();
-
-			userArray = userArray.map(user => {
-				return user.user.id;
-			});
-
-			console.log('Connected. Displaying roulette leaderboard');
-			const sql = 'SELECT * FROM roulette_leaderboard';
-
-			con.query(sql, userArray, async (err, result) => {
-				if (err) throw err;
-				// console.log(result);
-				let leaderboard = 'ROULETTE LEADERBOARD';
-				for (const i in result) {
-					if (!userArray.includes(result[i].UserID)) {
-						continue;
-					}
-					const name = await interaction.guild.members.fetch(result[i].UserID);
-					leaderboard += '\n- - - - - - - - - - - - - - - - - - - -\n';
-					leaderboard += `**${name.displayName}**  |  Wins: ${result[i].Wins}  |  Attempts: ${result[i].Attempts}  |  W/L: ${result[i].WL}`;
-				}
-				await interaction.deferReply();
-				await interaction.editReply({ content: leaderboard });
-			});
-		}
 		else if (interaction.options.getSubcommand() === 'rescue') {
 			const verdict = random(0, 6);
 
@@ -210,8 +209,10 @@ module.exports = {
 						const time = victim.communicationDisabledUntil;
 						const diff = Math.abs(time - Date.now());
 						const minutes = Math.round((diff / 1000) / 60);
+
 						updateTimeout(userID, minutes);
 						interaction.member.timeout(1000 * 60 * minutes, 'Owned idiot');
+
 						await interaction.deferReply();
 						await interaction.editReply({ content: `You lost! You've been put in timeout for ${calculateTime(minutes)} alongside ${victim.displayName}.\nConsecutive Losses: ${CL + 1}`, files: ['./img/rescue_fail.jpg'] });
 
