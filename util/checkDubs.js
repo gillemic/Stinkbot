@@ -119,7 +119,7 @@ module.exports = {
 
 					if (did_attempt) {
 						if (correct_call) {
-							sql = `UPDATE dubs SET correct_${column}=correct_${column}+1, attempts=attempts+1 WHERE UserID=${userID}`;
+							sql = `UPDATE dubs SET ${column}=${column}+1, correct_${column}=correct_${column}+1, attempts=attempts+1 WHERE UserID=${userID}`;
 						}
 						else {
 							sql = `UPDATE dubs SET attempts=attempts+1 WHERE UserID=${userID}`;
