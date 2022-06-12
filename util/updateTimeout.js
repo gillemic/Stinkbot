@@ -17,18 +17,16 @@ module.exports = {
 			if (result.length) {
 				// user exists
 				sql = `UPDATE timeout SET Timeouts=Timeouts+1, TotalTime=TotalTime+${time} WHERE UserID=${userID}`;
-				con.query(sql, function(err, result3) {
+				con.query(sql, (err) => {
 					if (err) throw err;
-					console.log(result3);
 				});
 			}
 			else {
 				// new entry
 				sql = `INSERT INTO timeout VALUES ("${userID}", 1, ${time})`;
 
-				con.query(sql, function(err, result4) {
+				con.query(sql, (err) => {
 					if (err) throw err;
-					console.log(result4);
 				});
 			}
 		});

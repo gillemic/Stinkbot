@@ -21,7 +21,6 @@ module.exports = {
 
 		// Check if a food is specified
 		if (food) {
-			console.log(food);
 			if (food === 'pizza') {
 				await interaction.deferReply();
 				await interaction.editReply({ files: ['img/slob/pizza.gif'] });
@@ -44,7 +43,6 @@ module.exports = {
 			}
 		}
 		else {
-			console.log(food);
 			const rand = random(0, 4);
 
 			await interaction.deferReply();

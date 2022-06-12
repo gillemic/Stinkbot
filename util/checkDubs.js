@@ -85,9 +85,8 @@ module.exports = {
 					// user exists
 					if (result[0].highest < count) {
 						sql = `UPDATE dubs SET highest=${count} WHERE UserID=${userID}`;
-						con.query(sql, function(err, result2) {
+						con.query(sql, (err) => {
 							if (err) throw err;
-							console.log(result2);
 						});
 					}
 
@@ -103,18 +102,16 @@ module.exports = {
 						sql = `UPDATE dubs SET ${column}=${column}+1 WHERE UserID=${userID}`;
 					}
 
-					con.query(sql, function(err, result3) {
+					con.query(sql, (err) => {
 						if (err) throw err;
-						console.log(result3);
 					});
 				}
 				else {
 					// new entry
 					sql = `INSERT INTO dubs VALUES ("${userID}", 0, 0, 0, 0, ${count}, 0, 0, 0, 0, 0)`;
 
-					con.query(sql, function(err, result4) {
+					con.query(sql, (err) => {
 						if (err) throw err;
-						console.log(result4);
 					});
 
 					if (did_attempt) {
@@ -129,9 +126,8 @@ module.exports = {
 						sql = `UPDATE dubs SET ${column}=${column}+1 WHERE UserID=${userID}`;
 					}
 
-					con.query(sql, function(err, result5) {
+					con.query(sql, (err) => {
 						if (err) throw err;
-						console.log(result5);
 					});
 				}
 			});
@@ -149,9 +145,8 @@ module.exports = {
 						if (did_attempt) {
 							sql = `UPDATE dubs SET attempts=attempts+1 WHERE UserID=${userID}`;
 
-							con.query(sql, function(err, result5) {
+							con.query(sql, (err) => {
 								if (err) throw err;
-								console.log(result5);
 							});
 						}
 					}
@@ -163,9 +158,8 @@ module.exports = {
 						else {
 							sql = `INSERT INTO dubs VALUES ("${userID}", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)`;
 						}
-						con.query(sql, function(err, result5) {
+						con.query(sql, (err) => {
 							if (err) throw err;
-							console.log(result5);
 						});
 					}
 				});

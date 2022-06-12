@@ -101,7 +101,6 @@ module.exports = {
 
 			con.query(sql, async (err, result) => {
 				if (err) throw err;
-				console.log(result[0]);
 				if (result.length) {
 					// user exists
 					CL = parseInt(result[0].Consecutive_Losses);
@@ -110,9 +109,8 @@ module.exports = {
 					// new user
 					sql = `INSERT INTO roulette VALUES ("${userID}", 0, 0, 0)`;
 
-					con.query(sql, (err, result2) => {
+					con.query(sql, (err) => {
 						if (err) throw err;
-						console.log(result2);
 					});
 				}
 
@@ -146,9 +144,8 @@ module.exports = {
 
 						sql = `UPDATE roulette SET Consecutive_Losses=0, Wins=Wins+1, Attempts=Attempts+1 WHERE UserID=${userID}`;
 					}
-					con.query(sql, (err, result3) => {
+					con.query(sql, (err) => {
 						if (err) throw err;
-						console.log(result3);
 					});
 				}
 				else {
@@ -189,7 +186,6 @@ module.exports = {
 
 			con.query(sql, async (err, result) => {
 				if (err) throw err;
-				console.log(result[0]);
 				if (result.length) {
 					// user exists
 					CL = parseInt(result[0].Consecutive_Losses);
@@ -198,9 +194,8 @@ module.exports = {
 					// new user
 					sql = `INSERT INTO roulette VALUES ("${userID}", 0, 0, 0)`;
 
-					con.query(sql, (err, result2) => {
+					con.query(sql, (err) => {
 						if (err) throw err;
-						console.log(result2);
 					});
 				}
 
@@ -225,9 +220,8 @@ module.exports = {
 
 						sql = `UPDATE roulette SET Consecutive_Losses=0, Wins=Wins+1, Attempts=Attempts+1 WHERE UserID=${userID}`;
 					}
-					con.query(sql, (err, result3) => {
+					con.query(sql, (err) => {
 						if (err) throw err;
-						console.log(result3);
 					});
 				}
 				else {

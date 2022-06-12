@@ -73,14 +73,11 @@ module.exports = {
 				return user.user.id;
 			});
 
-			console.log(userArray);
-
 			console.log('Connected. Displaying HOT leaderboard');
 			const sql = 'SELECT * FROM discord_bot.hot_leaderboard';
 
 			con.query(sql, userArray, async (err, result) => {
 				if (err) throw err;
-				console.log(result);
 				let leaderboard = 'HEADS OR TAILS LEADERBOARD';
 				for (const i in result) {
 					if (!userArray.includes(result[i].UserID)) {
@@ -153,16 +150,14 @@ module.exports = {
 
 							sql = `UPDATE hot SET Wins=Wins+1 WHERE UserID=${game.winnerID}`;
 
-							con.query(sql, function(err, result2) {
+							con.query(sql, (err) => {
 								if (err) throw err;
-								console.log(result2);
 							});
 
 							sql = `UPDATE hot SET Losses=Losses+1 WHERE UserID=${game.loserID}`;
 
-							con.query(sql, function(err, result3) {
+							con.query(sql, (err) => {
 								if (err) throw err;
-								console.log(result3);
 							});
 						}
 					}
@@ -171,9 +166,8 @@ module.exports = {
 					// new player
 					sql = `INSERT INTO hot VALUES ("${userID}", 0, 0, "${interaction.user.username}", false)`;
 
-					con.query(sql, function(err, result4) {
+					con.query(sql, (err) => {
 						if (err) throw err;
-						console.log(result4);
 					});
 
 					const game = new HOT(choice);
@@ -200,20 +194,17 @@ module.exports = {
 
 						sql = `UPDATE hot SET Wins=Wins+1 WHERE UserID=${game.winnerID}`;
 
-						con.query(sql, function(err, result2) {
+						con.query(sql, (err) => {
 							if (err) throw err;
-							console.log(result2);
 						});
 
 						sql = `UPDATE hot SET Losses=Losses+1 WHERE UserID=${game.loserID}`;
 
-						con.query(sql, function(err, result3) {
+						con.query(sql, (err) => {
 							if (err) throw err;
-							console.log(result3);
 						});
 					}
 				}
-				console.log(result);
 			});
 		}
 	},
