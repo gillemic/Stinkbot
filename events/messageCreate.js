@@ -39,10 +39,6 @@ module.exports = {
 			return;
 		}
 
-		if (doesContain(message.content, 'deletemepls')) {
-			message.delete();
-		}
-
 		if (doesContain(message.content, 'thank') && doesContain(message.content, 'stinkbot')) {
 			message.reply('You\'re welcome :relieved:');
 		}
