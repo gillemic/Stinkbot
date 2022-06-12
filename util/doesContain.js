@@ -2,11 +2,15 @@ module.exports = {
 	name: 'doesContain',
 	doesContain(message, text) {
 		// todo
-		return message.indexOf(text) !== -1;
+		const args = message.toLowerCase().split(' ');
+
+		return args.includes(text.toLowerCase());
 	},
 	containsAny(message, array) {
 		// todo
-		const check = (word) => message.indexOf(word) !== -1;
-		return array.some(check);
+		const args = message.toLowerCase().split(' ');
+		const intersection = array.filter(element => args.includes(element));
+
+		return intersection.length ? true : false;
 	},
 };

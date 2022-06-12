@@ -176,8 +176,8 @@ module.exports = {
 				message.reply({ content: 'No dubs. You\'ve been put in timeout for 5 minutes.', files: ['./img/clown.jpg'] })
 					.then(msg => {
 						setTimeout(() => msg.delete(), 1000 * 60 * 5);
-						setTimeout(() => message.delete(), 1000 * 60 * 5);
 					});
+				setTimeout(() => message.delete(), 1000 * 60 * 5);
 			}
 			else if (doesContain(m, 'trips')) {
 				updateTimeout(userID, 10);
@@ -185,8 +185,8 @@ module.exports = {
 				message.reply({ content: 'No trips. You\'ve been put in timeout for 10 minutes.', files: ['./img/clown2.jpg'] })
 					.then(msg => {
 						setTimeout(() => msg.delete(), 1000 * 60 * 10);
-						setTimeout(() => message.delete(), 1000 * 60 * 10);
 					});
+				setTimeout(() => message.delete(), 1000 * 60 * 10);
 			}
 			else if (doesContain(m, 'quads')) {
 				updateTimeout(userID, 15);
@@ -194,8 +194,8 @@ module.exports = {
 				message.reply({ content: 'No quads. You\'ve been put in timeout for 15 minutes.', files: ['./img/clown3.jpg'] })
 					.then(msg => {
 						setTimeout(() => msg.delete(), 1000 * 60 * 15);
-						setTimeout(() => message.delete(), 1000 * 60 * 15);
 					});
+				setTimeout(() => message.delete(), 1000 * 60 * 15);
 			}
 			else if (doesContain(m, 'quints')) {
 				updateTimeout(userID, 30);
@@ -203,8 +203,8 @@ module.exports = {
 				message.reply({ content: 'No quints. You\'ve been put in timeout for 30 minutes.', files: ['./img/booboo.jpg'] })
 					.then(msg => {
 						setTimeout(() => msg.delete(), 1000 * 60 * 30);
-						setTimeout(() => message.delete(), 1000 * 60 * 30);
 					});
+				setTimeout(() => message.delete(), 1000 * 60 * 30);
 			}
 		}
 	},

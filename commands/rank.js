@@ -33,7 +33,6 @@ module.exports = {
 				if (error) throw error;
 				if (result.length) {
 					// skip without adding to database
-					console.log(result);
 				}
 				else {
 					// add to databse
