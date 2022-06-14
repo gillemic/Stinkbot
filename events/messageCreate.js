@@ -25,22 +25,19 @@ module.exports = {
 
 		if (doesContain(message.content, '-dubsleaderboard')) {
 			dubsLeaderboard(message);
-			return;
 		}
 
 		if (doesContain(message.content, '-timeoutleaderboard')) {
 			timeoutLeaderboard(message);
-			return;
+		}
+
+		if ((doesContain(message.content, 'thank') || doesContain(message.content, 'thanks')) && doesContain(message.content, 'stinkbot')) {
+			message.reply('You\'re welcome :relieved:');
 		}
 
 		if (message.channel.id === '358699161551634442') {
 			// stink chat
 			checkDubs(message);
-			return;
-		}
-
-		if (doesContain(message.content, 'thank') && doesContain(message.content, 'stinkbot')) {
-			message.reply('You\'re welcome :relieved:');
 		}
 	},
 };

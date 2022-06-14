@@ -171,40 +171,40 @@ module.exports = {
 			}
 
 			if (containsAny(m, dubs_words)) {
-				updateTimeout(userID, 5);
-				message.member.timeout(1000 * 60 * 5, 'Owned idiot');
-				message.reply({ content: 'No dubs. You\'ve been put in timeout for 5 minutes.', files: ['./img/clown.jpg'] })
-					.then(msg => {
-						setTimeout(() => msg.delete(), 1000 * 60 * 5);
-					});
-				setTimeout(() => message.delete(), 1000 * 60 * 5);
-			}
-			else if (doesContain(m, 'trips')) {
-				updateTimeout(userID, 10);
-				message.member.timeout(1000 * 60 * 10, 'Owned idiot');
-				message.reply({ content: 'No trips. You\'ve been put in timeout for 10 minutes.', files: ['./img/clown2.jpg'] })
-					.then(msg => {
-						setTimeout(() => msg.delete(), 1000 * 60 * 10);
-					});
-				setTimeout(() => message.delete(), 1000 * 60 * 10);
-			}
-			else if (doesContain(m, 'quads')) {
 				updateTimeout(userID, 15);
 				message.member.timeout(1000 * 60 * 15, 'Owned idiot');
-				message.reply({ content: 'No quads. You\'ve been put in timeout for 15 minutes.', files: ['./img/clown3.jpg'] })
+				message.reply({ content: 'No dubs. You\'ve been put in timeout for 15 minutes.', files: ['./img/clown.jpg'] })
 					.then(msg => {
+						message.react('❌');
 						setTimeout(() => msg.delete(), 1000 * 60 * 15);
 					});
-				setTimeout(() => message.delete(), 1000 * 60 * 15);
 			}
-			else if (doesContain(m, 'quints')) {
+			else if (doesContain(m, 'trips')) {
 				updateTimeout(userID, 30);
 				message.member.timeout(1000 * 60 * 30, 'Owned idiot');
-				message.reply({ content: 'No quints. You\'ve been put in timeout for 30 minutes.', files: ['./img/booboo.jpg'] })
+				message.reply({ content: 'No trips. You\'ve been put in timeout for 30 minutes.', files: ['./img/clown2.jpg'] })
 					.then(msg => {
+						message.react('❌');
 						setTimeout(() => msg.delete(), 1000 * 60 * 30);
 					});
-				setTimeout(() => message.delete(), 1000 * 60 * 30);
+			}
+			else if (doesContain(m, 'quads')) {
+				updateTimeout(userID, 45);
+				message.member.timeout(1000 * 60 * 45, 'Owned idiot');
+				message.reply({ content: 'No quads. You\'ve been put in timeout for 45 minutes.', files: ['./img/clown3.jpg'] })
+					.then(msg => {
+						message.react('❌');
+						setTimeout(() => msg.delete(), 1000 * 60 * 45);
+					});
+			}
+			else if (doesContain(m, 'quints')) {
+				updateTimeout(userID, 90);
+				message.member.timeout(1000 * 60 * 90, 'Owned idiot');
+				message.reply({ content: 'No quints. You\'ve been put in timeout for 90 minutes.', files: ['./img/booboo.jpg'] })
+					.then(msg => {
+						message.react('❌');
+						setTimeout(() => msg.delete(), 1000 * 60 * 90);
+					});
 			}
 		}
 	},
