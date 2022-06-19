@@ -200,7 +200,7 @@ module.exports = {
 			else if (doesContain(m, 'quints')) {
 				if (bread_bois.includes(userID)) {
 					// p
-					updateTimeout(userID, 1000 * 60 * 60 * 24);
+					updateTimeout(userID, 60 * 24);
 					message.member.timeout(1000 * 60 * 60 * 24, 'Owned idiot');
 					message.reply({ content: 'No quints. You\'ve been put in timeout for 24 HOURS', files: ['./img/booboo.jpg'] })
 						.then(msg => {
