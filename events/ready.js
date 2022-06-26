@@ -64,7 +64,7 @@ const cron = require('cron');
 module.exports = {
 	name: 'ready',
 	once: true,
-	async execute(client) {
+	execute(client) {
 		console.log(`${new Date().toLocaleTimeString()} - Ready! Logged in as ${client.user.tag}`);
 
 		let counter = 0;
@@ -92,8 +92,8 @@ module.exports = {
 
 		const scheduledMessage = new cron.CronJob('00 00 02 * * *', () => {
 			// This runs every day at 02:00:00, you can do anything you want
-			const channel = await client.channels.cache.get('358699161551634442');
-			channel.send({ files: ['./img/rugrats.gif']});
+			const channel = client.channels.cache.get('358699161551634442');
+			channel.send({ files: ['./img/rugrats.gif'] });
 		});
 
 		// When you want to start it, use:
