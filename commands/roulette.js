@@ -132,7 +132,7 @@ module.exports = {
 						updateTimeout(userID, 30 + (15 * CL));
 						interaction.member.timeout(1000 * 60 * (30 + (15 * CL)), 'Owned idiot');
 						await interaction.deferReply();
-						await interaction.editReply({ content: `You lost! You've been put in timeout for ${calculateTime(30 + 15 * CL)}.\nConsecutive Losses: ${CL + 1}`, files: ['./img/roulette_loss.gif'] });
+						await interaction.editReply({ content: `You lost! You've been put in timeout for ${calculateTime(30 + 15 * CL)} trying to time out ${victim.displayName}.\nConsecutive Losses: ${CL + 1}`, files: ['./img/roulette_loss.gif'] });
 
 						sql = `UPDATE roulette SET Consecutive_Losses=Consecutive_Losses+1, Attempts=Attempts+1 WHERE UserID=${userID}`;
 					}
