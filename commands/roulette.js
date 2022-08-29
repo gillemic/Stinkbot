@@ -80,6 +80,11 @@ module.exports = {
 				return;
 			}
 
+			if (!victim.user.bot && victim.voice.channel && victim.id != '77459485504839680') {
+				interaction.reply({ content: 'This user is in a voice channel. Don\'t be rude', ephemeral: true });
+				return;
+			}
+
 			if (victim.isCommunicationDisabled()) {
 				const time = victim.communicationDisabledUntil;
 				interaction.reply({ content: `${victim.displayName} is already in timeout! (Until ${time.toLocaleTimeString()} PST)` });
