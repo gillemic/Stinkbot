@@ -129,7 +129,7 @@ module.exports = {
 							return;
 						}
 						else {
-							interaction.reply({ content: '**\\*click**\\*' });
+							interaction.reply({ content: '**\\*click\\***' });
 							return;
 						}
 					}
