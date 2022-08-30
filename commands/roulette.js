@@ -81,7 +81,7 @@ module.exports = {
 			}
 
 			if (!victim.user.bot && victim.voice.channel && victim.id != '77459485504839680') {
-				interaction.reply({ content: 'This user is in a voice channel. Don\'t be rude', ephemeral: true });
+				interaction.reply({ content: 'This user is in a voice channel and cannot be put in timeout', ephemeral: true });
 				return;
 			}
 
