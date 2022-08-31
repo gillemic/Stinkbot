@@ -197,7 +197,7 @@ module.exports = {
 						setTimeout(() => msg.delete(), 1000 * 60 * 15);
 					});
 			}
-			else if (doesContain(m, 'quints')) {
+			else if (doesContain(m, 'quints') || doesContain(m, ':regional_indicator_q: :regional_indicator_u: :regional_indicator_i: :regional_indicator_n: :regional_indicator_t: :regional_indicator_s:')) {
 				if (bread_bois.includes(userID)) {
 					// p
 					updateTimeout(userID, 60 * 24);
