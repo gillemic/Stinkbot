@@ -72,6 +72,10 @@ module.exports = {
 			// woah!
 			const verdict = random(0, 6);
 
+			if (victim.id == '77459485504839680') {
+				verdict = random(1, 2);
+			}
+
 			const victim = interaction.options.getMember('user');
 			const userID = interaction.member.id;
 
