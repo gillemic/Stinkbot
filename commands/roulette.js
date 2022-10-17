@@ -75,9 +75,9 @@ module.exports = {
 			const victim = interaction.options.getMember('user');
 			const userID = interaction.member.id;
 
-			if (victim.id == '77459485504839680') {
+			/*if (victim.id === '77459485504839680') {
                                 verdict = random(1, 2);
-                        }
+                        }*/
 
 			if (victim.id === interaction.client.user.id) {
 				interaction.reply({ content: 'Fool. You cannot timeout Stinkbot.', ephemeral: true });
