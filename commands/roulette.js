@@ -90,8 +90,8 @@ module.exports = {
 			}
 
 			// between 8pm and 10pm on tuesdays
-			const start = 20 * 60;
-			const end = 22 * 60;
+			const start = 22 * 60;
+			const end = 23 * 60 + 30;
 			const date = new Date();
 			const now = date.getHours() * 60 + date.getMinutes();
 
