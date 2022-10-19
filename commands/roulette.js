@@ -75,10 +75,12 @@ module.exports = {
 			const victim = interaction.options.getMember('user');
 			const userID = interaction.member.id;
 
+			// Nathan
 			if (victim.id === '77459485504839680') {
 				verdict = random(1, 2);
 			}
-			else if (victim.id == '276164736398262282') {
+			// Zoltoyde
+			else if (victim.id == '276164736398262282' || victim.voice.channel) {
 				verdict = 5;
 			}
 
@@ -87,8 +89,13 @@ module.exports = {
 				return;
 			}
 
-			if (!victim.user.bot && victim.voice.channel && victim.id != '77459485504839680') {
-				interaction.reply({ content: 'This user is in a voice channel and cannot be put in timeout', ephemeral: true });
+			const start = 17 * 60;
+			const end = 22 * 60;
+			const date = new Date();
+			const now = date.getHours() * 60 + date.getMinutes();
+
+			if ((start <= now && now <= end) && date.getDay() == 2) {
+				interaction.reply({ content: 'It\'s real chainsaw man hours baby!!', ephemeral: true });
 				return;
 			}
 
