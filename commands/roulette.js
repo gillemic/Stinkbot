@@ -79,7 +79,7 @@ module.exports = {
 			if (victim.id === '77459485504839680') {
 				verdict = random(1, 2);
 			}
-			// Zoltoyde
+			// Zoltoyde or VC users
 			else if (victim.id == '276164736398262282' || victim.voice.channel) {
 				verdict = 5;
 			}
