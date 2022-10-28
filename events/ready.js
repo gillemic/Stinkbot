@@ -90,8 +90,8 @@ module.exports = {
 		};
 		updateStatus();
 
-		const scheduledMessage = new cron.CronJob('00 00 02 * * *', () => {
-			// This runs every day at 02:00:00, you can do anything you want
+		const scheduledMessage = new cron.CronJob('00 00 04 * * *', () => {
+			// This runs every day at 04:00:00, you can do anything you want
 			const channel = client.channels.cache.get('358699161551634442');
 			channel.send({ files: ['./img/rugrats.gif'] });
 		});
