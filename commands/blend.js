@@ -17,8 +17,8 @@ module.exports = {
 
 		const folder = await countImages(prompt);
 
-		const image_folder = await loadAndProcessMyLocalImage(folder);
+		await loadAndProcessMyLocalImage(folder);
 
-		await interaction.editReply({ file: `${image_folder}/final.png`, content: prompt });
+		await interaction.editReply({ files: [`${folder}/final.png`], content: prompt });
 	},
 };

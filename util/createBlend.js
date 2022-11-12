@@ -39,8 +39,7 @@ module.exports = {
 
 		for (const i in images) {
 			const buffer = Buffer.from(images[i], 'base64url');
-			sharp(buffer)
-				.resize(256, 256)
+			await sharp(buffer)
 				.png({ pngquant: true })
 				.toFile(`${folder}/dalle${i}.png`, (err) => {
 					if (err) throw err;
