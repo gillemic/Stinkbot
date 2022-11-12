@@ -8,3 +8,4 @@ commands/dubsweep.js
 start.bat
 *.log
 output/*
+generated/
