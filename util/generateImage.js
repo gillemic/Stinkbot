@@ -20,10 +20,8 @@ module.exports = {
 		await new Promise(resolve => setTimeout(resolve, 2000));
 
 		for (let i = 0; i < 9; i++) {
-			// await new Promise(resolve => setTimeout(resolve, 2000));
-			const localImage = await loadImage(`${blend_folder}/dalle${i}.png`)
-			// await new Promise(resolve => setTimeout(resolve, 2000));
-			context.drawImage(localImage, x_coord[i], y_coord[i], 340, 340)
+			const localImage = await loadImage(`${blend_folder}/dalle${i}.png`);
+			context.drawImage(localImage, x_coord[i], y_coord[i], 340, 340);
 		}
 
 		const buffer = canvas.toBuffer('image/png');
