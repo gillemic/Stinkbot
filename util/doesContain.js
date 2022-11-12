@@ -13,9 +13,14 @@ module.exports = {
 
 		return intersection.length ? true : false;
 	},
-	containsAtAll(message, text) {
+	containsAtAll(message, array) {
 		const mess = message.toLowerCase().replace(/[.,/#!$%^&*;:{}=_`~()?]/g, '');
 
-		return mess.indexOf(text) != -1;
+		for (const i in array) {
+			if (mess.indexOf(array[i]) != -1) {
+				return true;
+			}
+		}
+		return false;
 	},
 };
