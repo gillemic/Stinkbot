@@ -22,7 +22,7 @@ module.exports = {
 			console.error(error);
 		}
 	},
-	async countImages(input) {
+	async countImages(input, id) {
 		const request = await module.exports.getImages(input);
 
 		const images = request.data.images;
@@ -31,7 +31,7 @@ module.exports = {
 			fs.mkdirSync('./generated');
 		}
 
-		const folder = `./generated/${input.split(' ').join('_')}_${Date.now()}`;
+		const folder = `./generated/${id}_${input.split(' ').join('_')}`;
 
 		if (!fs.existsSync(folder)) {
 			fs.mkdirSync(folder);

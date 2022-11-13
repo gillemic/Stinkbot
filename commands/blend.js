@@ -37,7 +37,7 @@ module.exports = {
 			return;
 		}
 
-		const folder = await countImages(prompt);
+		const folder = await countImages(prompt, interaction.id);
 
 		await loadAndProcessMyLocalImage(folder);
 
