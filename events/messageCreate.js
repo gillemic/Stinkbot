@@ -2,6 +2,7 @@ const { random } = require('../util/random');
 const { doesContain } = require('../util/doesContain');
 const { checkDubs, dubsLeaderboard } = require('../util/checkDubs');
 const { timeoutLeaderboard } = require('../util/updateTimeout');
+const { requestBlend } = require('../util/sendBlend');
 
 module.exports = {
 	name: 'messageCreate',
@@ -44,6 +45,9 @@ module.exports = {
 		if (message.channel.id === '358699161551634442') {
 			// stink chat
 			checkDubs(message);
+		}
+		else if (message.channel.id === '909957374045995038') {
+			requestBlend(message);
 		}
 	},
 };

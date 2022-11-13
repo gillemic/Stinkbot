@@ -15,7 +15,7 @@ module.exports = {
 				.setDescription('the blend prompt')
 				.setRequired(true)),
 	async execute(interaction) {
-		await interaction.deferReply();
+		const message = await interaction.deferReply({ fetchReply: true });
 
 		const prompt = interaction.options.getString('prompt');
 
@@ -37,7 +37,7 @@ module.exports = {
 			return;
 		}
 
-		const folder = await countImages(prompt, interaction.id);
+		const folder = await countImages(prompt, message.id);
 
 		await loadAndProcessMyLocalImage(folder);
 
