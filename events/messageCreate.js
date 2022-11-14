@@ -46,7 +46,7 @@ module.exports = {
 			// stink chat
 			checkDubs(message);
 		}
-		else if (message.channel.id === '909957374045995038') {
+		else {
 			requestBlend(message);
 		}
 	},

@@ -27,12 +27,13 @@ module.exports = {
 
 		const path = `./generated/${blendFolder}`;
 
-		let blendNumber = parseInt(message.content);
+		let blendNumber = parseInt(message.content.charAt(0));
 
 		blendNumber = blendNumber-1;
 
 		if (blendNumber >= 0 && blendNumber <= 8) {
-			message.reply({ files: [`${path}/dalle${blendNumber}.png`] });
+			message.channel.send({ files: [`${path}/dalle${blendNumber}.png`] });
+			setTimeout(() => message.delete(), 3000);
 		}
 	},
 };
