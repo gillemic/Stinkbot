@@ -29,7 +29,6 @@ module.exports = {
 
 		// folder not found
 		if (!blendFolder) {
-			message.reply({ content: 'the images from this blend are no longer available :(' })
 			return
 		}
 
