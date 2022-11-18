@@ -31,7 +31,7 @@ module.exports = {
 			fs.mkdirSync('./generated');
 		}
 
-		const folder = `./generated/${id}_${input.split(' ').join('_')}`;
+		const folder = `./generated/${id}_${input.split(' ').join('_').replace(/[\/<>:"\\|?\*]/g,"")}`;
 
 		if (!fs.existsSync(folder)) {
 			fs.mkdirSync(folder);
