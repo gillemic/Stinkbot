@@ -1,5 +1,4 @@
 const axios = require('axios');
-// const { toUint8Array } = require('js-base64');
 const sharp = require('sharp');
 const fs = require('fs');
 
@@ -31,7 +30,7 @@ module.exports = {
 			fs.mkdirSync('./generated');
 		}
 
-		const folder = `./generated/${id}_${input.split(' ').join('_').replace(/[\/<>:"\\|?\*]/g,"")}`;
+		const folder = `./generated/${id}_${input.split(' ').join('_').replace(/[/<>:"\\|?*]/g, '')}`;
 
 		if (!fs.existsSync(folder)) {
 			fs.mkdirSync(folder);
@@ -39,7 +38,7 @@ module.exports = {
 
 		for (const i in images) {
 			const buffer = Buffer.from(images[i], 'base64url');
-			await sharp(buffer)
+			sharp(buffer)
 				.png({ pngquant: true })
 				.toFile(`${folder}/dalle${i}.png`, (err) => {
 					if (err) throw err;
