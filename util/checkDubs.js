@@ -43,7 +43,7 @@ module.exports = {
 					if (containsAny(m, dubs_words)) {
 						correct_call = true;
 					}
-					message.reply({ content: `MessageID: ${message_id} Holy shit! You got dubs`, files: ['./img/dubs.jpg'] });
+					message.reply({ content: `MessageID: ${message_id} Holy shit! You got dubs`, files: ['./img/dubs.png'] });
 				}
 				else {
 					message.react('2️⃣');
