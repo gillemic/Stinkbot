@@ -31,11 +31,11 @@ module.exports = {
 			return;
 		}
 
-		if (doesContain(message.content, '-dubsleaderboard') || containsAtAll(message.content, '-dubs leaderboard')) {
+		if (doesContain(message.content, '-dubsleaderboard')) {
 			dubsLeaderboard(message);
 		}
 
-		if (doesContain(message.content, '-timeoutleaderboard') || containsAtAll(message.content, '-timeout leaderboard')) {
+		if (doesContain(message.content, '-timeoutleaderboard')) {
 			timeoutLeaderboard(message);
 		}
 
