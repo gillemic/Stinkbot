@@ -9,15 +9,16 @@ module.exports = {
 	execute(message) {
 		const all_emojis = message.guild.emojis.cache.map(e => e.toString());
 		const pete_emojis = message.client.guilds.cache.get('344317039160197124').emojis.cache.map(e => e.toString());
-		const rand = random(0, all_emojis.length - 1);
 
-		// 1 in 10 chance to react
+		// 1 in 25 chance to react
 		const rand2 = random(0, 25);
 		if (rand2 === 2) {
 			if (message.client.user.username === 'Petebot') {
+				const rand = random(0, pete_emojis.length - 1);
 				message.react(pete_emojis[rand]);
 			}
 			else {
+				const rand = random(0, all_emojis.length - 1);
 				message.react(all_emojis[rand]);
 			}
 		}
