@@ -1,5 +1,5 @@
 const { random } = require('../util/random');
-const { doesContain } = require('../util/doesContain');
+const { doesContain, containsAtAll } = require('../util/doesContain');
 const { checkDubs, dubsLeaderboard } = require('../util/checkDubs');
 const { timeoutLeaderboard } = require('../util/updateTimeout');
 const { requestBlend } = require('../util/sendBlend');
@@ -30,11 +30,11 @@ module.exports = {
 			return;
 		}
 
-		if (doesContain(message.content, '-dubsleaderboard')) {
+		if (doesContain(message.content, '-dubsleaderboard') || containsAtAll(message.content, '-dubs leaderboard')) {
 			dubsLeaderboard(message);
 		}
 
-		if (doesContain(message.content, '-timeoutleaderboard')) {
+		if (doesContain(message.content, '-timeoutleaderboard') || containsAtAll(message.content, '-timeout leaderboard')) {
 			timeoutLeaderboard(message);
 		}
 
