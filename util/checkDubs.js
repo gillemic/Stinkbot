@@ -68,7 +68,7 @@ module.exports = {
 				if (doesContain(message.content, 'quints')) {
 					correct_call = true;
 				}
-				message.reply({ content: `@everyone MessageID: ${message_id} THATS QUINTS BABY!!`, files: ['./img/thefirstquints.png', './img/quints.png'] });
+				message.reply({ content: `@everyone MessageID: ${message_id} THATS QUINTS BABY!!`, files: ['./img/quints.png'] });
 				break;
 			default:
 				message.reply({ content: `@everyone MessageID: ${message_id} WOOOOOAAAAAHHHHH!!!!`, files: ['./img/holy.jpg'] });
