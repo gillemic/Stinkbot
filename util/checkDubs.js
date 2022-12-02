@@ -54,7 +54,7 @@ module.exports = {
 				if (doesContain(message.content, 'trips')) {
 					correct_call = true;
 				}
-				message.reply({ content: `MessageID: ${message_id} Woah!! You got trips`, files: ['./img/trips.jpg'] });
+				message.reply({ content: `MessageID: ${message_id} Woah!! You got trips`, files: ['./img/trips.png'] });
 				break;
 			case 4:
 				column = 'quads';
