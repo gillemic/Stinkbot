@@ -3,7 +3,7 @@ const { countImages } = require('../util/createBlend.js');
 const { loadAndProcessMyLocalImage } = require('../util/generateImage');
 const { containsAtAll } = require('../util/doesContain');
 
-const banned_words = ['blackface', 'black face', 'darkface', 'dark face', 'caricature', 'racist', 'racism', 'shaughn', 'shaaughn', 'squigger', 'squigga'];
+const banned_words = ['blackface', 'black face', 'darkface', 'dark face', 'caricature', 'racist', 'racism', 'shaughn', 'shaaughn', 'squigger', 'squigga', 'spooks'];
 const banned_users = ['105884992055349248', '415407957371781123'];
 
 module.exports = {
