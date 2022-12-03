@@ -56,4 +56,29 @@ module.exports = {
 			}
 		}
 	},
+	async immortalize(message) {
+		if (!message.reference) {
+			return;
+		}
+		
+		// get the referenced message id from the reply
+		const blendID = message.reference.messageId;
+
+		const oldMessage = await message.channel.messages.fetch(blendID);
+
+		// Not from Stinkbot
+		if (oldMessage.author.id != '344321956096638997') {
+			return;
+		}
+
+		const blendHOF = await message.client.channels.fetch('1046608656336162877');
+
+		const file = await oldMessage.attachments.first();
+
+		const attachment = file ? file.url : null
+
+		blendHOF.send({ content: oldMessage.content, files: [attachment] });
+
+		setTimeout(() => message.delete(), 1000);
+	}
 };

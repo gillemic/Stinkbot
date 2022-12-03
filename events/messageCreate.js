@@ -2,7 +2,7 @@ const { random } = require('../util/random');
 const { doesContain, containsAtAll } = require('../util/doesContain');
 const { checkDubs, dubsLeaderboard } = require('../util/checkDubs');
 const { timeoutLeaderboard } = require('../util/updateTimeout');
-const { requestBlend } = require('../util/sendBlend');
+const { requestBlend, immortalize } = require('../util/sendBlend');
 
 module.exports = {
 	name: 'messageCreate',
@@ -47,8 +47,14 @@ module.exports = {
 			// stink chat
 			checkDubs(message);
 		}
-		else {
-			requestBlend(message);
+		else if (message.channel.id === '909957374045995038') {
+			// blend channel
+			if (doesContain(message.content, 'keep')) {
+				immortalize(message);
+			}
+			else {
+				requestBlend(message);
+			}
 		}
 	},
 };
