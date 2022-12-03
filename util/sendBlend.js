@@ -39,6 +39,15 @@ module.exports = {
 			return
 		}
 
+		let creatorName = '';
+
+		// get author
+		if (oldMessage.interaction?.user) {
+			const creatorID = oldMessage.interaction.user.id;
+			const creator = await message.guild.members.cache.get(creatorID);
+			creatorName = `, by *${creator.displayName}*`;
+		}
+
 		// concatenate path
 		const path = `./generated/${blendFolder}`;
 
@@ -50,7 +59,7 @@ module.exports = {
 
 		// check if number between 0-8 and send file, check for delete perms, and delete reply message
 		if (blendNumber >= 0 && blendNumber <= 8) {
-			oldMessage.reply({ content: `${oldMessage.content} (requested by ${message.member.displayName})`, files: [`${path}/dalle${blendNumber}.png`] });
+			oldMessage.reply({ content: `${oldMessage.content}${creatorName} (requested by ${message.member.displayName})`, files: [`${path}/dalle${blendNumber}.png`] });
 			if (message.guild.me.permissions.has('MANAGE_MESSAGES')) {
 				setTimeout(() => message.delete(), 1000);
 			}
@@ -71,13 +80,24 @@ module.exports = {
 			return;
 		}
 
+		let plaque = '';
+
+		if (oldMessage.interaction?.user) {
+			const creatorID = oldMessage.interaction.user.id;
+			const creator = await message.guild.members.cache.get(creatorID);
+			plaque = `**${oldMessage.content}**, by *${creator.displayName}*`;
+		}
+		else {
+			plaque = oldMessage.content;
+		}
+
 		const blendHOF = await message.client.channels.fetch('1046608656336162877');
 
 		const file = await oldMessage.attachments.first();
 
 		const attachment = file ? file.url : null
 
-		blendHOF.send({ content: oldMessage.content, files: [attachment] });
+		blendHOF.send({ content: plaque, files: [attachment] });
 
 		setTimeout(() => message.delete(), 1000);
 	}
