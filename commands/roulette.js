@@ -90,7 +90,7 @@ module.exports = {
 			}
 
 			// between 8pm and 10pm on tuesdays
-			const start = 22 * 60;
+			/*const start = 22 * 60;
 			const end = 23 * 60 + 30;
 			const date = new Date();
 			const now = date.getHours() * 60 + date.getMinutes();
@@ -98,7 +98,7 @@ module.exports = {
 			if ((start <= now && now <= end) && date.getDay() == 2) {
 				interaction.reply({ content: 'It\'s real chainsaw man hours baby!!', ephemeral: true });
 				return;
-			}
+			}*/
 
 			if (victim.isCommunicationDisabled()) {
 				const time = victim.communicationDisabledUntil;

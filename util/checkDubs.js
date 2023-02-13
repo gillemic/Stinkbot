@@ -171,12 +171,12 @@ module.exports = {
 			}
 
 			if (containsAny(m, dubs_words)) {
-				updateTimeout(userID, 5);
-				message.member.timeout(1000 * 60 * 5, 'Owned idiot');
-				message.reply({ content: 'No dubs. You\'ve been put in timeout for 5 minutes.', files: ['./img/clown.jpg'] })
+				updateTimeout(userID, 10);
+				message.member.timeout(1000 * 60 * 10, 'Owned idiot');
+				message.reply({ content: 'No dubs. You\'ve been put in timeout for TEN minutes. (Conner\'s orders)', files: ['./img/clown.jpg'] })
 					.then(msg => {
 						message.react('❌');
-						setTimeout(() => msg.delete(), 1000 * 60 * 5);
+						setTimeout(() => msg.delete(), 1000 * 60 * 10);
 					});
 			}
 			else if (doesContain(m, 'trips')) {

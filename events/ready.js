@@ -55,6 +55,7 @@ const statuses = [
 	'Urban Dead',
 	'King\'s Field IV',
 	'Horse Racing 2016',
+	'Titanfall 3'
 ];
 
 const { randomShuffle } = require('../util/shuffle');

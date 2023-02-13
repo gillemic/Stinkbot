@@ -3,7 +3,7 @@ const { countImages } = require('../util/createBlend.js');
 const { loadAndProcessMyLocalImage } = require('../util/generateImage');
 const { containsAtAll } = require('../util/doesContain');
 
-const banned_words = ['blackface', 'black face', 'darkface', 'dark face', 'caricature', 'racist', 'racism', 'shaughn', 'shaaughn', 'squigger', 'squigga', 'spooks'];
+const banned_words = ['blackface', 'black face', 'darkface', 'dark face', 'caricature', 'racist', 'racism', 'shaughn', 'shaaughn', 'squigger', 'squigga', 'spooks', 'starving', 'child', 'children', 'hungy', 'hungry', 'kid', 'famished'];
 const banned_users = ['105884992055349248', '415407957371781123'];
 
 module.exports = {
@@ -15,6 +15,11 @@ module.exports = {
 				.setDescription('the blend prompt')
 				.setRequired(true)),
 	async execute(interaction) {
+		/*if (interaction.user.id === '105884992055349248') {
+			await interaction.editReply({ content: 'Ur done kid', ephemeral: true });
+			return;
+		}*/
+
 		const message = await interaction.deferReply({ fetchReply: true });
 
 		const prompt = interaction.options.getString('prompt');
@@ -25,14 +30,9 @@ module.exports = {
 			return;
 		}
 
-		// check if conor or justin between banned hours
-		/* if (interaction.user.id in banned_users):
-			await interaction.response.send_message("You are banned from blending fr", ephemeral=True)
-			return*/
-
 		// check if banned words
 		const query = prompt.toLowerCase();
-		if (containsAtAll(query, banned_words) && banned_users.includes(interaction.user.id)) {
+		if (banned_users.includes(interaction.user.id && containsAtAll(query, banned_words))) {
 			await interaction.editReply({ content: 'Nope.', ephemeral: true });
 			return;
 		}

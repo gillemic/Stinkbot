@@ -40,12 +40,17 @@ module.exports = {
 		}
 
 		let creatorName = '';
+		let requestorName = '';
 
 		// get author
 		if (oldMessage.interaction?.user) {
 			const creatorID = oldMessage.interaction.user.id;
 			const creator = await message.guild.members.cache.get(creatorID);
 			creatorName = `, by *${creator.displayName}*`;
+
+			if (creatorID != message.author.id) {
+				requestorName = ` (requested by ${message.member.displayName})`;
+			}
 		}
 
 		// concatenate path
@@ -59,7 +64,7 @@ module.exports = {
 
 		// check if number between 0-8 and send file, check for delete perms, and delete reply message
 		if (blendNumber >= 0 && blendNumber <= 8) {
-			oldMessage.reply({ content: `**${oldMessage.content}**${creatorName} (requested by ${message.member.displayName})`, files: [`${path}/dalle${blendNumber}.png`] });
+			oldMessage.reply({ content: `**${oldMessage.content}**${creatorName}${requestorName}`, files: [`${path}/dalle${blendNumber}.png`] });
 			if (message.guild.me.permissions.has('MANAGE_MESSAGES')) {
 				setTimeout(() => message.delete(), 1000);
 			}
