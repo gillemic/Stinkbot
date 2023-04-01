@@ -5,6 +5,7 @@ config.json
 img/hopps
 commands/feet.js
 commands/dubsweep.js
+dubsweep.json
 start.bat
 *.log
 output/*

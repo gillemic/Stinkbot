@@ -1,22 +1,24 @@
 const { random } = require('../util/random');
-const { doesContain } = require('../util/doesContain');
+const { doesContain, containsAtAll } = require('../util/doesContain');
 const { checkDubs, dubsLeaderboard } = require('../util/checkDubs');
 const { timeoutLeaderboard } = require('../util/updateTimeout');
+const { requestBlend, immortalize } = require('../util/sendBlend');
 
 module.exports = {
 	name: 'messageCreate',
 	execute(message) {
 		const all_emojis = message.guild.emojis.cache.map(e => e.toString());
 		const pete_emojis = message.client.guilds.cache.get('344317039160197124').emojis.cache.map(e => e.toString());
-		const rand = random(0, all_emojis.length - 1);
 
-		// 1 in 10 chance to react
+		// 1 in 25 chance to react
 		const rand2 = random(0, 25);
 		if (rand2 === 2) {
 			if (message.client.user.username === 'Petebot') {
+				const rand = random(0, pete_emojis.length - 1);
 				message.react(pete_emojis[rand]);
 			}
 			else {
+				const rand = random(0, all_emojis.length - 1);
 				message.react(all_emojis[rand]);
 			}
 		}
@@ -44,6 +46,15 @@ module.exports = {
 		if (message.channel.id === '358699161551634442') {
 			// stink chat
 			checkDubs(message);
+		}
+		else if (message.channel.id === '909957374045995038') {
+			// blend channel
+			if (doesContain(message.content, 'keep')) {
+				immortalize(message);
+			}
+			else {
+				requestBlend(message);
+			}
 		}
 	},
 };

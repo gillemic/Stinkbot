@@ -1,5 +1,5 @@
 const mysql = require('mysql');
-const { doesContain, containsAny } = require('./doesContain');
+const { doesContain, containsAny, containsAtAll } = require('./doesContain');
 const { Permissions } = require('discord.js');
 const { updateTimeout } = require('./updateTimeout');
 const bread_bois = ['347933045371830292', '167426770923028482', '492497894784499713', '275406619158904832'];
@@ -18,6 +18,7 @@ module.exports = {
 		const m = message.content.toLowerCase();
 		const dubs_words = ['dubs', 'dub5', 'doobs', 'd00bs', 'd00b5', 'doubles', 'doobles', 'dubbies', 'dubby', 'dubski'];
 		const all_words = [...dubs_words, 'trips', 'quads', 'quints'];
+		const check_words = ['checkem', 'check em'];
 
 		const last_digit = parseInt(message_id[message_id.length - 1]);
 
@@ -31,7 +32,7 @@ module.exports = {
 		let correct_call = false;
 		let did_attempt = false;
 
-		if (containsAny(m, all_words)) {
+		if (containsAny(m, all_words) || containsAtAll(m, check_words)) {
 			did_attempt = true;
 		}
 
@@ -39,11 +40,11 @@ module.exports = {
 			switch (count) {
 			case 2:
 				column = 'dubs';
-				if (containsAny(m, all_words)) {
+				if (containsAny(m, all_words) || containsAtAll(m, check_words)) {
 					if (containsAny(m, dubs_words)) {
 						correct_call = true;
 					}
-					message.reply({ content: `MessageID: ${message_id} Holy shit! You got dubs`, files: ['./img/dubs.jpg'] });
+					message.reply({ content: `MessageID: ${message_id} Holy shit! You got dubs`, files: ['./img/dubs.png'] });
 				}
 				else {
 					message.react('2️⃣');
@@ -54,7 +55,7 @@ module.exports = {
 				if (doesContain(message.content, 'trips')) {
 					correct_call = true;
 				}
-				message.reply({ content: `MessageID: ${message_id} Woah!! You got trips`, files: ['./img/trips.jpg'] });
+				message.reply({ content: `MessageID: ${message_id} Woah!! You got trips`, files: ['./img/trips.png'] });
 				break;
 			case 4:
 				column = 'quads';
@@ -68,7 +69,7 @@ module.exports = {
 				if (doesContain(message.content, 'quints')) {
 					correct_call = true;
 				}
-				message.reply({ content: `@everyone MessageID: ${message_id} THATS QUINTS BABY!!`, files: ['./img/thefirstquints.png', './img/quints.png'] });
+				message.reply({ content: `@everyone MessageID: ${message_id} THATS QUINTS BABY!!`, files: ['./img/quints.png'] });
 				break;
 			default:
 				message.reply({ content: `@everyone MessageID: ${message_id} WOOOOOAAAAAHHHHH!!!!`, files: ['./img/holy.jpg'] });
@@ -173,7 +174,7 @@ module.exports = {
 			if (containsAny(m, dubs_words)) {
 				updateTimeout(userID, 5);
 				message.member.timeout(1000 * 60 * 5, 'Owned idiot');
-				message.reply({ content: 'No dubs. You\'ve been put in timeout for 5 minutes.', files: ['./img/clown.jpg'] })
+				message.reply({ content: 'No dubs. You\'ve been put in timeout for 5 minutes. (Conner\'s orders have been repealed)', files: ['./img/clown.jpg'] })
 					.then(msg => {
 						message.react('❌');
 						setTimeout(() => msg.delete(), 1000 * 60 * 5);
@@ -200,8 +201,8 @@ module.exports = {
 			else if (doesContain(m, 'quints')) {
 				if (bread_bois.includes(userID)) {
 					// p
-					updateTimeout(userID, 60 * 24);
-					message.member.timeout(1000 * 60 * 60 * 24, 'Owned idiot');
+					updateTimeout(userID, 30);
+					message.member.timeout(1000 * 60 * 30, 'Owned idiot');
 					message.reply({ content: 'No quints. You\'ve been put in timeout for 24 HOURS', files: ['./img/booboo.jpg'] })
 						.then(msg => {
 							message.react('❌');
@@ -217,6 +218,15 @@ module.exports = {
 							setTimeout(() => msg.delete(), 1000 * 60 * 30);
 						});
 				}
+			}
+			else if (containsAtAll(m, check_words)) {
+				updateTimeout(userID, 15);
+				message.member.timeout(1000 * 60 * 15, 'Owned idiot');
+				message.reply({ content: 'Nothing for you. That\'s a 15 minute timeout.', files: ['./img/checkem_fail.png'] })
+					.then(msg => {
+						message.react('❌');
+						setTimeout(() => msg.delete(), 1000 * 60 * 15);
+					});
 			}
 		}
 	},
