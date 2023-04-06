@@ -19,6 +19,7 @@ module.exports = {
 		const dubs_words = ['dubs', 'dub5', 'doobs', 'd00bs', 'd00b5', 'doubles', 'doobles', 'dubbies', 'dubby', 'dubski'];
 		const all_words = [...dubs_words, 'trips', 'quads', 'quints'];
 		const check_words = ['checkem', 'check em'];
+		const super_quints = ['superquints', 'super quints'];
 
 		const last_digit = parseInt(message_id[message_id.length - 1]);
 
@@ -196,6 +197,15 @@ module.exports = {
 					.then(msg => {
 						message.react('❌');
 						setTimeout(() => msg.delete(), 1000 * 60 * 15);
+					});
+			}
+			else if (containsAtAll(m, super_quints)) {
+				updateTimeout(userID, 169);
+				message.member.timeout(1000 * 60 * 169, 'Owned idiot');
+				message.reply({ content: 'No super quints. You\'ve been put in timeout for 2 hours and 49 minutes.', files: ['./img/wick.jpg'] })
+					.then(msg => {
+						message.react('❌');
+						setTimeout(() => msg.delete(), 1000 * 60 * 169);
 					});
 			}
 			else if (doesContain(m, 'quints')) {
