@@ -1,3 +1,4 @@
+const { Events } = require('discord.js');
 const statuses = [
 	'deez',
 	'with fire',
@@ -63,7 +64,7 @@ const cron = require('cron');
 
 
 module.exports = {
-	name: 'ready',
+	name: Events.ClientReady,
 	once: true,
 	execute(client) {
 		console.log(`${new Date().toLocaleTimeString()} - Ready! Logged in as ${client.user.tag}`);

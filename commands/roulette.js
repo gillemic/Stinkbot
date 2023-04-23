@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { random } = require('../util/random');
-const { Permissions } = require('discord.js');
+const { PermissionsBitField } = require('discord.js');
 const { updateTimeout } = require('../util/updateTimeout');
 const mysql = require('mysql');
 
@@ -106,16 +106,6 @@ module.exports = {
 				return;
 			}
 
-			if (!interaction.guild.me.permissions.has(Permissions.FLAGS.MODERATE_MEMBERS)) {
-				interaction.reply({ content: 'Stinkbot does not have permissions to timeout members :(', ephemeral: true });
-				return;
-			}
-
-			if (interaction.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || victim.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) {
-				interaction.reply({ content: 'One or more user(s) is an Administator of this guild and cannot be put in timeout', ephemeral: true });
-				return;
-			}
-
 			let sql = `SELECT * FROM roulette WHERE UserID="${userID}"`;
 			let CL = 0;
 
@@ -192,16 +182,6 @@ module.exports = {
 			if (!victim.isCommunicationDisabled()) {
 				// const time = victim.communicationDisabledUntil;
 				interaction.reply({ content: `${victim.displayName} is not in timeout!` });
-				return;
-			}
-
-			if (!interaction.guild.me.permissions.has(Permissions.FLAGS.MODERATE_MEMBERS)) {
-				interaction.reply({ content: 'Stinkbot does not have permissions to timeout members :(', ephemeral: true });
-				return;
-			}
-
-			if (interaction.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || victim.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) {
-				interaction.reply({ content: 'One or more user(s) is an Administator of this guild and cannot be put in timeout', ephemeral: true });
 				return;
 			}
 

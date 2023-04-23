@@ -1,5 +1,7 @@
+const { Events } = require('discord.js');
+
 module.exports = {
-	name: 'presenceUpdate',
+	name: Events.PresenceUpdate,
 	execute(oldPresence, newPresence) {
 		// console.log(oldPresence, newPresence);
 		if (!newPresence.activities) return false;

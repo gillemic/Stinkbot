@@ -1,30 +1,16 @@
-const axios = require('axios');
 const sharp = require('sharp');
 const fs = require('fs');
+const { Client } = require('craiyon');
 
-const headers = {
-	'Accept': 'application/json',
-	'Content-Type': 'application/json',
-	'Origin': 'https://hf.space',
-	'Referer': 'https://hf.space/',
-	'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko)',
-};
+const craiyon = new Client();
 
 module.exports = {
-	async getImages(prompt) {
-		try {
-			return await axios.post('https://bf.dallemini.ai/generate', {
-				'prompt': prompt,
-			}, headers);
-		}
-		catch (error) {
-			console.error(error);
-		}
-	},
-	async countImages(input, array, id) {
-		// const request = await module.exports.getImages(input);
+	async countImages(input, id) {
+		const result = await craiyon.generate({
+			prompt: input,
+		})
 
-		const images = array;
+		const images = result.asBase64();
 
 		if (!fs.existsSync('./generated/')) {
 			fs.mkdirSync('./generated');
@@ -38,7 +24,7 @@ module.exports = {
 
 		for (const i in images) {
 			const buffer = Buffer.from(images[i], 'base64url');
-			sharp(buffer)
+			const pngBuffer = sharp(buffer)
 				.png({ pngquant: true })
 				.toFile(`${folder}/dalle${i}.png`, (err) => {
 					if (err) throw err;

@@ -1,5 +1,7 @@
+const { Events } = require('discord.js');
+
 module.exports = {
-	name: 'typingStart',
+	name: Events.TypingStart,
 	execute(typing) {
 		if (typing.member?.presence?.status === 'offline') {
 			console.log(`${new Date().toLocaleTimeString()} - ${typing.member.displayName} started typing in ${typing.channel.name} WHILE OFFLINE`);

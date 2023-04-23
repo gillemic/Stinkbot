@@ -1,6 +1,6 @@
 const mysql = require('mysql');
 const { doesContain, containsAny, containsAtAll } = require('./doesContain');
-const { Permissions } = require('discord.js');
+const { PermissionsBitField } = require('discord.js');
 const { updateTimeout } = require('./updateTimeout');
 const bread_bois = ['347933045371830292', '167426770923028482', '492497894784499713', '275406619158904832'];
 
@@ -17,7 +17,7 @@ module.exports = {
 		const message_id = message.id;
 		const m = message.content.toLowerCase();
 		const dubs_words = ['dubs', 'dub5', 'doobs', 'd00bs', 'd00b5', 'doubles', 'doobles', 'dubbies', 'dubby', 'dubski'];
-		const all_words = [...dubs_words, 'trips', 'quads', 'quints'];
+		const all_words = [...dubs_words, 'trips', 'quads', 'quints', 'checkem', 'check em'];
 		const check_words = ['checkem', 'check em'];
 		const super_quints = ['superquints', 'super quints'];
 
@@ -167,7 +167,7 @@ module.exports = {
 				});
 			}
 
-			if (message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) && containsAny(m, all_words)) {
+			if (message.member.permissions.has(PermissionsBitField.Flags.Administrator) && containsAny(m, all_words)) {
 				message.react('❌');
 				return;
 			}

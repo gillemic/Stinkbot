@@ -3,9 +3,10 @@ const { doesContain, containsAtAll } = require('../util/doesContain');
 const { checkDubs, dubsLeaderboard } = require('../util/checkDubs');
 const { timeoutLeaderboard } = require('../util/updateTimeout');
 const { requestBlend, immortalize } = require('../util/sendBlend');
+const { Events } = require('discord.js');
 
 module.exports = {
-	name: 'messageCreate',
+	name: Events.MessageCreate,
 	execute(message) {
 		const all_emojis = message.guild.emojis.cache.map(e => e.toString());
 		const pete_emojis = message.client.guilds.cache.get('344317039160197124').emojis.cache.map(e => e.toString());
@@ -24,7 +25,7 @@ module.exports = {
 		}
 
 		if (doesContain(message.content, '-baseball')) {
-			message.channel.send({ files: ['./img/OTAB.mp4'] });
+			message.channel.send({ files: [{ name: 'OhThatsABaeball.mp4', attachment: './img/OTAB.mp4' }] });
 		}
 
 		if (message.author.bot) {

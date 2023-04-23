@@ -11,11 +11,13 @@ module.exports = {
 		.addStringOption(option =>
 			option.setName('food')
 				.setDescription('The food to send. Pizza, hot dog, wing, or burger. \'feast\' sends all at once.')
-				.addChoice('burger', 'burger')
-				.addChoice('hot dog', 'hotdog')
-				.addChoice('wing', 'wing')
-				.addChoice('pizza', 'pizza')
-				.addChoice('feast', 'feast')),
+				.addChoices(
+					{ name: 'burger', value: 'burger' }, 
+					{ name: 'hot dog', value: 'hot dog' }, 
+					{ name: 'pizza', value: 'pizza' }, 
+					{ name: 'wing', value: 'wing' }, 
+					{ name: 'feast', value: 'feast' }, 
+				)),
 	async execute(interaction) {
 		const food = interaction.options.getString('food');
 
