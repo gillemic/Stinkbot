@@ -21,10 +21,10 @@ module.exports = {
 			console.error(error);
 		}
 	},
-	async countImages(input, id) {
-		const request = await module.exports.getImages(input);
+	async countImages(input, array, id) {
+		// const request = await module.exports.getImages(input);
 
-		const images = request.data.images;
+		const images = array;
 
 		if (!fs.existsSync('./generated/')) {
 			fs.mkdirSync('./generated');

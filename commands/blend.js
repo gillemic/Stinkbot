@@ -2,7 +2,9 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { countImages } = require('../util/createBlend.js');
 const { loadAndProcessMyLocalImage } = require('../util/generateImage');
 const { containsAtAll } = require('../util/doesContain');
+const { Client } = require('craiyon');
 
+const craiyon = new Client();
 const banned_words = ['blackface', 'black face', 'darkface', 'dark face', 'caricature', 'racist', 'racism', 'shaughn', 'shaaughn', 'squigger', 'squigga', 'spooks', 'starving', 'child', 'children', 'hungy', 'hungry', 'kid', 'famished'];
 const banned_users = ['105884992055349248', '415407957371781123'];
 
@@ -30,6 +32,12 @@ module.exports = {
 			return;
 		}
 
+		// Check if banned users
+		if (banned_users.contains(interaction.user.id)) {
+			await interaction.editReply({ content: 'Nope.', ephemeral: true });
+			return;
+		}
+
 		// check if banned words
 		const query = prompt.toLowerCase();
 		if (banned_users.includes(interaction.user.id && containsAtAll(query, banned_words))) {
@@ -37,7 +45,11 @@ module.exports = {
 			return;
 		}
 
-		const folder = await countImages(prompt, message.id);
+		const result = await craiyon.generate({
+			prompt: prompt
+		});
+
+		const folder = await countImages(prompt, result.asBase64(), message.id);
 
 		await loadAndProcessMyLocalImage(folder);
 
