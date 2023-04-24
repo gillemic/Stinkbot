@@ -2,7 +2,8 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { countImages } = require('../util/createBlend.js');
 const { loadAndProcessMyLocalImage } = require('../util/generateImage');
 const { containsAtAll } = require('../util/doesContain');
-
+const { CraiyonModel } = require('craiyon')
+ 
 const banned_words = ['blackface', 'black face', 'darkface', 'dark face', 'caricature', 'racist', 'racism', 'shaughn', 'shaaughn', 'squigger', 'squigga', 'spooks', 'starving', 'child', 'children', 'hungy', 'hungry', 'kid', 'famished'];
 const banned_users = ['105884992055349248', '415407957371781123'];
 
@@ -14,7 +15,20 @@ module.exports = {
 			option.setName('prompt')
 				.setDescription('the blend prompt')
 				.setMaxLength(100)
-				.setRequired(true)),
+				.setRequired(true))
+		.addStringOption(option =>
+			option.setName('type')
+				.setDescription('What style/filter you want the blend to be')
+				.addChoices(
+					{ name: 'None', value: 'none' },
+					{ name: 'Art', value: 'art' },
+					{ name: 'Drawing', value: 'drawing' },
+					{ name: 'Photo', value: 'photo' },
+				))
+		.addStringOption(option =>
+			option.setName('negative')
+				.setDescription('negative words to exclude from blends')
+				.setMaxLength(100)),
 	async execute(interaction) {
 		/*if (interaction.user.id === '105884992055349248') {
 			await interaction.editReply({ content: 'Ur done kid', ephemeral: true });
@@ -24,6 +38,7 @@ module.exports = {
 		const message = await interaction.deferReply({ fetchReply: true });
 
 		const prompt = interaction.options.getString('prompt');
+		
 
 		// Check if query is too long
 		if (prompt.length > 100) {

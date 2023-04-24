@@ -7,8 +7,8 @@ const craiyon = new Client();
 module.exports = {
 	async countImages(input, id) {
 		const result = await craiyon.generate({
-			prompt: input,
-		})
+			prompt: input
+		});
 
 		const images = result.asBase64();
 
