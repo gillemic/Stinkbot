@@ -74,6 +74,7 @@ module.exports = {
 
 			const victim = interaction.options.getMember('user');
 			const userID = interaction.member.id;
+			const shooter = await interaction.guild.members.fetch(userID);
 
 			// Nathan
 			if (victim.id === '77459485504839680') {
@@ -86,6 +87,11 @@ module.exports = {
 
 			if (victim.id === interaction.client.user.id) {
 				interaction.reply({ content: 'Fool. You cannot timeout Stinkbot.', ephemeral: true });
+				return;
+			}
+
+			if (!shooter.moderatable) {
+				interaction.reply({ content: 'No risk, no reward. Bitch. ', ephemeral: true });
 				return;
 			}
 

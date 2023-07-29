@@ -57,5 +57,15 @@ module.exports = {
 				requestBlend(message);
 			}
 		}
+
+		if (doesContain(message.content, 'spin') && doesContain(message.content, 'wheel')) {
+			// already timed out from quints
+			if (message.member.isCommunicationDisabled() || !(message.member.moderatable)) {
+				return;
+			}
+			else {
+				message.member.timeout(1000 * 60 * 10, 'You know what you did');
+			}
+		}
 	},
 };

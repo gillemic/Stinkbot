@@ -1,20 +1,28 @@
 const sharp = require('sharp');
 const fs = require('fs');
-const { Client } = require('craiyon');
+const { Client, ClientV1 } = require('craiyon');
 
 const craiyon = new Client();
+const craiyonV1 = new ClientV1();
 
 module.exports = {
-	async countImages(input, id) {
-		const result = await craiyon.generate({
-			prompt: input
-		});
+	async countImages(prompt_obj, id, version) {
+		let result;
+
+		if (version) {
+			result = await craiyonV1.generate(prompt_obj);
+		}
+		else {
+			result = await craiyon.generate(prompt_obj);
+		}
 
 		const images = result.asBase64();
 
 		if (!fs.existsSync('./generated/')) {
 			fs.mkdirSync('./generated');
 		}
+
+		const input = prompt_obj.prompt;
 
 		const folder = `./generated/${id}_${input.split(' ').join('_').replace(/[/<>:"\\|?*]/g, '')}`;
 

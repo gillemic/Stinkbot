@@ -2,6 +2,7 @@ const mysql = require('mysql');
 const { doesContain, containsAny, containsAtAll } = require('./doesContain');
 const { PermissionsBitField } = require('discord.js');
 const { updateTimeout } = require('./updateTimeout');
+const { random } = require('./random');
 const bread_bois = ['347933045371830292', '167426770923028482', '492497894784499713', '275406619158904832'];
 
 const con = mysql.createConnection({
@@ -200,13 +201,26 @@ module.exports = {
 					});
 			}
 			else if (containsAtAll(m, super_quints)) {
-				updateTimeout(userID, 169);
-				message.member.timeout(1000 * 60 * 169, 'Owned idiot');
-				message.reply({ content: 'No super quints. You\'ve been put in timeout for 2 hours and 49 minutes.', files: ['./img/wick.jpg'] })
-					.then(msg => {
-						message.react('❌');
-						setTimeout(() => msg.delete(), 1000 * 60 * 169);
-					});
+				let pick = random(0, 1);
+
+				if (pick) { // arpenheimer
+					updateTimeout(userID, 114);
+					message.member.timeout(1000 * 60 * 114, 'Owned idiot');
+					message.reply({ content: 'No super quints. You\'ve been put in timeout for 1 hour and 54 minutes.', files: ['./img/arpenheimer.jpg'] })
+						.then(msg => {
+							message.react('❌');
+							setTimeout(() => msg.delete(), 1000 * 60 * 114);
+						});
+				}
+				else { // bobbie
+					updateTimeout(userID, 180);
+					message.member.timeout(1000 * 60 * 180, 'Owned idiot');
+					message.reply({ content: 'No super quints. You\'ve been put in timeout for 3 hours', files: ['./img/bobbie.jpg'] })
+						.then(msg => {
+							message.react('❌');
+							setTimeout(() => msg.delete(), 1000 * 60 * 180);
+						});
+				}
 			}
 			else if (doesContain(m, 'quints')) {
 				if (bread_bois.includes(userID)) {
