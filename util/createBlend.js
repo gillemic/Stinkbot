@@ -10,10 +10,10 @@ module.exports = {
 		let result;
 
 		if (version) {
-			result = await craiyonV1.generate(prompt_obj);
+			result = await craiyon.generate(prompt_obj);
 		}
 		else {
-			result = await craiyon.generate(prompt_obj);
+			result = await craiyonV1.generate(prompt_obj);
 		}
 
 		const images = result.asBase64();

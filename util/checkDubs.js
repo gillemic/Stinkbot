@@ -201,9 +201,9 @@ module.exports = {
 					});
 			}
 			else if (containsAtAll(m, super_quints)) {
-				let pick = random(0, 1);
+				let pick = random(0, 2);
 
-				if (pick) { // arpenheimer
+				if (pick == 0) { // arpenheimer
 					updateTimeout(userID, 114);
 					message.member.timeout(1000 * 60 * 114, 'Owned idiot');
 					message.reply({ content: 'No super quints. You\'ve been put in timeout for 1 hour and 54 minutes.', files: ['./img/arpenheimer.jpg'] })

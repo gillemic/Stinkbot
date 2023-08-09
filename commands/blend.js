@@ -29,8 +29,8 @@ module.exports = {
 				.setDescription('Negative words to exclude from blends')
 				.setMaxLength(100))
 		.addBooleanOption(option =>
-			option.setName('v1')
-				.setDescription('Use the old version (v1) of Craiyon instead')),
+			option.setName('v3')
+				.setDescription('Use the new version (v3) of Craiyon instead')),
 	async execute(interaction) {
 		/*if (interaction.user.id === '105884992055349248') {
 			await interaction.editReply({ content: 'Ur done kid', ephemeral: true });
@@ -40,7 +40,7 @@ module.exports = {
 		const message = await interaction.deferReply({ fetchReply: true });
 
 		const prompt = interaction.options.getString('prompt');
-		const version = interaction.options.getBoolean('v1');
+		const version = interaction.options.getBoolean('v3');
 		const model = interaction.options.getString('type') ?? CraiyonModel.None;
 		const negative = interaction.options.getString('negative');
 
@@ -50,7 +50,7 @@ module.exports = {
 
 		let prompt_str = prompt;
 
-		if (!version) {
+		if (version) {
 			if (model) {
 				prompt_obj.model = model
 				if (model != 'none'){
@@ -61,9 +61,8 @@ module.exports = {
 			if (negative) {
 				prompt_obj.negative_prompt = negative;
 			}
-		}
-		else {
-			prompt_str += ` (Craiyon v1)`;
+
+			prompt_str += ` (Craiyon v3)`;
 		}
 
 		// Check if query is too long
