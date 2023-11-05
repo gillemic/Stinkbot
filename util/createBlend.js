@@ -1,4 +1,5 @@
 const sharp = require('sharp');
+const axios = require('axios');
 const fs = require('fs');
 const { Client, ClientV1 } = require('craiyon');
 
@@ -10,13 +11,36 @@ module.exports = {
 		let result;
 
 		if (version) {
-			result = await craiyon.generate(prompt_obj);
+			try {
+				result = await craiyon.generate(prompt_obj);
+			} catch(error) {
+				console.log(error)
+				return 'error';
+			}
 		}
 		else {
-			result = await craiyonV1.generate(prompt_obj);
+			try {
+				result = await craiyonV1.generate(prompt_obj);
+			} catch(error) {
+				console.log(error)
+				return 'error';
+			}
 		}
 
-		const images = result.asBase64();
+		let images;
+
+		if (version) {
+			images = [];
+
+			for (const i in result) {
+				let k = (await axios({ url: result[i], responseType: "arraybuffer" })).data;
+				images.push(k);
+			}
+
+		}
+		else {
+			images = result.asBase64();
+		}
 
 		if (!fs.existsSync('./generated/')) {
 			fs.mkdirSync('./generated');
@@ -30,15 +54,29 @@ module.exports = {
 			fs.mkdirSync(folder);
 		}
 
-		for (const i in images) {
-			const buffer = Buffer.from(images[i], 'base64url');
-			const pngBuffer = sharp(buffer)
-				.png({ pngquant: true })
-				.toFile(`${folder}/dalle${i}.png`, (err) => {
-					if (err) throw err;
-				});
-		}
+		if (version) {
+			for (const i in images) {
+				const buffer = Buffer.from(images[i]);
+				const pngBuffer = sharp(buffer)
+					.png({ pngquant: true })
+					.toFile(`${folder}/dalle${i}.png`, (err) => {
+						if (err) throw err;
+					});
+			}
 
-		return folder;
+			return folder;
+		}
+		else {
+			for (const i in images) {
+				const buffer = Buffer.from(images[i], 'base64url');
+				sharp(buffer)
+					.png({ pngquant: true })
+					.toFile(`${folder}/dalle${i}.png`, (err) => {
+						if (err) throw err;
+					});
+			}
+
+			return folder;
+		}
 	},
 };

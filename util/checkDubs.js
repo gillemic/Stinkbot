@@ -42,7 +42,7 @@ module.exports = {
 			switch (count) {
 			case 2:
 				column = 'dubs';
-				if (containsAny(m, all_words) || containsAtAll(m, check_words)) {
+				if (containsAny(m, all_words) || containsAtAll(m, check_words) || (random(1, 10) == 3)) {
 					if (containsAny(m, dubs_words)) {
 						correct_call = true;
 					}
@@ -272,7 +272,7 @@ module.exports = {
 					continue;
 				}
 				const name = await message.guild.members.fetch(result[i].UserID);
-				leaderboard += '\n- - - - - - - - - - - - - - - - - - - -\n';
+				leaderboard += '\n\n';
 				leaderboard += `**${name.displayName}**  |  Dubs: ${result[i].dubs}  |  Trips: ${result[i].trips}  |  Quads: ${result[i].quads}  |  Quints: ${result[i].quints}`;
 			}
 			return message.reply(leaderboard);

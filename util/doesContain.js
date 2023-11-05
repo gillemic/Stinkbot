@@ -23,4 +23,13 @@ module.exports = {
 		}
 		return false;
 	},
+	containsExactly(message, text) {
+		const mess = message.toLowerCase().replace(/[.,/#!$%^&*;:{}=_`~()?]/g, '');
+
+		if (mess.toLowerCase() == text.toLowerCase()) {
+			return true;
+		}
+
+		return false;
+	}
 };

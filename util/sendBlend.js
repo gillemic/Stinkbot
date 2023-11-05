@@ -82,9 +82,9 @@ module.exports = {
 		const oldMessage = await message.channel.messages.fetch(blendID);
 
 		// Not from Stinkbot
-		if (oldMessage.author.id != '344321956096638997') {
-			return;
-		}
+		// if (oldMessage.author.id != '344321956096638997') {
+		// 	return;
+		// }
 
 		let plaque = '';
 
@@ -94,16 +94,22 @@ module.exports = {
 			plaque = `**${oldMessage.content}**, by *${creator.displayName}*`;
 		}
 		else {
-			plaque = oldMessage.content;
+			const creatorID = oldMessage.author.id;
+			if (oldMessage.author.id == '344321956096638997') {
+				plaque = oldMessage.content;
+			}
+			else {
+				const creator = await message.guild.members.cache.get(creatorID);
+				const engraving = oldMessage.content ? `**${oldMessage.content}**, ` : `**Unknown**, `;
+				plaque = `${engraving}by *${creator.displayName}*`;
+			}
 		}
 
 		const blendHOF = await message.client.channels.fetch('1046608656336162877');
 
-		const file = await oldMessage.attachments.first();
+		const files = await oldMessage.attachments.map(file => file.attachment);
 
-		const attachment = file ? file.url : null
-
-		blendHOF.send({ content: plaque, files: [attachment] });
+		blendHOF.send({ content: plaque, files: files });
 
 		setTimeout(() => message.delete(), 1000);
 	}
