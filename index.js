@@ -1,29 +1,48 @@
 // Require the necessary discord.js classes
 const fs = require('fs');
-const { Client, Collection } = require('discord.js');
+const path = require('node:path');
+const { Client, Events, GatewayIntentBits, Collection } = require('discord.js');
 const { token } = require('./config.json');
 
 // Create a new client instance
-const client = new Client({ intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_PRESENCES', 'GUILD_MEMBERS', 'GUILD_INTEGRATIONS', 'GUILD_VOICE_STATES', 'GUILD_MESSAGE_TYPING'] });
+const client = new Client({ 
+	intents: [GatewayIntentBits.Guilds, 
+						GatewayIntentBits.GuildMessages, 
+						GatewayIntentBits.GuildPresences,
+						GatewayIntentBits.GuildMembers,
+						GatewayIntentBits.GuildIntegrations,
+						GatewayIntentBits.GuildVoiceStates,
+						GatewayIntentBits.GuildMessageTyping,
+						GatewayIntentBits.MessageContent
+					]
+});
 
 client.commands = new Collection();
+
+const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
+	const filePath = path.join(commandsPath, file);
+	const command = require(filePath);
 	// Set a new item in the Collection
 	// With the key as the command name and the value as the exported module
-	client.commands.set(command.data.name, command);
+	if ('data' in command && 'execute' in command) {
+		client.commands.set(command.data.name, command);
+	} else {
+		console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
+	}
 }
 
-const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
+const eventsPath = path.join(__dirname, 'events');
+const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 
 for (const file of eventFiles) {
-	const event = require(`./events/${file}`);
+	const filePath = path.join(eventsPath, file);
+	const event = require(filePath);
 	if (event.once) {
 		client.once(event.name, (...args) => event.execute(...args));
-	}
-	else {
+	} else {
 		client.on(event.name, (...args) => event.execute(...args));
 	}
 }

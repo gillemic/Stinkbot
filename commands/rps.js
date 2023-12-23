@@ -77,7 +77,14 @@ module.exports = {
 		.addStringOption(option =>
 			option.setName('choice')
 				.setDescription('Your choice. r, p, or s.')
-				.addChoices([['r', 'r'], ['p', 'p'], ['s', 's'], ['leaderboard', 'leaderboard'], ['ban', 'ban'], ['unban', 'unban']])
+				.addChoices(
+					{ name: 'r', value: 'r' }, 
+					{ name: 'p', value: 'p' }, 
+					{ name: 's', value: 's' }, 
+					{ name: 'leaderboard', value: 'leaderboard' }, 
+					{ name: 'ban', value: 'ban' }, 
+					{ name: 'unban', value: 'unban' }, 
+				)
 				.setRequired(true)),
 	async execute(interaction) {
 		const userID = interaction.user.id;

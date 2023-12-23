@@ -1,14 +1,16 @@
 const { random } = require('../util/random');
-const { doesContain, containsAtAll } = require('../util/doesContain');
+const { doesContain, containsAtAll, containsExactly } = require('../util/doesContain');
 const { checkDubs, dubsLeaderboard } = require('../util/checkDubs');
 const { timeoutLeaderboard } = require('../util/updateTimeout');
 const { requestBlend, immortalize } = require('../util/sendBlend');
+const { Events } = require('discord.js');
 
 module.exports = {
-	name: 'messageCreate',
+	name: Events.MessageCreate,
 	execute(message) {
 		const all_emojis = message.guild.emojis.cache.map(e => e.toString());
 		const pete_emojis = message.client.guilds.cache.get('344317039160197124').emojis.cache.map(e => e.toString());
+		const EDF = "To save our mother earth from any alien attack";
 
 		// 1 in 25 chance to react
 		const rand2 = random(0, 25);
@@ -24,7 +26,7 @@ module.exports = {
 		}
 
 		if (doesContain(message.content, '-baseball')) {
-			message.channel.send({ files: ['./img/OTAB.mp4'] });
+			message.channel.send({ files: [{ name: 'OhThatsABaeball.mp4', attachment: './img/OTAB.mp4' }] });
 		}
 
 		if (message.author.bot) {
@@ -43,6 +45,14 @@ module.exports = {
 			message.reply('You\'re welcome :relieved:');
 		}
 
+		if (containsExactly(message.content, EDF)) {
+			message.reply("FROM VICIOUS GIANT INSECTS WHO HAVE ONCE AGAIN COME BACK");
+		}
+
+		if (doesContain(message.content, 'EDF')) {
+			message.reply("EDF! EDF!");
+		}
+
 		if (message.channel.id === '358699161551634442') {
 			// stink chat
 			checkDubs(message);
@@ -54,6 +64,16 @@ module.exports = {
 			}
 			else {
 				requestBlend(message);
+			}
+		}
+
+		if (doesContain(message.content, 'spin') && doesContain(message.content, 'wheel')) {
+			// already timed out from quints
+			if (message.member.isCommunicationDisabled() || !(message.member.moderatable)) {
+				return;
+			}
+			else {
+				message.member.timeout(1000 * 60 * 10, 'You know what you did');
 			}
 		}
 	},

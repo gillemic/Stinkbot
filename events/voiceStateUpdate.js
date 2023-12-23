@@ -1,5 +1,7 @@
+const { Events } = require('discord.js');
+
 module.exports = {
-	name: 'voiceStateUpdate',
+	name: Events.VoiceStateUpdate,
 	execute(oldState, newState) {
 		// something
 		const member = newState.member;

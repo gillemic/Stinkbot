@@ -1,7 +1,8 @@
 const mysql = require('mysql');
 const { doesContain, containsAny, containsAtAll } = require('./doesContain');
-const { Permissions } = require('discord.js');
+const { PermissionsBitField } = require('discord.js');
 const { updateTimeout } = require('./updateTimeout');
+const { random } = require('./random');
 const bread_bois = ['347933045371830292', '167426770923028482', '492497894784499713', '275406619158904832'];
 
 const con = mysql.createConnection({
@@ -17,8 +18,9 @@ module.exports = {
 		const message_id = message.id;
 		const m = message.content.toLowerCase();
 		const dubs_words = ['dubs', 'dub5', 'doobs', 'd00bs', 'd00b5', 'doubles', 'doobles', 'dubbies', 'dubby', 'dubski'];
-		const all_words = [...dubs_words, 'trips', 'quads', 'quints'];
+		const all_words = [...dubs_words, 'trips', 'quads', 'quints', 'checkem', 'check em'];
 		const check_words = ['checkem', 'check em'];
+		const super_quints = ['superquints', 'super quints'];
 
 		const last_digit = parseInt(message_id[message_id.length - 1]);
 
@@ -40,11 +42,16 @@ module.exports = {
 			switch (count) {
 			case 2:
 				column = 'dubs';
-				if (containsAny(m, all_words) || containsAtAll(m, check_words)) {
+				if (containsAny(m, all_words) || containsAtAll(m, check_words) || (random(1, 10) == 3)) {
 					if (containsAny(m, dubs_words)) {
 						correct_call = true;
 					}
-					message.reply({ content: `MessageID: ${message_id} Holy shit! You got dubs`, files: ['./img/dubs.png'] });
+					if (random(0, 1)) {
+						message.reply({ content: `MessageID: ${message_id} Holy shit! You got dubs`, files: ['./img/dubs.jpg'] });
+					}
+					else {
+						message.reply({ content: `MessageID: ${message_id} Holy shit! You got dubs`, files: ['./img/dubs.png'] });
+					}
 				}
 				else {
 					message.react('2️⃣');
@@ -55,7 +62,12 @@ module.exports = {
 				if (doesContain(message.content, 'trips')) {
 					correct_call = true;
 				}
-				message.reply({ content: `MessageID: ${message_id} Woah!! You got trips`, files: ['./img/trips.png'] });
+				if (random(0, 1)) {
+					message.reply({ content: `MessageID: ${message_id} Woah!! You got trips`, files: ['./img/trips.png'] });
+				}
+				else {
+					message.reply({ content: `MessageID: ${message_id} Woah!! You got trips`, files: ['./img/trips.jpg'] });
+				}
 				break;
 			case 4:
 				column = 'quads';
@@ -166,7 +178,7 @@ module.exports = {
 				});
 			}
 
-			if (message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) && containsAny(m, all_words)) {
+			if (message.member.permissions.has(PermissionsBitField.Flags.Administrator) && containsAny(m, all_words)) {
 				message.react('❌');
 				return;
 			}
@@ -197,6 +209,28 @@ module.exports = {
 						message.react('❌');
 						setTimeout(() => msg.delete(), 1000 * 60 * 15);
 					});
+			}
+			else if (containsAtAll(m, super_quints)) {
+				let pick = random(0, 2);
+
+				if (pick == 0) { // arpenheimer
+					updateTimeout(userID, 114);
+					message.member.timeout(1000 * 60 * 114, 'Owned idiot');
+					message.reply({ content: 'No super quints. You\'ve been put in timeout for 1 hour and 54 minutes.', files: ['./img/arpenheimer.jpg'] })
+						.then(msg => {
+							message.react('❌');
+							setTimeout(() => msg.delete(), 1000 * 60 * 114);
+						});
+				}
+				else { // bobbie
+					updateTimeout(userID, 180);
+					message.member.timeout(1000 * 60 * 180, 'Owned idiot');
+					message.reply({ content: 'No super quints. You\'ve been put in timeout for 3 hours', files: ['./img/bobbie.jpg'] })
+						.then(msg => {
+							message.react('❌');
+							setTimeout(() => msg.delete(), 1000 * 60 * 180);
+						});
+				}
 			}
 			else if (doesContain(m, 'quints')) {
 				if (bread_bois.includes(userID)) {
@@ -248,7 +282,7 @@ module.exports = {
 					continue;
 				}
 				const name = await message.guild.members.fetch(result[i].UserID);
-				leaderboard += '\n- - - - - - - - - - - - - - - - - - - -\n';
+				leaderboard += '\n\n';
 				leaderboard += `**${name.displayName}**  |  Dubs: ${result[i].dubs}  |  Trips: ${result[i].trips}  |  Quads: ${result[i].quads}  |  Quints: ${result[i].quints}`;
 			}
 			return message.reply(leaderboard);

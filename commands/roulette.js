@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { random } = require('../util/random');
-const { Permissions } = require('discord.js');
+const { PermissionsBitField } = require('discord.js');
 const { updateTimeout } = require('../util/updateTimeout');
 const mysql = require('mysql');
 
@@ -74,6 +74,7 @@ module.exports = {
 
 			const victim = interaction.options.getMember('user');
 			const userID = interaction.member.id;
+			const shooter = await interaction.guild.members.fetch(userID);
 
 			// Nathan
 			if (victim.id === '77459485504839680') {
@@ -86,6 +87,11 @@ module.exports = {
 
 			if (victim.id === interaction.client.user.id) {
 				interaction.reply({ content: 'Fool. You cannot timeout Stinkbot.', ephemeral: true });
+				return;
+			}
+
+			if (!shooter.moderatable) {
+				interaction.reply({ content: 'No risk, no reward. Bitch. ', ephemeral: true });
 				return;
 			}
 
@@ -103,16 +109,6 @@ module.exports = {
 			if (victim.isCommunicationDisabled()) {
 				const time = victim.communicationDisabledUntil;
 				interaction.reply({ content: `${victim.displayName} is already in timeout! (Until ${time.toLocaleTimeString()} PST)` });
-				return;
-			}
-
-			if (!interaction.guild.me.permissions.has(Permissions.FLAGS.MODERATE_MEMBERS)) {
-				interaction.reply({ content: 'Stinkbot does not have permissions to timeout members :(', ephemeral: true });
-				return;
-			}
-
-			if (interaction.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || victim.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) {
-				interaction.reply({ content: 'One or more user(s) is an Administator of this guild and cannot be put in timeout', ephemeral: true });
 				return;
 			}
 
@@ -192,16 +188,6 @@ module.exports = {
 			if (!victim.isCommunicationDisabled()) {
 				// const time = victim.communicationDisabledUntil;
 				interaction.reply({ content: `${victim.displayName} is not in timeout!` });
-				return;
-			}
-
-			if (!interaction.guild.me.permissions.has(Permissions.FLAGS.MODERATE_MEMBERS)) {
-				interaction.reply({ content: 'Stinkbot does not have permissions to timeout members :(', ephemeral: true });
-				return;
-			}
-
-			if (interaction.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || victim.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) {
-				interaction.reply({ content: 'One or more user(s) is an Administator of this guild and cannot be put in timeout', ephemeral: true });
 				return;
 			}
 

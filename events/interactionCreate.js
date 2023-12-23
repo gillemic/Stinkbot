@@ -1,7 +1,8 @@
 // const banned_users = ['347933045371830292'];
+const { Events } = require('discord.js');
 
 module.exports = {
-	name: 'interactionCreate',
+	name: Events.InteractionCreate,
 	execute(interaction) {
 		const client = interaction.client;
 
