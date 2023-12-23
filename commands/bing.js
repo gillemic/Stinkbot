@@ -25,6 +25,8 @@ module.exports = {
 
 			let imageFiles;
 
+			console.log(prompt);
+
 			try {
 				imageFiles = await generateImageFiles(sanitizeString(prompt), boost);
 			}
@@ -67,6 +69,8 @@ module.exports = {
 			}
 
 			await new Promise(resolve => setTimeout(resolve, 2000));
+
+			let finalImages = fileArray.pop()
 
 			await interaction.editReply({ content: prompt, files: fileArray });
 	}

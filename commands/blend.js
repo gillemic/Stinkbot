@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { countImages } = require('../util/createBlend.js');
 const { loadAndProcessMyLocalImage } = require('../util/generateImage');
 const { containsAtAll } = require('../util/doesContain');
-const { banned_words } = require('./config.json');
+const { banned_words } = require('../config.json');
 const { CraiyonModel } = require('craiyon')
  
 const banned_users = ['105884992055349248', '415407957371781123'];

@@ -46,7 +46,12 @@ module.exports = {
 					if (containsAny(m, dubs_words)) {
 						correct_call = true;
 					}
-					message.reply({ content: `MessageID: ${message_id} Holy shit! You got dubs`, files: ['./img/dubs.png'] });
+					if (random(0, 1)) {
+						message.reply({ content: `MessageID: ${message_id} Holy shit! You got dubs`, files: ['./img/dubs.jpg'] });
+					}
+					else {
+						message.reply({ content: `MessageID: ${message_id} Holy shit! You got dubs`, files: ['./img/dubs.png'] });
+					}
 				}
 				else {
 					message.react('2️⃣');
@@ -57,7 +62,12 @@ module.exports = {
 				if (doesContain(message.content, 'trips')) {
 					correct_call = true;
 				}
-				message.reply({ content: `MessageID: ${message_id} Woah!! You got trips`, files: ['./img/trips.png'] });
+				if (random(0, 1)) {
+					message.reply({ content: `MessageID: ${message_id} Woah!! You got trips`, files: ['./img/trips.png'] });
+				}
+				else {
+					message.reply({ content: `MessageID: ${message_id} Woah!! You got trips`, files: ['./img/trips.jpg'] });
+				}
 				break;
 			case 4:
 				column = 'quads';
