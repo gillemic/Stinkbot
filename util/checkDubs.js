@@ -46,7 +46,7 @@ module.exports = {
 					if (containsAny(m, dubs_words)) {
 						correct_call = true;
 					}
-					if (random(0, 1)) {
+					if (random(0, 2)) {
 						message.reply({ content: `MessageID: ${message_id} Holy shit! You got dubs`, files: ['./img/dubs.jpg'] });
 					}
 					else {
@@ -62,11 +62,11 @@ module.exports = {
 				if (doesContain(message.content, 'trips')) {
 					correct_call = true;
 				}
-				if (random(0, 1)) {
-					message.reply({ content: `MessageID: ${message_id} Woah!! You got trips`, files: ['./img/trips.png'] });
+				if (random(0, 2)) {
+					message.reply({ content: `MessageID: ${message_id} Woah!! You got trips`, files: ['./img/trips2.png'] });
 				}
 				else {
-					message.reply({ content: `MessageID: ${message_id} Woah!! You got trips`, files: ['./img/trips.jpg'] });
+					message.reply({ content: `MessageID: ${message_id} Woah!! You got trips`, files: ['./img/trips.png'] });
 				}
 				break;
 			case 4:

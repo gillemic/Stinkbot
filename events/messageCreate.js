@@ -13,7 +13,7 @@ module.exports = {
 		const EDF = "To save our mother earth from any alien attack";
 
 		// 1 in 25 chance to react
-		const rand2 = random(0, 25);
+		const rand2 = random(0, 50);
 		if (rand2 === 2) {
 			if (message.client.user.username === 'Petebot') {
 				const rand = random(0, pete_emojis.length - 1);
