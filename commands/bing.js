@@ -14,21 +14,18 @@ module.exports = {
 		.setDescription('Bing it, bitch')
 		.addStringOption(option => option.setName('prompt')
 			.setDescription('the bing prompt')
-			.setRequired(true))
-		.addBooleanOption(option => option.setName('boost')
-			.setDescription('Use a boost to get your blend faster and more reliably. Will not work if we are out of our daily 15.')),
+			.setRequired(true)),
 	async execute(interaction) {
 			const message = await interaction.deferReply({ fetchReply: true });
 
 			const prompt = interaction.options.getString('prompt');
-			const boost = interaction.options.getBoolean('boost') ?? false;
 
 			let imageFiles;
 
 			console.log(prompt);
 
 			try {
-				imageFiles = await generateImageFiles(sanitizeString(prompt), boost);
+				imageFiles = await generateImageFiles(sanitizeString(prompt));
 			}
 			catch(error) {
 				let line = error.name;
@@ -70,8 +67,6 @@ module.exports = {
 
 			await new Promise(resolve => setTimeout(resolve, 2000));
 
-			let finalImages = fileArray.pop()
-
-			await interaction.editReply({ content: prompt, files: fileArray });
+			await interaction.editReply({ content: prompt, files: fileArray.slice(0, -1) });
 	}
 };

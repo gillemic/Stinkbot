@@ -45,6 +45,10 @@ module.exports = {
 			message.reply('You\'re welcome :relieved:');
 		}
 
+		if (doesContain(message.content, 'metal') && doesContain(message.content, 'gear')) {
+			message.reply(`This game series really is a cut above the rest, in terms of quality. I played 1-3 in High School (2 came out when I was in my first year, Twin Snakes my third year, and Snake Eater fall of my final year), admist the post-9/11 War on Terror.\n\nI kinda gave up after 4, and I felt the games had said their piece and I was ready to move on. When GZ and Phantom Pain dropped, I barely paid any attention. I didn't even know there was another title I'd missed before them. Then one day it was on sale, and I knew I couldn't skip the last chapter of this tale. That game floored me. Cemented my appreciation for what Kojima was trying to get across for years, and then it left me with my own titular Phantom Pain. The series was done. What had I just done as Venom in this final chapter? I had become a genocidal terrorist because funny Japanese auteur man gave me the option. What did I miss in Peace Walker? I had to play them all again, from the very start. So I loaded up MGS3 and started MG1 and MG2. I replayed the series over the course of 2019. And then I did so again last year. These games were super well made.`)
+		}
+
 		if (containsExactly(message.content, EDF)) {
 			message.reply("FROM VICIOUS GIANT INSECTS WHO HAVE ONCE AGAIN COME BACK");
 		}

@@ -42,16 +42,11 @@ module.exports = {
 			switch (count) {
 			case 2:
 				column = 'dubs';
-				if (containsAny(m, all_words) || containsAtAll(m, check_words) || (random(1, 10) == 3)) {
+				if (containsAny(m, all_words) || containsAtAll(m, check_words)) {
 					if (containsAny(m, dubs_words)) {
 						correct_call = true;
 					}
-					if (random(0, 2)) {
-						message.reply({ content: `MessageID: ${message_id} Holy shit! You got dubs`, files: ['./img/dubs.jpg'] });
-					}
-					else {
-						message.reply({ content: `MessageID: ${message_id} Holy shit! You got dubs`, files: ['./img/dubs.png'] });
-					}
+					message.reply({ content: `MessageID: ${message_id} Holy shit! You got dubs`, files: ['./img/dubs.jpg'] });
 				}
 				else {
 					message.react('2️⃣');
@@ -62,12 +57,7 @@ module.exports = {
 				if (doesContain(message.content, 'trips')) {
 					correct_call = true;
 				}
-				if (random(0, 2)) {
-					message.reply({ content: `MessageID: ${message_id} Woah!! You got trips`, files: ['./img/trips2.png'] });
-				}
-				else {
-					message.reply({ content: `MessageID: ${message_id} Woah!! You got trips`, files: ['./img/trips.png'] });
-				}
+				message.reply({ content: `MessageID: ${message_id} Woah!! You got trips`, files: ['./img/trips2.png'] });
 				break;
 			case 4:
 				column = 'quads';
@@ -186,7 +176,7 @@ module.exports = {
 			if (containsAny(m, dubs_words)) {
 				updateTimeout(userID, 5);
 				message.member.timeout(1000 * 60 * 5, 'Owned idiot');
-				message.reply({ content: 'No dubs. You\'ve been put in timeout for 5 minutes. (Conner\'s orders have been repealed)', files: ['./img/clown.jpg'] })
+				message.reply({ content: 'No dubs. You\'ve been put in timeout for 5 minutes.', files: ['./img/clown.jpg'] })
 					.then(msg => {
 						message.react('❌');
 						setTimeout(() => msg.delete(), 1000 * 60 * 5);
@@ -211,47 +201,22 @@ module.exports = {
 					});
 			}
 			else if (containsAtAll(m, super_quints)) {
-				let pick = random(0, 2);
-
-				if (pick == 0) { // arpenheimer
-					updateTimeout(userID, 114);
-					message.member.timeout(1000 * 60 * 114, 'Owned idiot');
-					message.reply({ content: 'No super quints. You\'ve been put in timeout for 1 hour and 54 minutes.', files: ['./img/arpenheimer.jpg'] })
-						.then(msg => {
-							message.react('❌');
-							setTimeout(() => msg.delete(), 1000 * 60 * 114);
-						});
-				}
-				else { // bobbie
-					updateTimeout(userID, 180);
-					message.member.timeout(1000 * 60 * 180, 'Owned idiot');
-					message.reply({ content: 'No super quints. You\'ve been put in timeout for 3 hours', files: ['./img/bobbie.jpg'] })
-						.then(msg => {
-							message.react('❌');
-							setTimeout(() => msg.delete(), 1000 * 60 * 180);
-						});
-				}
+				updateTimeout(userID, 169);
+				message.member.timeout(1000 * 60 * 169, 'Owned idiot');
+				message.reply({ content: 'No super quints. You\'ve been put in timeout for 2 hours and 49 minutes', files: ['./img/wick.jpg'] })
+					.then(msg => {
+						message.react('❌');
+						setTimeout(() => msg.delete(), 1000 * 60 * 169);
+					});
 			}
 			else if (doesContain(m, 'quints')) {
-				if (bread_bois.includes(userID)) {
-					// p
-					updateTimeout(userID, 30);
-					message.member.timeout(1000 * 60 * 30, 'Owned idiot');
-					message.reply({ content: 'No quints. You\'ve been put in timeout for 24 HOURS', files: ['./img/booboo.jpg'] })
-						.then(msg => {
-							message.react('❌');
-							setTimeout(() => msg.delete(), 1000 * 60 * 30);
-						});
-				}
-				else {
-					updateTimeout(userID, 30);
-					message.member.timeout(1000 * 60 * 30, 'Owned idiot');
-					message.reply({ content: 'No quints. You\'ve been put in timeout for 30 minutes.', files: ['./img/booboo.jpg'] })
-						.then(msg => {
-							message.react('❌');
-							setTimeout(() => msg.delete(), 1000 * 60 * 30);
-						});
-				}
+				updateTimeout(userID, 30);
+				message.member.timeout(1000 * 60 * 30, 'Owned idiot');
+				message.reply({ content: 'No quints. You\'ve been put in timeout for 30 minutes.', files: ['./img/booboo.jpg'] })
+					.then(msg => {
+						message.react('❌');
+						setTimeout(() => msg.delete(), 1000 * 60 * 30);
+					});
 			}
 			else if (containsAtAll(m, check_words)) {
 				updateTimeout(userID, 15);
